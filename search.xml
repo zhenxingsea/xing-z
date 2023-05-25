@@ -21,6 +21,12 @@
 <h3 id="查找内容"><a href="#查找内容" class="headerlink" title="查找内容"></a>查找内容</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">grep -nr “keyword” ./</span><br></pre></td></tr></table></figure>
 
 ]]></content>
+      <categories>
+        <category>操作系统</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+      </tags>
   </entry>
   <entry>
     <title>快速开始</title>

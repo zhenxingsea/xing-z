@@ -15,6 +15,24 @@
       </categories>
   </entry>
   <entry>
+    <title>Linux常用命令</title>
+    <url>/2023/05/25/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
+    <content><![CDATA[<h1 id="Linux常用命令"><a href="#Linux常用命令" class="headerlink" title="Linux常用命令"></a>Linux常用命令</h1><h3 id="替换内容"><a href="#替换内容" class="headerlink" title="替换内容"></a>替换内容</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sed &#x27;s/aaa/bbb/g&#x27; file-path</span><br></pre></td></tr></table></figure>
+
+<h3 id="查找开始与结束"><a href="#查找开始与结束" class="headerlink" title="查找开始与结束"></a>查找开始与结束</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sed -n &#x27;/10:00:00/,/12:00:00/p&#x27; test.log</span><br></pre></td></tr></table></figure>
+
+<h3 id="查找内容"><a href="#查找内容" class="headerlink" title="查找内容"></a>查找内容</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">grep -nr “keyword” ./</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>操作系统</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+        <tag>常用命令</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>端口转发常用的几种方法</title>
     <url>/2023/05/25/linux%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E5%B8%B8%E7%94%A8%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95/</url>
     <content><![CDATA[<h1 id="linux-端口转发常用的几种方法"><a href="#linux-端口转发常用的几种方法" class="headerlink" title="linux 端口转发常用的几种方法"></a>linux 端口转发常用的几种方法</h1><h2 id="SSH-端口转发"><a href="#SSH-端口转发" class="headerlink" title="SSH 端口转发"></a>SSH 端口转发</h2><p>SSH 提供了一个非常有意思的功能，就是端口转发，它能够将其他 TCP 端口的网络数据通过 SSH 链接来转发，并且自动提供了相应的加密及解密服务。</p>
@@ -62,24 +80,6 @@
       <tags>
         <tag>网络转发</tag>
         <tag>网络</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Linux常用命令</title>
-    <url>/2023/05/25/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
-    <content><![CDATA[<h1 id="Linux常用命令"><a href="#Linux常用命令" class="headerlink" title="Linux常用命令"></a>Linux常用命令</h1><h3 id="替换内容"><a href="#替换内容" class="headerlink" title="替换内容"></a>替换内容</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sed &#x27;s/aaa/bbb/g&#x27; file-path</span><br></pre></td></tr></table></figure>
-
-<h3 id="查找开始与结束"><a href="#查找开始与结束" class="headerlink" title="查找开始与结束"></a>查找开始与结束</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sed -n &#x27;/10:00:00/,/12:00:00/p&#x27; test.log</span><br></pre></td></tr></table></figure>
-
-<h3 id="查找内容"><a href="#查找内容" class="headerlink" title="查找内容"></a>查找内容</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">grep -nr “keyword” ./</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>操作系统</category>
-      </categories>
-      <tags>
-        <tag>linux</tag>
-        <tag>常用命令</tag>
       </tags>
   </entry>
 </search>

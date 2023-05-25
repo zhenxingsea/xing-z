@@ -1,20 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Docker常用命令</title>
-    <url>/2023/05/25/Docker%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
-    <content><![CDATA[<h1 id="Docker常用命令"><a href="#Docker常用命令" class="headerlink" title="Docker常用命令"></a>Docker常用命令</h1><h2 id="清除所有容器"><a href="#清除所有容器" class="headerlink" title="清除所有容器"></a>清除所有容器</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker rm -f $(docker ps -aq)</span><br></pre></td></tr></table></figure>
-
-<h2 id="清除所有镜像"><a href="#清除所有镜像" class="headerlink" title="清除所有镜像"></a>清除所有镜像</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker rmi $(docker images -q)</span><br></pre></td></tr></table></figure>
-
-<h2 id="停止所有的容器"><a href="#停止所有的容器" class="headerlink" title="停止所有的容器"></a>停止所有的容器</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker stop $(docker ps -aq)</span><br></pre></td></tr></table></figure>
-
-<h2 id="删除“已退出”的容器"><a href="#删除“已退出”的容器" class="headerlink" title="删除“已退出”的容器"></a>删除“已退出”的容器</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker rm $(docker ps -q -f status=exited)</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>Docker</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Linux常用命令</title>
     <url>/2023/05/25/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
     <content><![CDATA[<h1 id="Linux常用命令"><a href="#Linux常用命令" class="headerlink" title="Linux常用命令"></a>Linux常用命令</h1><h3 id="替换内容"><a href="#替换内容" class="headerlink" title="替换内容"></a>替换内容</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sed &#x27;s/aaa/bbb/g&#x27; file-path</span><br></pre></td></tr></table></figure>
@@ -31,6 +17,20 @@
         <tag>linux</tag>
         <tag>常用命令</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>Docker常用命令</title>
+    <url>/2023/05/25/Docker%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
+    <content><![CDATA[<h1 id="Docker常用命令"><a href="#Docker常用命令" class="headerlink" title="Docker常用命令"></a>Docker常用命令</h1><h2 id="清除所有容器"><a href="#清除所有容器" class="headerlink" title="清除所有容器"></a>清除所有容器</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker rm -f $(docker ps -aq)</span><br></pre></td></tr></table></figure>
+
+<h2 id="清除所有镜像"><a href="#清除所有镜像" class="headerlink" title="清除所有镜像"></a>清除所有镜像</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker rmi $(docker images -q)</span><br></pre></td></tr></table></figure>
+
+<h2 id="停止所有的容器"><a href="#停止所有的容器" class="headerlink" title="停止所有的容器"></a>停止所有的容器</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker stop $(docker ps -aq)</span><br></pre></td></tr></table></figure>
+
+<h2 id="删除“已退出”的容器"><a href="#删除“已退出”的容器" class="headerlink" title="删除“已退出”的容器"></a>删除“已退出”的容器</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker rm $(docker ps -q -f status=exited)</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Docker</category>
+      </categories>
   </entry>
   <entry>
     <title>端口转发常用的几种方法</title>

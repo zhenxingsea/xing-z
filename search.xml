@@ -31,6 +31,22 @@
       </tags>
   </entry>
   <entry>
+    <title>Python使用ecc加密算法</title>
+    <url>/2023/05/26/Python%E4%BD%BF%E7%94%A8ecc%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/</url>
+    <content><![CDATA[<h2 id="Python生成ecc秘钥，与签名验证"><a href="#Python生成ecc秘钥，与签名验证" class="headerlink" title="Python生成ecc秘钥，与签名验证"></a>Python生成ecc秘钥，与签名验证</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import ecdsa</span><br><span class="line">import hashlib</span><br><span class="line">from ecdsa.util import sigencode_der,sigdecode_der</span><br><span class="line">ecc_pri = ecdsa.SigningKey.generate(curve=ecdsa.NIST256p)</span><br><span class="line">sign_dat = ecc_pri.sign(b&#x27;123456&#x27;, entropy=None, hashfunc=hashlib.sha256, sigencode=sigencode_der)</span><br><span class="line">print(sign_dat)</span><br><span class="line">ecc_pub = ecc_pri.get_verifying_key()</span><br><span class="line">result = ecc_pub.verify(sign_dat, b&#x27;123456&#x27;, hashfunc=hashlib.sha256, sigdecode=sigdecode_der)</span><br><span class="line">print(result)</span><br><span class="line"></span><br><span class="line">with open(&#x27;ecc_pri.pem&#x27;, &#x27;wb&#x27;) as f2:</span><br><span class="line">	f2.write(ecc_pri.to_pem())</span><br><span class="line">with open(&#x27;ecc_sig.data&#x27;, &#x27;wb&#x27;) as f1:</span><br><span class="line">	f1.write(sign_dat)</span><br><span class="line">with open(&#x27;ecc_pub.pem&#x27;, &#x27;wb&#x27;) as f2:</span><br><span class="line">	f2.write(ecc_pub.to_pem())</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="Python导入外部ECC秘钥进行签名"><a href="#Python导入外部ECC秘钥进行签名" class="headerlink" title="Python导入外部ECC秘钥进行签名"></a>Python导入外部ECC秘钥进行签名</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import  ecdsa</span><br><span class="line">import hashlib</span><br><span class="line">from ecdsa.util import sigencode_der,sigdecode_der</span><br><span class="line">with open(&#x27;ecc_prikey.key&#x27;, &#x27;rb&#x27;) as f1:</span><br><span class="line">    pem_pri=f1.read()</span><br><span class="line">with open(&#x27;ecc_pub.key&#x27;, &#x27;rb&#x27;) as f2:</span><br><span class="line">    pem_pub=f2.read()</span><br><span class="line">pri_ecc = ecdsa.SigningKey.from_pem(pem_pri)</span><br><span class="line">print(pri_ecc) #私钥对象</span><br><span class="line">pub_ecc = ecdsa.VerifyingKey.from_pem(pem_pub) #公钥对象</span><br><span class="line">ecc_dat = pri_ecc.sign(b&#x27;123456&#x27;, entropy=None, hashfunc=hashlib.sha256,sigencode=sigencode_der)</span><br><span class="line">result = pub_ecc.verify(ecc_dat,b&#x27;123456&#x27;,hashfunc=hashlib.sha256,sigdecode=sigdecode_der)</span><br><span class="line">print(result)</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>编程开发</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+        <tag>加密</tag>
+        <tag>ECC</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>端口转发常用的几种方法</title>
     <url>/2023/05/25/linux%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E5%B8%B8%E7%94%A8%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95/</url>
     <content><![CDATA[<h2 id="SSH-端口转发"><a href="#SSH-端口转发" class="headerlink" title="SSH 端口转发"></a>SSH 端口转发</h2><p>SSH 提供了一个非常有意思的功能，就是端口转发，它能够将其他 TCP 端口的网络数据通过 SSH 链接来转发，并且自动提供了相应的加密及解密服务。</p>
@@ -189,5 +205,12 @@
 <li>uvloop：在 libuv 之上超快速实现 asyncio 事件循环。</li>
 </ul>
 ]]></content>
+      <categories>
+        <category>编程开发</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+        <tag>库</tag>
+      </tags>
   </entry>
 </search>

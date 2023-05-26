@@ -52,6 +52,39 @@
       </tags>
   </entry>
   <entry>
+    <title>Linux/Mac文件编码处理</title>
+    <url>/2023/05/26/Linux%E6%96%87%E4%BB%B6%E7%BC%96%E7%A0%81%E5%A4%84%E7%90%86/</url>
+    <content><![CDATA[<h2 id="enca"><a href="#enca" class="headerlink" title="enca"></a>enca</h2><ul>
+<li><p>安装工具</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># brew install enca</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>检查文件名为xxx.txt中 中文的编码方式</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># enca -L zh_CN xxx.txt </span><br></pre></td></tr></table></figure>
+</li>
+<li><p>转换文件编码</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># enca -L 当前语言 -x 目标编码 文件名</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>批量转换</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">enca -x 目标编码 *</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="iconv"><a href="#iconv" class="headerlink" title="iconv"></a>iconv</h2><p>自行安装iconv工具</p>
+<h3 id="单个处理"><a href="#单个处理" class="headerlink" title="单个处理"></a>单个处理</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">iconv -f GBK -t UTF-8 *** &gt; ****</span><br></pre></td></tr></table></figure>
+<ul>
+<li>-f 是表示从什么编码，后面跟编码</li>
+<li>-t 是表示转换到什么编码，后面跟编码</li>
+<li>&gt; 表示从哪个文件保存为哪个文件</li>
+<li>*** 第一个<em><strong>表示的是需要转换的文件，第二个</strong></em>表示转换完后的文件</li>
+</ul>
+<h3 id="批量操作"><a href="#批量操作" class="headerlink" title="批量操作"></a>批量操作</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">find *.txt -exec sh -c &quot;iconv -f GB2312 -t UTF-8 &#123;&#125; &gt; &#123;&#125;.txt&quot; </span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>操作系统</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>编码</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Nginx配置模板</title>
     <url>/2023/05/26/Nginx%E9%85%8D%E7%BD%AE%E6%A8%A1%E6%9D%BF/</url>
     <content><![CDATA[<h2 id="常用Nginx-Server配置模板"><a href="#常用Nginx-Server配置模板" class="headerlink" title="常用Nginx Server配置模板"></a>常用Nginx Server配置模板</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">        listen 1225;</span><br><span class="line">        server_name tencent.xing-z.com;</span><br><span class="line"></span><br><span class="line">        client_max_body_size 800m;</span><br><span class="line">        proxy_connect_timeout 600;</span><br><span class="line">        proxy_read_timeout 600;</span><br><span class="line">        proxy_send_timeout 600;</span><br><span class="line"></span><br><span class="line">        ssl on;</span><br><span class="line">        ssl_certificate /home/ubuntu/.acme.sh/tencent.xing-z.com/tencent.xing-z.com.cer;</span><br><span class="line">        ssl_certificate_key /home/ubuntu/.acme.sh/tencent.xing-z.com/tencent.xing-z.com.key;</span><br><span class="line"></span><br><span class="line">        #ssl_session_cache    shared:SSL:1m;</span><br><span class="line">        #ssl_session_timeout  5m;</span><br><span class="line">        #ssl_prefer_server_ciphers  on;</span><br><span class="line">        #ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:ECDHE:ECDH:AES:HIGH:!NULL:!aNULL:!MD5:!ADH:!RC4;</span><br><span class="line">        ssl_protocols TLSv1 TLSv1.1 TLSv1.2;</span><br><span class="line"></span><br><span class="line">        location / &#123;</span><br><span class="line">                proxy_pass http://127.0.0.1:41225;</span><br><span class="line">                proxy_http_version 1.1;</span><br><span class="line">                proxy_set_header Upgrade $http_upgrade;</span><br><span class="line">                proxy_set_header Connection &quot;upgrade&quot;;</span><br><span class="line">                proxy_set_header Host $http_host;</span><br><span class="line"></span><br><span class="line">                proxy_set_header X-Real-IP $remote_addr;</span><br><span class="line">                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</span><br><span class="line">                proxy_set_header X-Forwarded-Proto https;</span><br><span class="line">                proxy_set_header X-Nginx-Proxy true;</span><br><span class="line"></span><br><span class="line">                proxy_redirect off;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
@@ -65,7 +98,122 @@
   <entry>
     <title>Nmap端口扫描常用参数</title>
     <url>/2023/05/26/Nmap%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F%E5%B8%B8%E7%94%A8%E5%8F%82%E6%95%B0/</url>
-    <content><![CDATA[<h2 id="最全的NMAP命令用法了"><a href="#最全的NMAP命令用法了" class="headerlink" title="最全的NMAP命令用法了"></a>最全的NMAP命令用法了</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1. nmap -sT 192.168.96.4  //TCP连接扫描，不安全，慢</span><br><span class="line"></span><br><span class="line">2. nmap -sS 192.168.96.4  //SYN扫描,使用最频繁，安全，快</span><br><span class="line"></span><br><span class="line">3. nmap -Pn 192.168.96.4  //目标机禁用ping，绕过ping扫描</span><br><span class="line"></span><br><span class="line">4. nmap -sU 192.168.96.4  //UDP扫描,慢,可得到有价值的服务器程序</span><br><span class="line"></span><br><span class="line">5. nmap -sI 僵尸ip 目标ip  //使用僵尸机对目标机发送数据包</span><br><span class="line"></span><br><span class="line">6. nmap -sA 192.168.96.4  //检测哪些端口被屏蔽</span><br><span class="line"></span><br><span class="line">7. nmap 192.168.96.4 -p &lt;portnumber&gt;  //对指定端口扫描</span><br><span class="line"></span><br><span class="line">8. nmap 192.168.96.1/24 //对整个网段的主机进行扫描</span><br><span class="line"></span><br><span class="line">9. nmap 192.168.96.4 -oX myscan.xml //对扫描结果另存在myscan.xml</span><br><span class="line"></span><br><span class="line">10. nmap -T1~6 192.168.96.4  //设置扫描速度，一般T4足够。</span><br><span class="line"></span><br><span class="line">11. nmap -sV 192.168.96.4  //对端口上的服务程序版本进行扫描</span><br><span class="line"></span><br><span class="line">12. nmap -O 192.168.96.4  //对目标主机的操作系统进行扫描</span><br><span class="line"></span><br><span class="line">13. nmap -sC &lt;scirptfile&gt; 192.168.96.4  //使用脚本进行扫描，耗时长</span><br><span class="line"></span><br><span class="line">14. nmap -A 192.168.96.4  //强力扫描，耗时长</span><br><span class="line"></span><br><span class="line">15. nmap -6 ipv6地址   //对ipv6地址的主机进行扫描</span><br><span class="line"></span><br><span class="line">16. nmap -f 192.168.96.4  //使用小数据包发送，避免被识别出</span><br><span class="line"></span><br><span class="line">17. nmap –mtu &lt;size&gt; 192.168.96.4 //发送的包大小,最大传输单元必须是8的整数</span><br><span class="line"></span><br><span class="line">18. nmap -D &lt;假ip&gt; 192.168.96.4 //发送参杂着假ip的数据包检测</span><br><span class="line"></span><br><span class="line">19. nmap --source-port &lt;portnumber&gt; //针对防火墙只允许的源端口</span><br><span class="line"></span><br><span class="line">20. nmap –data-length: &lt;length&gt; 192.168.96.4 //改变发生数据包的默认的长度，避免被识别出来是nmap发送的。</span><br><span class="line"></span><br><span class="line">21. nmap -v 192.168.96.4  //显示冗余信息(扫描细节)</span><br><span class="line"></span><br><span class="line">22. nmap -sn 192.168.96.4  //对目标进行ping检测，不进行端口扫描（会发送四种报文确定目标是否存活,）</span><br><span class="line"></span><br><span class="line">23. nmap -sP 192.168.96.4  //仅仅对目标进行ping检测。</span><br><span class="line"></span><br><span class="line">24. nmap -n/-p 192.168.96.4  //-n表示不进行dns解析，-p表示要</span><br><span class="line"></span><br><span class="line">25. nmap --system-dns 192.168.96.4  //扫描指定系统的dns服务器</span><br><span class="line"></span><br><span class="line">26. nmap –traceroute 192.168.96.4  //追踪每个路由节点。</span><br><span class="line"></span><br><span class="line">27. nmap -PE/PP/PM: 使用ICMP echo, timestamp, and netmask 请求包发现主机。</span><br><span class="line"></span><br><span class="line">28. nmap -sP 192.168.96.4       //主机存活性扫描，arp直连方式。</span><br><span class="line"></span><br><span class="line">29. nmap -iR [number]       //对随机生成number个地址进行扫描。</span><br></pre></td></tr></table></figure>]]></content>
+    <content><![CDATA[<h2 id="最全的NMAP命令用法了"><a href="#最全的NMAP命令用法了" class="headerlink" title="最全的NMAP命令用法了"></a>最全的NMAP命令用法了</h2><ul>
+<li>TCP连接扫描，不安全，慢</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1. nmap -sT 192.168.96.4  </span><br></pre></td></tr></table></figure>
+<ul>
+<li>SYN扫描,使用最频繁，安全，快</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">2. nmap -sS 192.168.96.4  </span><br></pre></td></tr></table></figure>
+<ul>
+<li>目标机禁用ping，绕过ping扫描</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">3. nmap -Pn 192.168.96.4  </span><br></pre></td></tr></table></figure>
+<ul>
+<li>UDP扫描,慢,可得到有价值的服务器程序</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">4. nmap -sU 192.168.96.4  </span><br></pre></td></tr></table></figure>
+<ul>
+<li>使用僵尸机对目标机发送数据包</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">5. nmap -sI 僵尸ip 目标ip  </span><br></pre></td></tr></table></figure>
+<ul>
+<li>检测哪些端口被屏蔽</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">6. nmap -sA 192.168.96.4  </span><br></pre></td></tr></table></figure>
+<ul>
+<li>对指定端口扫描</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">7. nmap 192.168.96.4 -p &lt;portnumber&gt;  </span><br></pre></td></tr></table></figure>
+<ul>
+<li>对整个网段的主机进行扫描</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">8. nmap 192.168.96.1/24 </span><br></pre></td></tr></table></figure>
+<ul>
+<li>对扫描结果另存在myscan.xml</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">9. nmap 192.168.96.4 -oX myscan.xml </span><br></pre></td></tr></table></figure>
+<ul>
+<li>设置扫描速度，一般T4足够。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">10. nmap -T1~6 192.168.96.4  </span><br></pre></td></tr></table></figure>
+<ul>
+<li>对端口上的服务程序版本进行扫描</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">11. nmap -sV 192.168.96.4  </span><br></pre></td></tr></table></figure>
+<ul>
+<li>对目标主机的操作系统进行扫描</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">12. nmap -O 192.168.96.4  </span><br></pre></td></tr></table></figure>
+<ul>
+<li>使用脚本进行扫描，耗时长</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">13. nmap -sC &lt;scirptfile&gt; 192.168.96.4  </span><br></pre></td></tr></table></figure>
+<ul>
+<li>强力扫描，耗时长</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">14. nmap -A 192.168.96.4  </span><br></pre></td></tr></table></figure>
+<ul>
+<li>对ipv6地址的主机进行扫描</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">15. nmap -6 ipv6地址   </span><br></pre></td></tr></table></figure>
+<ul>
+<li>使用小数据包发送，避免被识别出</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">16. nmap -f 192.168.96.4  </span><br></pre></td></tr></table></figure>
+<ul>
+<li>发送的包大小,最大传输单元必须是8的整数</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">17. nmap –mtu &lt;size&gt; 192.168.96.4 </span><br></pre></td></tr></table></figure>
+<ul>
+<li>发送参杂着假ip的数据包检测</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">18. nmap -D &lt;假ip&gt; 192.168.96.4 </span><br></pre></td></tr></table></figure>
+<ul>
+<li>针对防火墙只允许的源端口</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">19. nmap --source-port &lt;portnumber&gt; </span><br></pre></td></tr></table></figure>
+<ul>
+<li>改变发生数据包的默认的长度，避免被识别出来是nmap发送的。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">20. nmap –data-length: &lt;length&gt; 192.168.96.4 </span><br></pre></td></tr></table></figure>
+<ul>
+<li>显示冗余信息(扫描细节)</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">21. nmap -v 192.168.96.4 </span><br></pre></td></tr></table></figure>
+<ul>
+<li>对目标进行ping检测，不进行端口扫描（会发送四种报文确定目标是否存活,）</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">22. nmap -sn 192.168.96.4 </span><br></pre></td></tr></table></figure>
+<ul>
+<li>仅仅对目标进行ping检测。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">23. nmap -sP 192.168.96.4  </span><br></pre></td></tr></table></figure>
+<ul>
+<li>-n表示不进行dns解析，-p表示要</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">24. nmap -n/-p 192.168.96.4  </span><br></pre></td></tr></table></figure>
+<ul>
+<li>扫描指定系统的dns服务器</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">25. nmap --system-dns 192.168.96.4  </span><br></pre></td></tr></table></figure>
+<ul>
+<li>追踪每个路由节点。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">26. nmap –traceroute 192.168.96.4  </span><br></pre></td></tr></table></figure>
+<ul>
+<li>使用ICMP echo, timestamp, and netmask 请求包发现主机。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">27. nmap -PE/PP/PM</span><br></pre></td></tr></table></figure>
+<ul>
+<li>主机存活性扫描，arp直连方式。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">28. nmap -sP 192.168.96.4       </span><br></pre></td></tr></table></figure>
+<ul>
+<li>对随机生成number个地址进行扫描。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">29. nmap -iR [number]      </span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>网络安全</category>
       </categories>

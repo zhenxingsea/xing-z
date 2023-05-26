@@ -80,4 +80,114 @@
         <tag>网络</tag>
       </tags>
   </entry>
+  <entry>
+    <title>python好用的库</title>
+    <url>/2023/05/26/python%E5%A5%BD%E7%94%A8%E7%9A%84%E5%BA%93/</url>
+    <content><![CDATA[<h2 id="sympy"><a href="#sympy" class="headerlink" title="sympy"></a>sympy</h2><ul>
+<li>是一个Python的科学计算库，用一套强大的符号计算体系完成诸如多项式求值、求极限、解方程、求积分、微分方程、级数展开、矩阵运算等等计算问题。使用 <a href="https://blog.csdn.net/qq_51478930/article/details/123636192">https://blog.csdn.net/qq_51478930/article/details/123636192</a></li>
+</ul>
+<h2 id="pillow"><a href="#pillow" class="headerlink" title="pillow"></a>pillow</h2><ul>
+<li>Pillow专门用于处理图像，您可以使用该库创建缩略图，在文件格式之间转换、旋转、应用滤镜、显示图像等等。如果您需要对许多图像执行批量操作，这是理想的选择。</li>
+</ul>
+<h2 id="Requests"><a href="#Requests" class="headerlink" title="Requests"></a>Requests</h2><ul>
+<li>Requests建立在世界上下载量最大的python库urllib3上，它令Web请求变得非常简单，功能强大且用途广泛。<br></li>
+<li>Requests可以完成您能想到的所有高级工作，比如：认证，使用cookie，执行POST、PUT、DELETE等，使用自定义证书，使用会话Session、使用代理等。</li>
+</ul>
+<h2 id="打包分发"><a href="#打包分发" class="headerlink" title="打包分发"></a>打包分发</h2><ul>
+<li>PyInstaller：将 Python 程序转换成独立的执行文件（跨平台）。</li>
+<li>cx_Freeze：将python程序转换为带有一个动态链接库的可执行文件。</li>
+<li>dh-virtualenv：构建并将 virtualenv 虚拟环境作为一个 Debian 包来发布。</li>
+<li>Nuitka：将脚本、模块、包编译成可执行文件或扩展模块。</li>
+<li>py2app：将 Python 脚本变为独立软件包（Mac OS X）。</li>
+<li>py2exe：将 Python 脚本变为独立软件包（Windows）。</li>
+<li>pynsist：一个用来创建 Windows 安装程序的工具，可以在安装程序中打包 Python 本身。</li>
+</ul>
+<h2 id="文件类"><a href="#文件类" class="headerlink" title="文件类"></a>文件类</h2><ul>
+<li>aiofiles：基于 asyncio，提供文件异步操作</li>
+<li>imghdr：（Python 标准库）检测图片类型</li>
+<li>mimetypes：（Python 标准库）将文件名映射为 MIME 类型</li>
+<li>path.py：对 os.path 进行封装的模块</li>
+<li>pathlib：（Python3.4+ 标准库）跨平台的、面向对象的路径操作库</li>
+<li>python-magic：文件类型检测的第三方库 libmagic 的 Python 接口</li>
+<li>Unipath：用面向对象的方式操作文件和目录</li>
+<li>watchdog：管理文件系统事件的 API 和 shell 工具</li>
+</ul>
+<h2 id="文本通用"><a href="#文本通用" class="headerlink" title="文本通用"></a>文本通用</h2><ul>
+<li>chardet：字符编码检测器，兼容 Python2 和 Python3。</li>
+<li>difflib：(Python 标准库)帮助我们进行差异化比较。</li>
+<li>ftfy：让 Unicode 文本更完整更连贯。</li>
+<li>fuzzywuzzy：模糊字符串匹配。</li>
+<li>Levenshtein：快速计算编辑距离以及字符串的相似度。</li>
+<li>pangu.py：在中日韩语字符和数字字母之间添加空格。</li>
+<li>pypinyin：汉字拼音转换工具 Python 版。</li>
+<li>shortuuid：一个生成器库，用以生成简洁的，明白的，URL 安全的 UUID。</li>
+<li>simplejson：Python 的 JSON 编码、解码器。</li>
+<li>unidecode：Unicode 文本的 ASCII 转换形式 。</li>
+<li>uniout：打印可读的字符，而不是转义的字符串。</li>
+<li>xpinyin：一个用于把汉字转换为拼音的库。</li>
+<li>yfiglet-figlet：pyfiglet -figlet 的 Python 实现。</li>
+<li>flashtext: 一个高效的文本查找替换库。</li>
+</ul>
+<h2 id="解释器"><a href="#解释器" class="headerlink" title="解释器"></a>解释器</h2><ul>
+<li>phonenumbers：解析，格式化，储存，验证电话号码。</li>
+<li>PLY：lex 和 yacc 解析工具的 Python 实现。</li>
+<li>Pygments：通用语法高亮工具。</li>
+<li>pyparsing：生成通用解析器的框架。</li>
+<li>python-nameparser：把一个人名分解为几个独立的部分。</li>
+<li>python-user-agents：浏览器 user agent 解析器。</li>
+<li>sqlparse：一个无验证的 SQL 解析器。</li>
+</ul>
+<h2 id="办公文本格式处理-Office"><a href="#办公文本格式处理-Office" class="headerlink" title="办公文本格式处理 Office"></a>办公文本格式处理 Office</h2><ul>
+<li>Marmir：把输入的 Python 数据结构转换为电子表单。</li>
+<li>openpyxl：一个用来读写 Excel 2010 xlsx&#x2F;xlsm&#x2F;xltx&#x2F;xltm 文件的库。</li>
+<li>pyexcel：一个提供统一 API，用来读写，操作 Excel 文件的库。</li>
+<li>python-docx：读取，查询以及修改 Microsoft Word 2007&#x2F;2008 docx 文件。</li>
+<li>relatorio：模板化 OpenDocument 文件。</li>
+<li>unoconv：在 LibreOffice&#x2F;OpenOffice 支持的任意文件格式之间进行转换。</li>
+<li>XlsxWriter：一个用于创建 Excel .xlsx 文件的 Python 模块。</li>
+<li>xlwings：一个使得在 Excel 中方便调用 Python 的库（反之亦然），基于 BSD 协议。</li>
+<li>xlwt：读写 Excel 文件的数据和格式信息。</li>
+</ul>
+<h2 id="办公文本格式处理-PDF"><a href="#办公文本格式处理-PDF" class="headerlink" title="办公文本格式处理 PDF"></a>办公文本格式处理 PDF</h2><ul>
+<li>PDFMiner：一个用于从 PDF 文档中抽取信息的工具。</li>
+<li>PyPDF2：一个可以分割，合并和转换 PDF 页面的库。</li>
+<li>ReportLab：快速创建富文本 PDF 文档。</li>
+</ul>
+<h2 id="配置管理"><a href="#配置管理" class="headerlink" title="配置管理"></a>配置管理</h2><ul>
+<li>config：logging 模块作者写的分级配置模块。</li>
+<li>ConfigObj：INI 文件解析器，带验证功能。</li>
+<li>ConfigParser：(Python 标准库) INI 文件解析器。</li>
+<li>profig：通过多种格式进行配置，具有数值转换功能。</li>
+<li>python-decouple：将设置和代码完全隔离。</li>
+</ul>
+<h2 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h2><ul>
+<li>pickleDB：一个简单，轻量级键值储存数据库。</li>
+<li>PipelineDB：流式 SQL 数据库。</li>
+<li>TinyDB：一个微型的，面向文档型数据库。</li>
+<li>ZODB：一个 Python 原生对象数据库。一个键值和对象图数据库。</li>
+</ul>
+<h2 id="网络编程的库"><a href="#网络编程的库" class="headerlink" title="网络编程的库"></a>网络编程的库</h2><ul>
+<li>asyncio：(Python 标准库) 异步 I&#x2F;O, 事件循环, 协程以及任务。</li>
+<li>Twisted：一个事件驱动的网络引擎。</li>
+<li>pulsar：事件驱动的并发框架。</li>
+<li>diesel：基于 Greenlet 的事件 I&#x2F;O 框架。</li>
+<li>pyzmq：一个 ZeroMQ 消息库的 Python 封装。</li>
+<li>Toapi：一个轻巧，简单，快速的 Flask 库，致力于为所有网站提供 API 服务。</li>
+<li>txZMQ：基于 Twisted 的 ZeroMQ 消息库的 Python 封装。</li>
+</ul>
+<h2 id="操作系统进程启动及通信库"><a href="#操作系统进程启动及通信库" class="headerlink" title="操作系统进程启动及通信库"></a>操作系统进程启动及通信库</h2><ul>
+<li>envoy：比 Python subprocess 模块更人性化。</li>
+<li>sarge：另一 种 subprocess 模块的封装。</li>
+<li>sh：一个完备的 subprocess 替代库。</li>
+</ul>
+<h2 id="并发与并行"><a href="#并发与并行" class="headerlink" title="并发与并行"></a>并发与并行</h2><ul>
+<li>multiprocessing：(Python 标准库) 基于进程的“线程”接口。</li>
+<li>threading：(Python 标准库)更高层的线程接口。</li>
+<li>eventlet：支持 WSGI 的异步框架。</li>
+<li>gevent：一个基于协程的 Python 网络库，使用 greenlet。</li>
+<li>Tomorrow：用于产生异步代码的神奇的装饰器语法实现。</li>
+<li>uvloop：在 libuv 之上超快速实现 asyncio 事件循环。</li>
+</ul>
+]]></content>
+  </entry>
 </search>

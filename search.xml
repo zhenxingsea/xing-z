@@ -238,6 +238,14 @@
       </tags>
   </entry>
   <entry>
+    <title>Vue构建后前端路由拦截失效</title>
+    <url>/2023/06/08/Vue%E6%9E%84%E5%BB%BA%E5%90%8E%E5%89%8D%E7%AB%AF%E8%B7%AF%E7%94%B1%E6%8B%A6%E6%88%AA%E5%A4%B1%E6%95%88/</url>
+    <content><![CDATA[<p>原因是：这个问题是因为 Vue 的路由模式默认是 hash 模式,只改变 URL 的 hash 部分。但是 Nginx 会把 URL 中的 hash 部分去掉。<br>解决：在nginx 的server 中添加以下代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">location / &#123;</span><br><span class="line">  try_files $uri $uri/ /index.html;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">location ~ ^/.*\.(ico|css|js|gif|jpe?g|png|svg|woff2?|ttf)$ &#123;</span><br><span class="line">  add_header Cache-Control &quot;public&quot;;</span><br><span class="line">  expires 1w;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个配置会正确保留 URL 中的 hash,所以 Vue 路由可以正常工作。</p>
+]]></content>
+  </entry>
+  <entry>
     <title>docker常用服务</title>
     <url>/2023/05/26/docker%E5%B8%B8%E7%94%A8%E6%9C%8D%E5%8A%A1/</url>
     <content><![CDATA[<h2 id="redis"><a href="#redis" class="headerlink" title="redis"></a>redis</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker run --name redis-dev -p 6379:6379 -d --restart=always redis:latest redis-server --requirepass &quot;root&quot;</span><br></pre></td></tr></table></figure>

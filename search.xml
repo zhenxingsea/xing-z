@@ -247,6 +247,12 @@
       </tags>
   </entry>
   <entry>
+    <title>Ubuntu升级docker-compose</title>
+    <url>/2023/06/26/Ubuntu%E5%8D%87%E7%BA%A7docker-compose/</url>
+    <content><![CDATA[<p>通过安装最新的可能的版本来更新</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ sudo curl -L &quot;https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)&quot; -o /usr/local/bin/docker-compose</span><br><span class="line">$ sudo chmod +x /usr/local/bin/docker-compose</span><br></pre></td></tr></table></figure>]]></content>
+  </entry>
+  <entry>
     <title>Vue构建后前端路由拦截失效</title>
     <url>/2023/06/08/Vue%E6%9E%84%E5%BB%BA%E5%90%8E%E5%89%8D%E7%AB%AF%E8%B7%AF%E7%94%B1%E6%8B%A6%E6%88%AA%E5%A4%B1%E6%95%88/</url>
     <content><![CDATA[<p>原因是：这个问题是因为 Vue 的路由模式默认是 hash 模式,只改变 URL 的 hash 部分。但是 Nginx 会把 URL 中的 hash 部分去掉。<br>解决：在nginx 的server 中添加以下代码：</p>

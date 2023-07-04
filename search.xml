@@ -60,6 +60,12 @@
 <li>K3S_TOKEN master节点token</li>
 </ul>
 <h2 id="查看节点"><a href="#查看节点" class="headerlink" title="查看节点"></a>查看节点</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># kubectl get node</span><br><span class="line">NAME             STATUS   ROLES                  AGE   VERSION</span><br><span class="line">ubuntu           Ready    control-plane,master   11h   v1.26.5+k3s1</span><br><span class="line">jp               Ready    &lt;none&gt;                 29s   v1.26.5+k3s1</span><br><span class="line">vm-0-15-ubuntu   Ready    &lt;none&gt;                 11h   v1.26.5+k3s1</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>k8s</category>
+      </categories>
+      <tags>
+        <tag>k8s</tag>
+      </tags>
   </entry>
   <entry>
     <title>Linux常用命令</title>
@@ -268,6 +274,12 @@
     <url>/2023/06/26/Ubuntu%E5%8D%87%E7%BA%A7docker-compose.html</url>
     <content><![CDATA[<p>通过安装最新的可能的版本来更新</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ sudo curl -L &quot;https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)&quot; -o /usr/local/bin/docker-compose</span><br><span class="line">$ sudo chmod +x /usr/local/bin/docker-compose</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>docker</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+      </tags>
   </entry>
   <entry>
     <title>Vue构建后前端路由拦截失效</title>
@@ -319,6 +331,12 @@
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">apiVersion: traefik.containo.us/v1alpha1</span><br><span class="line">kind: Middleware</span><br><span class="line">metadata:</span><br><span class="line">  name: blog-path-prefix-strip</span><br><span class="line">  namespace: blog</span><br><span class="line">spec:</span><br><span class="line">  stripPrefix:</span><br><span class="line">    prefixes:</span><br><span class="line">      - /blog/api</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line">apiVersion: traefik.containo.us/v1alpha1</span><br><span class="line">kind: IngressRoute</span><br><span class="line">metadata:</span><br><span class="line">  name: blog-ingress</span><br><span class="line">  namespace: blog</span><br><span class="line">spec:</span><br><span class="line">  entryPoints:</span><br><span class="line">  - web</span><br><span class="line">  routes:</span><br><span class="line">  - match: Host(`blog.test`) &amp;&amp; PathPrefix(`/blog/api`)</span><br><span class="line">    kind: Rule</span><br><span class="line">    services:</span><br><span class="line">    - name: blog-service</span><br><span class="line">      port: 44678</span><br><span class="line">    middlewares:</span><br><span class="line">    - name: blog-path-prefix-strip</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line">apiVersion: v1</span><br><span class="line">kind: Service</span><br><span class="line">metadata:</span><br><span class="line">  name: blog-service</span><br><span class="line">  namespace: blog</span><br><span class="line">spec:</span><br><span class="line">  selector:</span><br><span class="line">    app: blog-home-api</span><br><span class="line">  ports:</span><br><span class="line">    - protocol: TCP</span><br><span class="line">      port: 44678</span><br><span class="line">      targetPort: 33333</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line">apiVersion: apps/v1</span><br><span class="line">kind: Deployment</span><br><span class="line">metadata:</span><br><span class="line">  name: blog-api</span><br><span class="line">  namespace: blog</span><br><span class="line">  labels:</span><br><span class="line">    app: blog-api</span><br><span class="line">spec:</span><br><span class="line">  replicas: 1</span><br><span class="line">  selector:</span><br><span class="line">    matchLabels:</span><br><span class="line">      app: blog-home-api</span><br><span class="line">  template:</span><br><span class="line">    metadata:</span><br><span class="line">      labels:</span><br><span class="line">        app: blog-home-api</span><br><span class="line">    spec:</span><br><span class="line">      containers:</span><br><span class="line">      - name: blog-home-api</span><br><span class="line">        image: registry.cn-hangzhou.aliyuncs.com/xianzx-public/blog-api:v1.3</span><br><span class="line">        ports:</span><br><span class="line">         - containerPort: 33333</span><br><span class="line">        command: [&quot;python&quot;, &quot;./app.py&quot;]</span><br></pre></td></tr></table></figure>
 
 <h2 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">kubectl apply -f XXX.yml </span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>k8s</category>
+      </categories>
+      <tags>
+        <tag>k8s</tag>
+      </tags>
   </entry>
   <entry>
     <title>端口转发常用的几种方法</title>

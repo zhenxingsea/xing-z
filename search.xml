@@ -346,6 +346,55 @@
       </tags>
   </entry>
   <entry>
+    <title>k8s配置文件常用属性说明</title>
+    <url>/2023/07/05/k8s%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%B8%B8%E7%94%A8%E5%B1%9E%E6%80%A7%E8%AF%B4%E6%98%8E.html</url>
+    <content><![CDATA[<h4 id="以下是K3s-Yaml配置文件中常见属性的说明："><a href="#以下是K3s-Yaml配置文件中常见属性的说明：" class="headerlink" title="以下是K3s Yaml配置文件中常见属性的说明："></a>以下是K3s Yaml配置文件中常见属性的说明：</h4><ul>
+<li><code>apiVersion</code>：Kubernetes API 版本</li>
+<li><code>kind</code>：资源类型，通常为 <code>Deployment</code>、<code>Pod</code>、<code>Service</code>等</li>
+<li><code>metadata</code>：元数据字段，包括 <code>name</code>（资源名称）、<code>namespace</code>（命名空间）、<code>labels</code>（标签）等</li>
+<li><code>spec</code>：规范字段，用于定义资源的规范</li>
+<li><code>containers</code>：在 <code>Pod</code> 中定义容器的列表<ul>
+<li><code>name</code>：容器名称</li>
+<li><code>image</code>：容器使用的镜像</li>
+<li><code>ports</code>：容器所使用的端口配置</li>
+</ul>
+</li>
+<li><code>replicas</code>：在 <code>Deployment</code> 中定义的副本数量</li>
+<li><code>selector</code>：在 <code>Service</code> 中定义用于选择 <code>Pod</code> 的标签</li>
+<li><code>type</code>：在 <code>Service</code> 中定义服务类型，如 <code>ClusterIP</code>、<code>NodePort</code>、<code>LoadBalancer</code>等</li>
+<li><code>nodeSelector</code>：在 <code>Pod</code> 中定义用于选择节点的标签</li>
+<li><code>affinity</code>：用于定义调度规则以控制 <code>Pod</code> 的调度<ul>
+<li><code>nodeAffinity</code>：节点亲和性规则<ul>
+<li><code>requiredDuringSchedulingIgnoredDuringExecution</code>：必需的调度规则<ul>
+<li><code>nodeSelectorTerms</code>：节点选择器规则<ul>
+<li><code>matchExpressions</code>：匹配表达式<ul>
+<li><code>key</code>：节点标签的键</li>
+<li><code>operator</code>：匹配操作符，如 <code>In</code>、<code>NotIn</code>、<code>Exists</code>等</li>
+<li><code>values</code>：节点标签的值列表</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>tolerations</code>：容忍规则，用于定义在特定节点上运行 <code>Pod</code> 时容忍的 Taints</li>
+<li><code>serviceAccountName</code>：指定要在 <code>Pod</code> 中使用的 Service Account</li>
+<li><code>volumes</code>：定义 <code>Pod</code> 使用的卷<ul>
+<li><code>name</code>：卷名称</li>
+<li><code>emptyDir</code>：空目录卷</li>
+<li><code>hostPath</code>：主机路径卷</li>
+<li><code>persistentVolumeClaim</code>：持久卷声明</li>
+</ul>
+</li>
+</ul>
+<p>除了上述常见属性外，还有其他可配置的字段和属性，具体取决于不同的资源类型和您的应用需求。您可以参考 Kubernetes 官方文档获得更详细的配置信息（<a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/kubernetes-objects/%EF%BC%89">https://kubernetes.io/docs/concepts/overview/working-with-objects/kubernetes-objects/）</a></p>
+<h4 id="以下是一个pod-yaml例子："><a href="#以下是一个pod-yaml例子：" class="headerlink" title="以下是一个pod yaml例子："></a>以下是一个pod yaml例子：</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">apiVersion: apps/v1</span><br><span class="line">kind: Deployment</span><br><span class="line">metadata:</span><br><span class="line">  name: my-deployment  # 部署的名称</span><br><span class="line">spec:</span><br><span class="line">  replicas: 3  # 副本数量</span><br><span class="line">  selector:</span><br><span class="line">    matchLabels:</span><br><span class="line">      app: MyApp  # 标签选择器</span><br><span class="line">  template:</span><br><span class="line">    metadata:</span><br><span class="line">      labels:</span><br><span class="line">        app: MyApp  # Pod 标签</span><br><span class="line">    spec:</span><br><span class="line">      containers:</span><br><span class="line">        - name: my-container  # 容器的名称</span><br><span class="line">          image: my-image  # 容器使用的镜像</span><br><span class="line">          ports:  # 容器端口配置</span><br><span class="line">            - containerPort: 80  # 容器监听的端口</span><br><span class="line">      nodeSelector:</span><br><span class="line">        kubernetes.io/hostname: node1  # 选择要运行 Pod 的节点</span><br><span class="line">      affinity:  # 调度规则</span><br><span class="line">        nodeAffinity:</span><br><span class="line">          requiredDuringSchedulingIgnoredDuringExecution:</span><br><span class="line">            nodeSelectorTerms:</span><br><span class="line">              - matchExpressions:</span><br><span class="line">                  - key: disktype  # 节点标签的键</span><br><span class="line">                    operator: In  # 操作符</span><br><span class="line">                    values:</span><br><span class="line">                      - ssd  # 节点标签的值</span><br><span class="line">      tolerations:  # 容忍规则</span><br><span class="line">        - key: &quot;nodeType&quot;  # 容忍规则的键</span><br><span class="line">          operator: &quot;Exists&quot;  # 操作符</span><br><span class="line">          effect: &quot;NoSchedule&quot;  # 容忍规则的效果</span><br><span class="line">      volumes:  # 卷配置</span><br><span class="line">        - name: my-volume  # 卷的名称</span><br><span class="line">          emptyDir: &#123;&#125;  # 空目录卷</span><br></pre></td></tr></table></figure>]]></content>
+  </entry>
+  <entry>
     <title>端口转发常用的几种方法</title>
     <url>/2023/05/25/linux%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E5%B8%B8%E7%94%A8%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95.html</url>
     <content><![CDATA[<h2 id="SSH-端口转发"><a href="#SSH-端口转发" class="headerlink" title="SSH 端口转发"></a>SSH 端口转发</h2><p>SSH 提供了一个非常有意思的功能，就是端口转发，它能够将其他 TCP 端口的网络数据通过 SSH 链接来转发，并且自动提供了相应的加密及解密服务。</p>

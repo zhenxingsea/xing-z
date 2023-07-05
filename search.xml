@@ -332,6 +332,30 @@
       </tags>
   </entry>
   <entry>
+    <title>k8s 常用服务组件</title>
+    <url>/2023/07/05/k8s-%E5%B8%B8%E7%94%A8%E6%9C%8D%E5%8A%A1%E7%BB%84%E4%BB%B6.html</url>
+    <content><![CDATA[<h4 id="Kubernetes（K8s）是一个高度可扩展的容器编排平台，它由多个常用的服务组件组成。以下是一些常用的Kubernetes服务组件："><a href="#Kubernetes（K8s）是一个高度可扩展的容器编排平台，它由多个常用的服务组件组成。以下是一些常用的Kubernetes服务组件：" class="headerlink" title="Kubernetes（K8s）是一个高度可扩展的容器编排平台，它由多个常用的服务组件组成。以下是一些常用的Kubernetes服务组件："></a>Kubernetes（K8s）是一个高度可扩展的容器编排平台，它由多个常用的服务组件组成。以下是一些常用的Kubernetes服务组件：</h4><ol>
+<li><p><strong>kube-apiserver</strong>：Kubernetes API的前端组件，提供了集群的核心API服务。</p>
+</li>
+<li><p><strong>kube-controller-manager</strong>：运行一组控制器，负责管理集群中的各种资源，如Pod、ReplicaSet、Deployment等。</p>
+</li>
+<li><p><strong>kube-scheduler</strong>：负责在集群中的可用节点上调度Pod，根据资源需求和其他条件为新创建的Pod选择合适的节点。</p>
+</li>
+<li><p><strong>kubelet</strong>：在每个节点上运行并与kube-apiserver进行通信，负责管理节点上的Pod和容器，以及监控它们的状态。</p>
+</li>
+<li><p><strong>kube-proxy</strong>：维护节点上的网络规则和转发，负责实现Kubernetes服务抽象。</p>
+</li>
+<li><p><strong>etcd</strong>：可靠的分布式键值存储系统，用于保存Kubernetes集群配置、服务发现和状态数据。</p>
+</li>
+<li><p><strong>CoreDNS</strong>：一个开源的域名系统（DNS）服务插件，提供基于域名的服务发现和解析。</p>
+</li>
+<li><p><strong>Container Runtime</strong>：Kubernetes支持多种容器运行时，如Docker、containerd、CRI-O等，用于管理和执行容器。</p>
+</li>
+</ol>
+<p>除了上述主要服务组件之外，Kubernetes还有其他可选的组件和插件，如Ingress Controller、Metrics Server、Dashboard等，用于增强和扩展集群的功能。这些组件共同协作，构成了一个完整的Kubernetes集群，提供了可靠的容器编排和管理环境。</p>
+]]></content>
+  </entry>
+  <entry>
     <title>k8s开放API的例子</title>
     <url>/2023/07/01/k8s%E5%BC%80%E6%94%BEAPI%E7%9A%84%E4%BE%8B%E5%AD%90.html</url>
     <content><![CDATA[<h2 id="k8s上的XXX-yaml"><a href="#k8s上的XXX-yaml" class="headerlink" title="k8s上的XXX.yaml"></a>k8s上的XXX.yaml</h2><p>新建一个xxx.yaml文件</p>

@@ -1,27 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Docker常用命令</title>
-    <url>/2023/05/25/Docker%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4.html</url>
-    <content><![CDATA[<h2 id="查看容器所有信息"><a href="#查看容器所有信息" class="headerlink" title="查看容器所有信息"></a>查看容器所有信息</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker inspect &lt;容器ID/Name&gt;</span><br></pre></td></tr></table></figure>
-
-<h2 id="清除所有容器"><a href="#清除所有容器" class="headerlink" title="清除所有容器"></a>清除所有容器</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker rm -f $(docker ps -aq)</span><br></pre></td></tr></table></figure>
-
-<h2 id="清除关键字容器"><a href="#清除关键字容器" class="headerlink" title="清除关键字容器"></a>清除关键字容器</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker container  rm -f $(docker ps -a | grep &lt;keyword&gt; | awk &#x27;&#123;print $1&#125;&#x27;)</span><br></pre></td></tr></table></figure>
-
-<h2 id="清除所有镜像"><a href="#清除所有镜像" class="headerlink" title="清除所有镜像"></a>清除所有镜像</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker rmi $(docker images -q)</span><br></pre></td></tr></table></figure>
-
-<h2 id="清除关键字镜像"><a href="#清除关键字镜像" class="headerlink" title="清除关键字镜像"></a>清除关键字镜像</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker image rm -f $(docker images | grep &lt;keyword&gt; | awk &#x27;&#123;print $3&#125;&#x27;)</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="停止所有的容器"><a href="#停止所有的容器" class="headerlink" title="停止所有的容器"></a>停止所有的容器</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker stop $(docker ps -aq)</span><br></pre></td></tr></table></figure>
-
-<h2 id="删除“已退出”的容器"><a href="#删除“已退出”的容器" class="headerlink" title="删除“已退出”的容器"></a>删除“已退出”的容器</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker rm $(docker ps -q -f status=exited)</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>Docker</category>
-      </categories>
-  </entry>
-  <entry>
     <title>GIt常用的回滚操作</title>
     <url>/2023/05/26/GIt%E5%B8%B8%E7%94%A8%E7%9A%84%E5%9B%9E%E6%BB%9A%E6%93%8D%E4%BD%9C.html</url>
     <content><![CDATA[<h2 id="本地整体回滚"><a href="#本地整体回滚" class="headerlink" title="本地整体回滚"></a>本地整体回滚</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># git log -3</span><br><span class="line"># git reset —hard 7e34ff38eeeed1adea5470bbee89a63b0e925993</span><br><span class="line"># git push -f origin master</span><br></pre></td></tr></table></figure>
@@ -43,12 +22,33 @@
       </tags>
   </entry>
   <entry>
-    <title>K3S国内安装</title>
+    <title>Docker常用命令</title>
+    <url>/2023/05/25/Docker%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4.html</url>
+    <content><![CDATA[<h2 id="查看容器所有信息"><a href="#查看容器所有信息" class="headerlink" title="查看容器所有信息"></a>查看容器所有信息</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker inspect &lt;容器ID/Name&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="清除所有容器"><a href="#清除所有容器" class="headerlink" title="清除所有容器"></a>清除所有容器</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker rm -f $(docker ps -aq)</span><br></pre></td></tr></table></figure>
+
+<h2 id="清除关键字容器"><a href="#清除关键字容器" class="headerlink" title="清除关键字容器"></a>清除关键字容器</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker container  rm -f $(docker ps -a | grep &lt;keyword&gt; | awk &#x27;&#123;print $1&#125;&#x27;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="清除所有镜像"><a href="#清除所有镜像" class="headerlink" title="清除所有镜像"></a>清除所有镜像</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker rmi $(docker images -q)</span><br></pre></td></tr></table></figure>
+
+<h2 id="清除关键字镜像"><a href="#清除关键字镜像" class="headerlink" title="清除关键字镜像"></a>清除关键字镜像</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker image rm -f $(docker images | grep &lt;keyword&gt; | awk &#x27;&#123;print $3&#125;&#x27;)</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="停止所有的容器"><a href="#停止所有的容器" class="headerlink" title="停止所有的容器"></a>停止所有的容器</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker stop $(docker ps -aq)</span><br></pre></td></tr></table></figure>
+
+<h2 id="删除“已退出”的容器"><a href="#删除“已退出”的容器" class="headerlink" title="删除“已退出”的容器"></a>删除“已退出”的容器</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker rm $(docker ps -q -f status=exited)</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Docker</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>K3S国内安装&amp;安装kuboard</title>
     <url>/2023/06/23/K3S%E5%9B%BD%E5%86%85%E5%AE%89%E8%A3%85.html</url>
     <content><![CDATA[<h2 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h2><ul>
 <li>安装Docker</li>
 </ul>
-<h2 id="master安装"><a href="#master安装" class="headerlink" title="master安装"></a>master安装</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># curl –sfL https://rancher-mirror.oss-cn-beijing.aliyuncs.com/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn INSTALL_K3S_VERSION=</span><br><span class="line">v1.26.5+k3s1 sh -s - --docker --flannel-iface=run0 --system-default-registry &quot;registry.cn-hangzhou.aliyuncs.com&quot;</span><br></pre></td></tr></table></figure>
+<h2 id="master安装"><a href="#master安装" class="headerlink" title="master安装"></a>master安装</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># curl –sfL https://rancher-mirror.oss-cn-beijing.aliyuncs.com/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn INSTALL_K3S_VERSION=v1.26.5+k3s1 sh -s - --docker --flannel-iface=tun0 --system-default-registry &quot;registry.cn-hangzhou.aliyuncs.com&quot;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>INSTALL_K3S_MIRROR: 国内源</li>
 <li>system-default-registry: 国内仓库源</li>
@@ -58,7 +58,7 @@
 <h2 id="获取master-Token"><a href="#获取master-Token" class="headerlink" title="获取master Token"></a>获取master Token</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># cat /var/lib/rancher/k3s/server/node-token</span><br></pre></td></tr></table></figure>
 
 
-<h2 id="agent安装"><a href="#agent安装" class="headerlink" title="agent安装"></a>agent安装</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># curl –sfL https://rancher-mirror.oss-cn-beijing.aliyuncs.com/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn INSTALL_K3S_VERSION=</span><br><span class="line">v1.26.5+k3s1 K3S_URL=https://10.8.0.5:6443 K3S_TOKEN=&lt;token&gt; sh -s - --docker  --flannel-iface=tun0 --system-default-registry &quot;registry.cn-hangzhou.aliyuncs.com&quot;</span><br></pre></td></tr></table></figure>
+<h2 id="agent安装"><a href="#agent安装" class="headerlink" title="agent安装"></a>agent安装</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># curl –sfL https://rancher-mirror.oss-cn-beijing.aliyuncs.com/k3s/k3s-install.sh  | INSTALL_K3S_MIRROR=cn INSTALL_K3S_VERSION=v1.26.5+k3s1 K3S_URL=https://10.8.0.4:6443 K3S_TOKEN=&lt;token&gt; sh -s - --docker  --flannel-iface=tun0</span><br></pre></td></tr></table></figure>
 <ul>
 <li>INSTALL_K3S_MIRROR 国内源</li>
 <li>system-default-registry: 国内仓库源</li>
@@ -66,7 +66,17 @@
 <li>INSTALL_K3S_VERSION k3s版本</li>
 <li>K3S_TOKEN master节点token</li>
 </ul>
-<h2 id="查看节点"><a href="#查看节点" class="headerlink" title="查看节点"></a>查看节点</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># kubectl get node</span><br><span class="line">NAME             STATUS   ROLES                  AGE   VERSION</span><br><span class="line">ubuntu           Ready    control-plane,master   11h   v1.26.5+k3s1</span><br><span class="line">jp               Ready    &lt;none&gt;                 29s   v1.26.5+k3s1</span><br><span class="line">vm-0-15-ubuntu   Ready    &lt;none&gt;                 11h   v1.26.5+k3s1</span><br></pre></td></tr></table></figure>]]></content>
+<h2 id="查看节点"><a href="#查看节点" class="headerlink" title="查看节点"></a>查看节点</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># kubectl get node</span><br><span class="line">NAME             STATUS   ROLES                  AGE   VERSION</span><br><span class="line">ubuntu           Ready    control-plane,master   11h   v1.26.5+k3s1</span><br><span class="line">jp               Ready    &lt;none&gt;                 29s   v1.26.5+k3s1</span><br><span class="line">vm-0-15-ubuntu   Ready    &lt;none&gt;                 11h   v1.26.5+k3s1</span><br></pre></td></tr></table></figure>
+
+<h2 id="安装kuboard"><a href="#安装kuboard" class="headerlink" title="安装kuboard"></a>安装kuboard</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">kubectl apply -f https://addons.kuboard.cn/kuboard/kuboard-v3.yaml</span><br><span class="line"># 您也可以使用下面的指令，唯一的区别是，该指令使用华为云的镜像仓库替代 docker hub 分发 Kuboard 所需要的镜像</span><br><span class="line"># kubectl apply -f https://addons.kuboard.cn/kuboard/kuboard-v3-swr.yaml</span><br></pre></td></tr></table></figure>
+
+<h2 id="访问Kuboard"><a href="#访问Kuboard" class="headerlink" title="访问Kuboard"></a>访问Kuboard</h2><p>在浏览器中打开链接 <a href="http://your-node-ip-address:30080/">http://your-node-ip-address:30080</a></p>
+<p>输入初始用户名和密码，并登录</p>
+<ul>
+<li>用户名： admin</li>
+<li>密码： Kuboard123</li>
+</ul>
+<h2 id="卸载Kuboard"><a href="#卸载Kuboard" class="headerlink" title="卸载Kuboard"></a>卸载Kuboard</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">kubectl delete -f https://addons.kuboard.cn/kuboard/kuboard-v3.yaml</span><br><span class="line"># 清理遗留数据</span><br><span class="line">rm -rf /usr/share/kuboard</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>k8s</category>
       </categories>
@@ -316,6 +326,22 @@
       </tags>
   </entry>
   <entry>
+    <title>docker换国内源</title>
+    <url>/2023/05/26/docker%E6%8D%A2%E5%9B%BD%E5%86%85%E6%BA%90.html</url>
+    <content><![CDATA[<ul>
+<li>通过修改 daemon 配置文件 &#x2F;etc&#x2F;docker&#x2F;daemon.json 来使用加速器。<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># vim /etc/docker/daemon.json</span><br></pre></td></tr></table></figure></li>
+<li>按下面说的修改后重启docker服务就行<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;builder&quot;: &#123;</span><br><span class="line">    &quot;gc&quot;: &#123;</span><br><span class="line">      &quot;enabled&quot;: true,</span><br><span class="line">      &quot;defaultKeepStorage&quot;: &quot;20GB&quot;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;features&quot;: &#123;</span><br><span class="line">    &quot;buildkit&quot;: true</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;experimental&quot;: false,</span><br><span class="line">  &quot;registry-mirrors&quot;: [</span><br><span class="line">    &quot;https://yrqaxlmr.mirror.aliyuncs.com&quot; // 替换成国内源就行</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>重启docker服务<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># systemctl restart docker</span><br></pre></td></tr></table></figure></li>
+</ul>
+]]></content>
+      <categories>
+        <category>DevOps</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>k8s 常用服务组件</title>
     <url>/2023/07/05/k8s-%E5%B8%B8%E7%94%A8%E6%9C%8D%E5%8A%A1%E7%BB%84%E4%BB%B6.html</url>
     <content><![CDATA[<h4 id="Kubernetes（K8s）是一个高度可扩展的容器编排平台，它由多个常用的服务组件组成。以下是一些常用的Kubernetes服务组件："><a href="#Kubernetes（K8s）是一个高度可扩展的容器编排平台，它由多个常用的服务组件组成。以下是一些常用的Kubernetes服务组件：" class="headerlink" title="Kubernetes（K8s）是一个高度可扩展的容器编排平台，它由多个常用的服务组件组成。以下是一些常用的Kubernetes服务组件："></a>Kubernetes（K8s）是一个高度可扩展的容器编排平台，它由多个常用的服务组件组成。以下是一些常用的Kubernetes服务组件：</h4><ol>
@@ -338,22 +364,6 @@
 </ol>
 <p>除了上述主要服务组件之外，Kubernetes还有其他可选的组件和插件，如Ingress Controller、Metrics Server、Dashboard等，用于增强和扩展集群的功能。这些组件共同协作，构成了一个完整的Kubernetes集群，提供了可靠的容器编排和管理环境。</p>
 ]]></content>
-  </entry>
-  <entry>
-    <title>docker换国内源</title>
-    <url>/2023/05/26/docker%E6%8D%A2%E5%9B%BD%E5%86%85%E6%BA%90.html</url>
-    <content><![CDATA[<ul>
-<li>通过修改 daemon 配置文件 &#x2F;etc&#x2F;docker&#x2F;daemon.json 来使用加速器。<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># vim /etc/docker/daemon.json</span><br></pre></td></tr></table></figure></li>
-<li>按下面说的修改后重启docker服务就行<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;builder&quot;: &#123;</span><br><span class="line">    &quot;gc&quot;: &#123;</span><br><span class="line">      &quot;enabled&quot;: true,</span><br><span class="line">      &quot;defaultKeepStorage&quot;: &quot;20GB&quot;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;features&quot;: &#123;</span><br><span class="line">    &quot;buildkit&quot;: true</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;experimental&quot;: false,</span><br><span class="line">  &quot;registry-mirrors&quot;: [</span><br><span class="line">    &quot;https://yrqaxlmr.mirror.aliyuncs.com&quot; // 替换成国内源就行</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li>重启docker服务<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># systemctl restart docker</span><br></pre></td></tr></table></figure></li>
-</ul>
-]]></content>
-      <categories>
-        <category>DevOps</category>
-      </categories>
-      <tags>
-        <tag>docker</tag>
-      </tags>
   </entry>
   <entry>
     <title>k8s开放API的例子</title>

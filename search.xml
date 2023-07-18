@@ -596,6 +596,40 @@
       </tags>
   </entry>
   <entry>
+    <title>ubuntu安装nfs服务器</title>
+    <url>/2023/07/18/ubuntu%E5%AE%89%E8%A3%85nfs%E6%9C%8D%E5%8A%A1%E5%99%A8.html</url>
+    <content><![CDATA[<ul>
+<li>在终端中执行以下命令</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt upgrade</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>安装NFS内核服务器软件包：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo apt install nfs-kernel-server</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>创建一个要共享的目录，例如</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo mkdir -p /export</span><br><span class="line">sudo chmod 755 /export</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>将以下内容添加到文件中，替换 <client_IP> 为客户端的IP地址</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo vim /etc/exports</span><br><span class="line"></span><br><span class="line">#写入</span><br><span class="line">/export &lt;client_IP&gt;(rw,sync,no_subtree_check)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>将更改应用到NFS服务器并重新启动服务</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo exportfs -ra</span><br><span class="line">sudo systemctl restart nfs-kernel-server</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在客户端上安装NFS客户端软件包</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo apt install nfs-common</span><br><span class="line"># 创建一个挂载点，例如 /mnt/nfs_share</span><br><span class="line">sudo mkdir -p /mnt/nfs_share</span><br><span class="line"># 挂载NFS共享到挂载点</span><br><span class="line">sudo mount &lt;server_IP&gt;:/nfs_share /mnt/nfs_share</span><br><span class="line"># 检查挂载是否成功</span><br><span class="line">df -h</span><br></pre></td></tr></table></figure>
+]]></content>
+  </entry>
+  <entry>
     <title>常用kubectl命令</title>
     <url>/2023/07/05/%E5%B8%B8%E7%94%A8kubectl%E5%91%BD%E4%BB%A4.html</url>
     <content><![CDATA[<h3 id="配置和集群管理命令："><a href="#配置和集群管理命令：" class="headerlink" title="配置和集群管理命令："></a>配置和集群管理命令：</h3><ul>

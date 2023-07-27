@@ -93,11 +93,7 @@
 
 <h2 id="查找内容"><a href="#查找内容" class="headerlink" title="查找内容"></a>查找内容</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">grep -nr “keyword” ./</span><br></pre></td></tr></table></figure>
 
-<h2 id="查找内容-1"><a href="#查找内容-1" class="headerlink" title="查找内容"></a>查找内容</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">find /path/to/directory1 /path/to/directory2 -type f -name &quot;*keyword*&quot; -exec tar -czvf archive.tar.gz &#123;&#125; +</span><br></pre></td></tr></table></figure>
-<p><code>/path/to/directory1</code>和<code>/path/to/directory2</code>是待搜索的目录路径。你可以根据实际情况进行替换。</p>
-<p><code>keyword</code>是你要查找的文件名中包含的关键字。可以根据需要进行更改。通配符*表示匹配任意字符。</p>
-<p><code>tar -czvf archive.tar.gz</code>是用于将查找到的文件打包成一个压缩文件的命令。你可以根据需要使用其他压缩命令，如zip等。</p>
-]]></content>
+<h2 id="查找文件名并打包"><a href="#查找文件名并打包" class="headerlink" title="查找文件名并打包"></a>查找文件名并打包</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">find /path/to/directory1 /path/to/directory2 -type f -name &quot;*keyword*&quot; -exec tar -czvf archive.tar.gz &#123;&#125; +</span><br><span class="line"></span><br><span class="line">- `/path/to/directory1`和`/path/to/directory2`是待搜索的目录路径。你可以根据实际情况进行替换。</span><br><span class="line">- `keyword`是你要查找的文件名中包含的关键字。可以根据需要进行更改。通配符*表示匹配任意字符。</span><br><span class="line">- `tar -czvf archive.tar.gz`是用于将查找到的文件打包成一个压缩文件的命令。你可以根据需要使用其他压缩命令，如zip等。</span><br><span class="line">在find命令中，&#123;&#125; +表示将查找到的文件批量传递给后面的命令。具体地，它表示将每个匹配的文件作为参数传递给-exec后面的命令。通过使用+而不是;，find命令可以一次性传递多个文件给-exec后面的命令，从而提高效率。这样可以减少每个文件调用一次命令的次数，而是将多个文件一起传递给命令。</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>操作系统</category>
       </categories>

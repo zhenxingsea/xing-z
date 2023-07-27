@@ -91,7 +91,13 @@
 
 <h2 id="查找开始与结束"><a href="#查找开始与结束" class="headerlink" title="查找开始与结束"></a>查找开始与结束</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sed -n &#x27;/10:00:00/,/12:00:00/p&#x27; test.log</span><br></pre></td></tr></table></figure>
 
-<h2 id="查找内容"><a href="#查找内容" class="headerlink" title="查找内容"></a>查找内容</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">grep -nr “keyword” ./</span><br></pre></td></tr></table></figure>]]></content>
+<h2 id="查找内容"><a href="#查找内容" class="headerlink" title="查找内容"></a>查找内容</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">grep -nr “keyword” ./</span><br></pre></td></tr></table></figure>
+
+<h2 id="查找内容-1"><a href="#查找内容-1" class="headerlink" title="查找内容"></a>查找内容</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">find /path/to/directory1 /path/to/directory2 -type f -name &quot;*keyword*&quot; -exec tar -czvf archive.tar.gz &#123;&#125; +</span><br></pre></td></tr></table></figure>
+<p><code>/path/to/directory1</code>和<code>/path/to/directory2</code>是待搜索的目录路径。你可以根据实际情况进行替换。</p>
+<p><code>keyword</code>是你要查找的文件名中包含的关键字。可以根据需要进行更改。通配符*表示匹配任意字符。</p>
+<p><code>tar -czvf archive.tar.gz</code>是用于将查找到的文件打包成一个压缩文件的命令。你可以根据需要使用其他压缩命令，如zip等。</p>
+]]></content>
       <categories>
         <category>操作系统</category>
       </categories>

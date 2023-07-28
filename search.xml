@@ -309,6 +309,28 @@
 ]]></content>
   </entry>
   <entry>
+    <title>docker-compose参数说明</title>
+    <url>/2023/07/28/docker-compose%E5%8F%82%E6%95%B0%E8%AF%B4%E6%98%8E.html</url>
+    <content><![CDATA[<p>当创建一个 Docker 服务的 Docker Compose 文件时，你可以使用以下模板作为起点：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&#x27;3&#x27;</span>  <span class="comment"># 版本号</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span>    <span class="comment"># 服务列表</span></span><br><span class="line">  <span class="attr">service_name:</span>    <span class="comment"># 服务名称，自行替换</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">image_name:tag</span>    <span class="comment"># 镜像名字和版本，自行替换</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">host_port:container_port</span>    <span class="comment"># 将容器端口映射到主机的端口</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">host_path:container_path</span>    <span class="comment"># 将主机路径挂载到容器路径</span></span><br><span class="line">    <span class="attr">environment:</span>    <span class="comment"># 环境变量</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">KEY=VALUE</span>    <span class="comment"># 自定义的环境变量</span></span><br><span class="line">    <span class="attr">depends_on:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">dependent_service</span>    <span class="comment"># 该服务依赖的其他服务列表</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">restart_policy</span>    <span class="comment"># 容器重启策略</span></span><br><span class="line">    <span class="attr">command:</span> <span class="string">command_to_run</span>    <span class="comment"># 运行容器的自定义命令</span></span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">network_name</span>    <span class="comment"># 服务所在的网络</span></span><br><span class="line"></span><br><span class="line"><span class="attr">networks:</span>    <span class="comment"># 网络列表</span></span><br><span class="line">  <span class="attr">network_name:</span>    <span class="comment"># 网络名称，自行替换</span></span><br><span class="line">    <span class="comment"># 网络配置，可以设置网络类型等</span></span><br></pre></td></tr></table></figure>
+
+<p>下面是对每个配置参数的注释说明：</p>
+<ul>
+<li><code>version</code>：指定 Docker Compose 文件格式的版本，例如 <code>&#39;3&#39;</code>。</li>
+<li><code>service_name</code>：替换为你的服务名称，可以是任意字符串。</li>
+<li><code>image</code>：指定服务所使用的镜像名称和版本，例如 <code>image_name:tag</code>。镜像可以从 Docker Hub 或者本地构建。</li>
+<li><code>ports</code>：用于将容器端口映射到主机的端口。<code>host_port</code> 是主机上的端口号，<code>container_port</code> 是容器内的端口号。</li>
+<li><code>volumes</code>：用于将主机上的路径挂载到容器内的路径。<code>host_path</code> 是主机上的路径，<code>container_path</code> 是容器内的路径。</li>
+<li><code>environment</code>：用于设置容器内的环境变量。格式为 <code>KEY=VALUE</code>，将定义一条环境变量。</li>
+<li><code>depends_on</code>：设置服务所依赖的其他服务列表。这将确保在启动当前服务之前，依赖的服务已经启动。</li>
+<li><code>restart</code>：用于指定容器重启策略。常见的策略包括 <code>&#39;no&#39;</code>（不重启）、<code>&#39;always&#39;</code>（总是重启）和 <code>&#39;on-failure&#39;</code>（仅在失败时重启）。</li>
+<li><code>command</code>：指定在容器中运行的自定义命令。例如，你可以使用这个参数来覆盖镜像的默认执行命令。</li>
+<li><code>networks</code>：用于指定服务所在的网络。网络可以是默认网络或者自定义网络，可以与其他服务共享。</li>
+</ul>
+<p>你需要根据你的具体情况替换模板中的占位符，并根据需要添加或调整其他配置参数。</p>
+]]></content>
+  </entry>
+  <entry>
     <title>docker常用服务</title>
     <url>/2023/05/26/docker%E5%B8%B8%E7%94%A8%E6%9C%8D%E5%8A%A1.html</url>
     <content><![CDATA[<h2 id="redis"><a href="#redis" class="headerlink" title="redis"></a>redis</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker run --name redis-dev -p 6379:6379 -d --restart=always redis:latest redis-server --requirepass &quot;root&quot;</span><br></pre></td></tr></table></figure>

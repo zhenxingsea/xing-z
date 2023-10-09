@@ -366,6 +366,23 @@
       </tags>
   </entry>
   <entry>
+    <title>docker部署单体mongodb</title>
+    <url>/2023/10/09/docker%E9%83%A8%E7%BD%B2%E5%8D%95%E4%BD%93mongodb.html</url>
+    <content><![CDATA[<h2 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h2><p><img src="/images/pasted-6.png" alt="项目结构"></p>
+<h3 id="编写mongod-conf"><a href="#编写mongod-conf" class="headerlink" title="编写mongod.conf"></a>编写mongod.conf</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 数据库文件存储位置</span><br><span class="line">dbpath = /data/db</span><br><span class="line"># log文件存储位置</span><br><span class="line">logpath = /data/log/mongod.log</span><br><span class="line"># 使用追加的方式写日志</span><br><span class="line">logappend = true</span><br><span class="line"># 是否以守护进程方式运行</span><br><span class="line"># fork = true</span><br><span class="line"># 全部ip可以访问</span><br><span class="line">bind_ip = 0.0.0.0</span><br><span class="line"># 端口号</span><br><span class="line">port = 27017</span><br><span class="line"># 是否启用认证</span><br><span class="line">auth = true</span><br><span class="line"># 设置oplog的大小(MB)</span><br><span class="line">oplogSize=2048</span><br></pre></td></tr></table></figure>
+
+<h3 id="编写docker-compose-yaml"><a href="#编写docker-compose-yaml" class="headerlink" title="编写docker-compose.yaml"></a>编写docker-compose.yaml</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">version: &#x27;3&#x27;</span><br><span class="line">services:</span><br><span class="line">  mongodb:</span><br><span class="line">    image: mongo</span><br><span class="line">    restart: always</span><br><span class="line">    container_name: mongodb</span><br><span class="line">    environment:</span><br><span class="line">      MYSQL_ROOT_PASSWORD: password</span><br><span class="line">      TZ: Asia/Shanghai</span><br><span class="line">    ports:</span><br><span class="line">      - 27017:27017</span><br><span class="line">    volumes:</span><br><span class="line">      - ./config:/data/configdb</span><br><span class="line">      - ./data:/data/db</span><br><span class="line">    # command: [&#x27;mongo&#x27;, &#x27;--auth&#x27;]</span><br></pre></td></tr></table></figure>
+
+<h3 id="运行docker-comose-并进入容器创建用户"><a href="#运行docker-comose-并进入容器创建用户" class="headerlink" title="运行docker-comose,并进入容器创建用户"></a>运行docker-comose,并进入容器创建用户</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># docker-compose up -d</span><br><span class="line"># docker exec -it mongodb /bin/bash</span><br><span class="line">&gt; mongosh admin</span><br><span class="line">&gt; db.createUser(&#123; user: &#x27;admin&#x27;, pwd: &#x27;adminpwd&#x27;, roles: [ &#123; role: &quot;root&quot;, db: &quot;admin&quot; &#125; ] &#125;);</span><br><span class="line">&#123;ok:1&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>user:用户名 admin</li>
+<li>pwd:密码 adminpwd</li>
+<li>role:角色 root</li>
+<li>db:授权使用admin库</li>
+</ul>
+]]></content>
+  </entry>
+  <entry>
     <title>k8s 常用服务组件</title>
     <url>/2023/07/05/k8s-%E5%B8%B8%E7%94%A8%E6%9C%8D%E5%8A%A1%E7%BB%84%E4%BB%B6.html</url>
     <content><![CDATA[<h4 id="Kubernetes（K8s）是一个高度可扩展的容器编排平台，它由多个常用的服务组件组成。以下是一些常用的Kubernetes服务组件："><a href="#Kubernetes（K8s）是一个高度可扩展的容器编排平台，它由多个常用的服务组件组成。以下是一些常用的Kubernetes服务组件：" class="headerlink" title="Kubernetes（K8s）是一个高度可扩展的容器编排平台，它由多个常用的服务组件组成。以下是一些常用的Kubernetes服务组件："></a>Kubernetes（K8s）是一个高度可扩展的容器编排平台，它由多个常用的服务组件组成。以下是一些常用的Kubernetes服务组件：</h4><ol>

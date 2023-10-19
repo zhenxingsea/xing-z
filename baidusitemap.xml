@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://blog.xing-z.com/2023/10/07/mysql%E4%B8%BB%E4%BB%8E%E9%85%8D%E7%BD%AE.html</loc>
+    <lastmod>2023-10-19</lastmod>
+  </url>
+  <url>
     <loc>https://blog.xing-z.com/2023/10/09/docker%E9%83%A8%E7%BD%B2%E5%8D%95%E4%BD%93mongodb.html</loc>
     <lastmod>2023-10-19</lastmod>
   </url>
   <url>
     <loc>https://blog.xing-z.com/2023/10/19/CentOS7-9%E5%AE%89%E8%A3%85%E6%96%B0%E7%89%88%E6%9C%ACDocker.html</loc>
     <lastmod>2023-10-19</lastmod>
-  </url>
-  <url>
-    <loc>https://blog.xing-z.com/2023/10/07/mysql%E4%B8%BB%E4%BB%8E%E9%85%8D%E7%BD%AE.html</loc>
-    <lastmod>2023-10-07</lastmod>
   </url>
   <url>
     <loc>https://blog.xing-z.com/2023/07/28/docker-compose%E5%8F%82%E6%95%B0%E8%AF%B4%E6%98%8E.html</loc>

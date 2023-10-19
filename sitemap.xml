@@ -4,7 +4,16 @@
   <url>
     <loc>https://blog.xing-z.com/2023/10/09/docker%E9%83%A8%E7%BD%B2%E5%8D%95%E4%BD%93mongodb.html</loc>
     
-    <lastmod>2023-10-09</lastmod>
+    <lastmod>2023-10-19</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.xing-z.com/2023/10/19/CentOS7-9%E5%AE%89%E8%A3%85%E6%96%B0%E7%89%88%E6%9C%ACDocker.html</loc>
+    
+    <lastmod>2023-10-19</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -218,6 +227,20 @@
 
   
   <url>
+    <loc>https://blog.xing-z.com/tags/docker/</loc>
+    <lastmod>2023-10-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.xing-z.com/tags/centos7/</loc>
+    <lastmod>2023-10-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.xing-z.com/tags/%E5%9B%9E%E6%BB%9A/</loc>
     <lastmod>2023-10-19</lastmod>
     <changefreq>weekly</changefreq>
@@ -309,7 +332,7 @@
   </url>
   
   <url>
-    <loc>https://blog.xing-z.com/tags/docker/</loc>
+    <loc>https://blog.xing-z.com/tags/mongodb/</loc>
     <lastmod>2023-10-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -403,6 +426,13 @@
   
   <url>
     <loc>https://blog.xing-z.com/categories/DevOps/</loc>
+    <lastmod>2023-10-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.xing-z.com/categories/Docker/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
     <lastmod>2023-10-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

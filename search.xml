@@ -64,7 +64,7 @@
     <content><![CDATA[<h2 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h2><ul>
 <li>安装Docker</li>
 </ul>
-<h2 id="master安装"><a href="#master安装" class="headerlink" title="master安装"></a>master安装</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># curl –sfL https://rancher-mirror.oss-cn-beijing.aliyuncs.com/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn INSTALL_K3S_VERSION=v1.26.5+k3s1 sh -s - --docker --flannel-iface=tun0 --system-default-registry &quot;registry.cn-hangzhou.aliyuncs.com&quot;</span><br></pre></td></tr></table></figure>
+<h2 id="master安装"><a href="#master安装" class="headerlink" title="master安装"></a>master安装</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># curl –sfL https://rancher-mirror.oss-cn-beijing.aliyuncs.com/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn INSTALL_K3S_VERSION=v1.26.5+k3s1 sh -s -  --flannel-iface=tun0 --system-default-registry &quot;registry.cn-hangzhou.aliyuncs.com&quot;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>INSTALL_K3S_MIRROR: 国内源</li>
 <li>system-default-registry: 国内仓库源</li>
@@ -74,7 +74,7 @@
 <h2 id="获取master-Token"><a href="#获取master-Token" class="headerlink" title="获取master Token"></a>获取master Token</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># cat /var/lib/rancher/k3s/server/node-token</span><br></pre></td></tr></table></figure>
 
 
-<h2 id="agent安装"><a href="#agent安装" class="headerlink" title="agent安装"></a>agent安装</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># curl –sfL https://rancher-mirror.oss-cn-beijing.aliyuncs.com/k3s/k3s-install.sh  | INSTALL_K3S_MIRROR=cn INSTALL_K3S_VERSION=v1.26.5+k3s1 K3S_URL=https://10.8.0.4:6443 K3S_TOKEN=&lt;token&gt; sh -s - --docker  --flannel-iface=tun0</span><br></pre></td></tr></table></figure>
+<h2 id="agent安装"><a href="#agent安装" class="headerlink" title="agent安装"></a>agent安装</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># curl –sfL https://rancher-mirror.oss-cn-beijing.aliyuncs.com/k3s/k3s-install.sh  | INSTALL_K3S_MIRROR=cn INSTALL_K3S_VERSION=v1.26.5+k3s1 K3S_URL=https://10.8.0.4:6443 K3S_TOKEN=&lt;token&gt; sh -s -  --flannel-iface=tun0</span><br></pre></td></tr></table></figure>
 <ul>
 <li>INSTALL_K3S_MIRROR 国内源</li>
 <li>system-default-registry: 国内仓库源</li>

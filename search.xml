@@ -1,0 +1,970 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>CentOS7.9安装新版本Docker</title>
+    <url>/2023/10/19/CentOS7-9%E5%AE%89%E8%A3%85%E6%96%B0%E7%89%88%E6%9C%ACDocker/</url>
+    <content><![CDATA[<h2 id="卸载原有版本"><a href="#卸载原有版本" class="headerlink" title="卸载原有版本"></a>卸载原有版本</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">yum remove docker \</span><br><span class="line">  docker-client \</span><br><span class="line">  docker-client-latest \</span><br><span class="line">  docker-common \</span><br><span class="line">  docker-latest \</span><br><span class="line">  docker-latest-logrotate \</span><br><span class="line">  docker-logrotate \</span><br><span class="line">  docker-engine</span><br></pre></td></tr></table></figure>
+
+<h2 id="安装yum-utils和源"><a href="#安装yum-utils和源" class="headerlink" title="安装yum-utils和源"></a>安装yum-utils和源</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">yum install -y yum-utils</span><br><span class="line">yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo</span><br></pre></td></tr></table></figure>
+
+<h2 id="安装docker"><a href="#安装docker" class="headerlink" title="安装docker"></a>安装docker</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">yum install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Docker</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+        <tag>centos7</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Docker常用命令</title>
+    <url>/2023/05/25/Docker%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
+    <content><![CDATA[<h2 id="查看容器所有信息"><a href="#查看容器所有信息" class="headerlink" title="查看容器所有信息"></a>查看容器所有信息</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker inspect &lt;容器ID/Name&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="清除所有容器"><a href="#清除所有容器" class="headerlink" title="清除所有容器"></a>清除所有容器</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker rm -f $(docker ps -aq)</span><br></pre></td></tr></table></figure>
+
+<h2 id="清除关键字容器"><a href="#清除关键字容器" class="headerlink" title="清除关键字容器"></a>清除关键字容器</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker container  rm -f $(docker ps -a | grep &lt;keyword&gt; | awk &#x27;&#123;print $1&#125;&#x27;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="清除所有镜像"><a href="#清除所有镜像" class="headerlink" title="清除所有镜像"></a>清除所有镜像</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker rmi $(docker images -q)</span><br></pre></td></tr></table></figure>
+
+<h2 id="清除关键字镜像"><a href="#清除关键字镜像" class="headerlink" title="清除关键字镜像"></a>清除关键字镜像</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker image rm -f $(docker images | grep &lt;keyword&gt; | awk &#x27;&#123;print $3&#125;&#x27;)</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="停止所有的容器"><a href="#停止所有的容器" class="headerlink" title="停止所有的容器"></a>停止所有的容器</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker stop $(docker ps -aq)</span><br></pre></td></tr></table></figure>
+
+<h2 id="删除“已退出”的容器"><a href="#删除“已退出”的容器" class="headerlink" title="删除“已退出”的容器"></a>删除“已退出”的容器</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker rm $(docker ps -q -f status=exited)</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Docker</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>GIt常用的回滚操作</title>
+    <url>/2023/05/26/GIt%E5%B8%B8%E7%94%A8%E7%9A%84%E5%9B%9E%E6%BB%9A%E6%93%8D%E4%BD%9C/</url>
+    <content><![CDATA[<h2 id="本地整体回滚"><a href="#本地整体回滚" class="headerlink" title="本地整体回滚"></a>本地整体回滚</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># git log -3</span><br><span class="line"># git reset —hard 7e34ff38eeeed1adea5470bbee89a63b0e925993</span><br><span class="line"># git push -f origin master</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="本地回退且保留之前的commit内容"><a href="#本地回退且保留之前的commit内容" class="headerlink" title="本地回退且保留之前的commit内容"></a>本地回退且保留之前的commit内容</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># git log --pretty=oneline</span><br><span class="line"># git reset —-soft commit_id</span><br></pre></td></tr></table></figure>
+
+<h2 id="本地add、commit，且已经push到远端"><a href="#本地add、commit，且已经push到远端" class="headerlink" title="本地add、commit，且已经push到远端"></a>本地add、commit，且已经push到远端</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># git revert commit_id</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="本地指定文件回滚"><a href="#本地指定文件回滚" class="headerlink" title="本地指定文件回滚"></a>本地指定文件回滚</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># git checkout --  script/bin/upload-express.js</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>git</category>
+      </categories>
+      <tags>
+        <tag>回滚</tag>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>K3S国内安装&amp;安装kuboard</title>
+    <url>/2023/06/23/K3S%E5%9B%BD%E5%86%85%E5%AE%89%E8%A3%85/</url>
+    <content><![CDATA[<h2 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h2><ul>
+<li>安装Docker</li>
+</ul>
+<h2 id="master安装"><a href="#master安装" class="headerlink" title="master安装"></a>master安装</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># curl –sfL https://rancher-mirror.oss-cn-beijing.aliyuncs.com/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn INSTALL_K3S_VERSION=v1.26.5+k3s1 sh -s -  --flannel-iface=tun0 --system-default-registry &quot;registry.cn-hangzhou.aliyuncs.com&quot;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>INSTALL_K3S_MIRROR: 国内源</li>
+<li>system-default-registry: 国内仓库源</li>
+<li>flannel-iface: 网段</li>
+<li>INSTALL_K3S_VERSION: k3s版本</li>
+</ul>
+<h2 id="获取master-Token"><a href="#获取master-Token" class="headerlink" title="获取master Token"></a>获取master Token</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># cat /var/lib/rancher/k3s/server/node-token</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="agent安装"><a href="#agent安装" class="headerlink" title="agent安装"></a>agent安装</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># curl –sfL https://rancher-mirror.oss-cn-beijing.aliyuncs.com/k3s/k3s-install.sh  | INSTALL_K3S_MIRROR=cn INSTALL_K3S_VERSION=v1.26.5+k3s1 K3S_URL=https://10.8.0.4:6443 K3S_TOKEN=&lt;token&gt; sh -s -  --flannel-iface=tun0</span><br></pre></td></tr></table></figure>
+<ul>
+<li>INSTALL_K3S_MIRROR 国内源</li>
+<li>system-default-registry: 国内仓库源</li>
+<li>K3S_URL master节点API</li>
+<li>INSTALL_K3S_VERSION k3s版本</li>
+<li>K3S_TOKEN master节点token</li>
+</ul>
+<h2 id="查看节点"><a href="#查看节点" class="headerlink" title="查看节点"></a>查看节点</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># kubectl get node</span><br><span class="line">NAME             STATUS   ROLES                  AGE   VERSION</span><br><span class="line">ubuntu           Ready    control-plane,master   11h   v1.26.5+k3s1</span><br><span class="line">jp               Ready    &lt;none&gt;                 29s   v1.26.5+k3s1</span><br><span class="line">vm-0-15-ubuntu   Ready    &lt;none&gt;                 11h   v1.26.5+k3s1</span><br></pre></td></tr></table></figure>
+
+<h2 id="安装kuboard"><a href="#安装kuboard" class="headerlink" title="安装kuboard"></a>安装kuboard</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">kubectl apply -f https://addons.kuboard.cn/kuboard/kuboard-v3.yaml</span><br><span class="line"># 您也可以使用下面的指令，唯一的区别是，该指令使用华为云的镜像仓库替代 docker hub 分发 Kuboard 所需要的镜像</span><br><span class="line"># kubectl apply -f https://addons.kuboard.cn/kuboard/kuboard-v3-swr.yaml</span><br></pre></td></tr></table></figure>
+
+<h2 id="访问Kuboard"><a href="#访问Kuboard" class="headerlink" title="访问Kuboard"></a>访问Kuboard</h2><p>在浏览器中打开链接 <a href="http://your-node-ip-address:30080/">http://your-node-ip-address:30080</a></p>
+<p>输入初始用户名和密码，并登录</p>
+<ul>
+<li>用户名： admin</li>
+<li>密码： Kuboard123</li>
+</ul>
+<h2 id="卸载Kuboard"><a href="#卸载Kuboard" class="headerlink" title="卸载Kuboard"></a>卸载Kuboard</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">kubectl delete -f https://addons.kuboard.cn/kuboard/kuboard-v3.yaml</span><br><span class="line"># 清理遗留数据</span><br><span class="line">rm -rf /usr/share/kuboard</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>k8s</category>
+      </categories>
+      <tags>
+        <tag>k8s</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Linux常用命令</title>
+    <url>/2023/12/29/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
+    <content><![CDATA[<p>源博文：<a href="https://zhuanlan.zhihu.com/p/673705569">https://zhuanlan.zhihu.com/p/673705569</a></p>
+<h2 id="基本命令"><a href="#基本命令" class="headerlink" title="基本命令"></a>基本命令</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">uname -m 显示机器的处理器架构</span><br><span class="line">uname -r 显示正在使用的内核版本</span><br><span class="line">dmidecode -q 显示硬件系统部件</span><br><span class="line">(SMBIOS / DMI) hdparm -i /dev/hda 罗列一个磁盘的架构特性</span><br><span class="line">hdparm -tT /dev/sda 在磁盘上执行测试性读取操作系统信息</span><br><span class="line">arch 显示机器的处理器架构</span><br><span class="line">uname -m 显示机器的处理器架构</span><br><span class="line">uname -r 显示正在使用的内核版本</span><br><span class="line">dmidecode -q 显示硬件系统部件 - (SMBIOS / DMI)</span><br><span class="line">hdparm -i /dev/hda 罗列一个磁盘的架构特性</span><br><span class="line">hdparm -tT /dev/sda 在磁盘上执行测试性读取操作</span><br><span class="line">cat /proc/cpuinfo 显示CPU info的信息</span><br><span class="line">cat /proc/interrupts 显示中断</span><br><span class="line">cat /proc/meminfo 校验内存使用</span><br><span class="line">cat /proc/swaps 显示哪些swap被使用</span><br><span class="line">cat /proc/version 显示内核的版本</span><br><span class="line">cat /proc/net/dev 显示网络适配器及统计</span><br><span class="line">cat /proc/mounts 显示已加载的文件系统</span><br><span class="line">lspci -tv 罗列 PCI 设备</span><br><span class="line">lsusb -tv 显示 USB 设备</span><br><span class="line">date 显示系统日期</span><br><span class="line">cal 2007 显示2007年的日历表</span><br><span class="line">date 041217002007.00 设置日期和时间 - 月日时分年.秒</span><br><span class="line">clock -w 将时间修改保存到 BIOS</span><br></pre></td></tr></table></figure>
+
+<h2 id="关机"><a href="#关机" class="headerlink" title="关机"></a>关机</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">shutdown -h now 关闭系统(1)</span><br><span class="line">init 0 关闭系统(2)</span><br><span class="line">telinit 0 关闭系统(3)</span><br><span class="line">shutdown -h hours:minutes &amp; 按预定时间关闭系统</span><br><span class="line">shutdown -c 取消按预定时间关闭系统</span><br><span class="line">shutdown -r now 重启(1)</span><br><span class="line">reboot 重启(2)</span><br><span class="line">logout 注销</span><br></pre></td></tr></table></figure>
+
+<h2 id="文件和目录"><a href="#文件和目录" class="headerlink" title="文件和目录"></a>文件和目录</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd /home 进入 &#x27;/ home&#x27; 目录&#x27;</span><br><span class="line">cd .. 返回上一级目录</span><br><span class="line">cd ../.. 返回上两级目录</span><br><span class="line">cd 进入个人的主目录</span><br><span class="line">cd ~user1 进入个人的主目录</span><br><span class="line">cd - 返回上次所在的目录</span><br><span class="line">pwd 显示工作路径</span><br><span class="line">ls 查看目录中的文件</span><br><span class="line">ls -F 查看目录中的文件</span><br><span class="line">ls -l 显示文件和目录的详细资料</span><br><span class="line">ls -a 显示隐藏文件</span><br><span class="line">ls *[0-9]* 显示包含数字的文件名和目录名</span><br><span class="line">tree 显示文件和目录由根目录开始的树形结构(1)</span><br><span class="line">lstree 显示文件和目录由根目录开始的树形结构(2)</span><br><span class="line">mkdir dir1 创建一个叫做 &#x27;dir1&#x27; 的目录&#x27;</span><br><span class="line">mkdir dir1 dir2 同时创建两个目录</span><br><span class="line">mkdir -p /tmp/dir1/dir2 创建一个目录树</span><br><span class="line">rm -f file1 删除一个叫做 &#x27;file1&#x27; 的文件&#x27;</span><br><span class="line">rmdir dir1 删除一个叫做 &#x27;dir1&#x27; 的目录&#x27;</span><br><span class="line">rm -rf dir1 删除一个叫做 &#x27;dir1&#x27; 的目录并同时删除其内容</span><br><span class="line">rm -rf dir1 dir2 同时删除两个目录及它们的内容</span><br><span class="line">mv dir1 new_dir 重命名/移动 一个目录</span><br><span class="line">cp file1 file2 复制一个文件</span><br><span class="line">cp dir/* . 复制一个目录下的所有文件到当前工作目录</span><br><span class="line">cp -a /tmp/dir1 . 复制一个目录到当前工作目录</span><br><span class="line">cp -a dir1 dir2 复制一个目录</span><br><span class="line">ln -s file1 lnk1 创建一个指向文件或目录的软链接</span><br><span class="line">ln file1 lnk1 创建一个指向文件或目录的物理链接</span><br><span class="line">touch -t 0712250000 file1 修改一个文件或目录的时间戳 - (YYMMDDhhmm)</span><br><span class="line">file file1 outputs the mime type of the file as text</span><br><span class="line">iconv -l 列出已知的编码</span><br><span class="line">iconv -f fromEncoding -t toEncoding inputFile &gt; outputFile creates a new from the given input file by assuming it is encoded in fromEncoding and converting it to toEncoding.</span><br><span class="line">find . -maxdepth 1 -name *.jpg -print -exec convert &quot;&#123;&#125;&quot; -resize 80x60 &quot;thumbs/&#123;&#125;&quot; \; batch resize files in the current directory and send them to a thumbnails directory (requires convert from Imagemagick)</span><br></pre></td></tr></table></figure>
+
+<h2 id="文件搜索"><a href="#文件搜索" class="headerlink" title="文件搜索"></a>文件搜索</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">find / -name file1 从 &#x27;/&#x27; 开始进入根文件系统搜索文件和目录</span><br><span class="line">find / -user user1 搜索属于用户 &#x27;user1&#x27; 的文件和目录</span><br><span class="line">find /home/user1 -name \*.bin 在目录 &#x27;/ home/user1&#x27; 中搜索带有&#x27;.bin&#x27; 结尾的文件</span><br><span class="line">find /usr/bin -type f -atime +100 搜索在过去100天内未被使用过的执行文件</span><br><span class="line">find /usr/bin -type f -mtime -10 搜索在10天内被创建或者修改过的文件</span><br><span class="line">find / -name \*.rpm -exec chmod 755 &#x27;&#123;&#125;&#x27; \; 搜索以 &#x27;.rpm&#x27; 结尾的文件并定义其权限</span><br><span class="line">find / -xdev -name \*.rpm 搜索以 &#x27;.rpm&#x27; 结尾的文件，忽略光驱、捷盘等可移动设备</span><br><span class="line">locate \*.ps 寻找以 &#x27;.ps&#x27; 结尾的文件 - 先运行 &#x27;updatedb&#x27; 命令</span><br><span class="line">whereis halt 显示一个二进制文件、源码或man的位置</span><br><span class="line">which halt 显示一个二进制文件或可执行文件的完整路径</span><br></pre></td></tr></table></figure>
+
+<h2 id="挂载一个文件系统"><a href="#挂载一个文件系统" class="headerlink" title="挂载一个文件系统"></a>挂载一个文件系统</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mount /dev/hda2 /mnt/hda2 挂载一个叫做hda2的盘 - 确定目录 &#x27;/ mnt/hda2&#x27; 已经存在</span><br><span class="line">umount /dev/hda2 卸载一个叫做hda2的盘 - 先从挂载点 &#x27;/ mnt/hda2&#x27; 退出</span><br><span class="line">fuser -km /mnt/hda2 当设备繁忙时强制卸载</span><br><span class="line">umount -n /mnt/hda2 运行卸载操作而不写入 /etc/mtab 文件- 当文件为只读或当磁盘写满时非常有用</span><br><span class="line">mount /dev/fd0 /mnt/floppy 挂载一个软盘</span><br><span class="line">mount /dev/cdrom /mnt/cdrom 挂载一个cdrom或dvdrom</span><br><span class="line">mount /dev/hdc /mnt/cdrecorder 挂载一个cdrw或dvdrom</span><br><span class="line">mount /dev/hdb /mnt/cdrecorder 挂载一个cdrw或dvdrom</span><br><span class="line">mount -o loop file.iso /mnt/cdrom 挂载一个文件或ISO镜像文件</span><br><span class="line">mount -t vfat /dev/hda5 /mnt/hda5 挂载一个Windows FAT32文件系统</span><br><span class="line">mount /dev/sda1 /mnt/usbdisk 挂载一个usb 捷盘或闪存设备</span><br><span class="line">mount -t smbfs -o username=user,password=pass //WinClient/share /mnt/share 挂载一个windows网络共享</span><br></pre></td></tr></table></figure>
+
+<h2 id="磁盘空间"><a href="#磁盘空间" class="headerlink" title="磁盘空间"></a>磁盘空间</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">df -h 显示已经挂载的分区列表</span><br><span class="line">ls -lSr |more 以尺寸大小排列文件和目录</span><br><span class="line">du -sh dir1 估算目录 &#x27;dir1&#x27; 已经使用的磁盘空间&#x27;</span><br><span class="line">du -sk * | sort -rn 以容量大小为依据依次显示文件和目录的大小</span><br><span class="line">rpm -q -a --qf &#x27;%10&#123;SIZE&#125;t%&#123;NAME&#125;n&#x27; | sort -k1,1n 以大小为依据依次显示已安装的rpm包所使用的空间 (fedora, redhat类系统)</span><br><span class="line">dpkg-query -W -f=&#x27;$&#123;Installed-Size;10&#125;t$&#123;Package&#125;n&#x27; | sort -k1,1n 以大小为依据显示已安装的deb包所使用的空间 (ubuntu, debian类系统)</span><br></pre></td></tr></table></figure>
+
+<h2 id="用户和群组"><a href="#用户和群组" class="headerlink" title="用户和群组"></a>用户和群组</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">groupadd group_name 创建一个新用户组</span><br><span class="line">groupdel group_name 删除一个用户组</span><br><span class="line">groupmod -n new_group_name old_group_name 重命名一个用户组</span><br><span class="line">useradd -c &quot;Name Surname &quot; -g admin -d /home/user1 -s /bin/bash user1 创建一个属于 &quot;admin&quot; 用户组的用户</span><br><span class="line">useradd user1 创建一个新用户</span><br><span class="line">userdel -r user1 删除一个用户 ( &#x27;-r&#x27; 排除主目录)</span><br><span class="line">usermod -c &quot;User FTP&quot; -g system -d /ftp/user1 -s /bin/nologin user1 修改用户属性</span><br><span class="line">passwd 修改口令</span><br><span class="line">passwd user1 修改一个用户的口令 (只允许root执行)</span><br><span class="line">chage -E 2005-12-31 user1 设置用户口令的失效期限</span><br><span class="line">pwck 检查 &#x27;/etc/passwd&#x27; 的文件格式和语法修正以及存在的用户</span><br><span class="line">grpck 检查 &#x27;/etc/passwd&#x27; 的文件格式和语法修正以及存在的群组</span><br><span class="line">newgrp group_name 登陆进一个新的群组以改变新创建文件的预设群组</span><br></pre></td></tr></table></figure>
+
+<h2 id="文件的权限-使用-“-”-设置权限，使用-“-”-用于取消"><a href="#文件的权限-使用-“-”-设置权限，使用-“-”-用于取消" class="headerlink" title="文件的权限 使用 “+” 设置权限，使用 “-” 用于取消"></a>文件的权限 使用 “+” 设置权限，使用 “-” 用于取消</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ls -lh 显示权限</span><br><span class="line">ls /tmp | pr -T5 -W$COLUMNS 将终端划分成5栏显示</span><br><span class="line">chmod ugo+rwx directory1 设置目录的所有人(u)、群组(g)以及其他人(o)以读（r ）、写(w)和执行(x)的权限</span><br><span class="line">chmod go-rwx directory1 删除群组(g)与其他人(o)对目录的读写执行权限</span><br><span class="line">chown user1 file1 改变一个文件的所有人属性</span><br><span class="line">chown -R user1 directory1 改变一个目录的所有人属性并同时改变改目录下所有文件的属性</span><br><span class="line">chgrp group1 file1 改变文件的群组</span><br><span class="line">chown user1:group1 file1 改变一个文件的所有人和群组属性</span><br><span class="line">find / -perm -u+s 罗列一个系统中所有使用了SUID控制的文件</span><br><span class="line">chmod u+s /bin/file1 设置一个二进制文件的 SUID 位 - 运行该文件的用户也被赋予和所有者同样的权限</span><br><span class="line">chmod u-s /bin/file1 禁用一个二进制文件的 SUID位</span><br><span class="line">chmod g+s /home/public 设置一个目录的SGID 位 - 类似SUID ，不过这是针对目录的</span><br><span class="line">chmod g-s /home/public 禁用一个目录的 SGID 位</span><br><span class="line">chmod o+t /home/public 设置一个文件的 STIKY 位 - 只允许合法所有人删除文件</span><br><span class="line">chmod o-t /home/public 禁用一个目录的 STIKY 位</span><br><span class="line">chmod +x 文件路径 为所有者、所属组和其他用户添加执行的权限</span><br><span class="line">chmod -x 文件路径 为所有者、所属组和其他用户删除执行的权限</span><br><span class="line">chmod u+x 文件路径 为所有者添加执行的权限</span><br><span class="line">chmod g+x 文件路径 为所属组添加执行的权限</span><br><span class="line">chmod o+x 文件路径 为其他用户添加执行的权限</span><br><span class="line">chmod ug+x 文件路径 为所有者、所属组添加执行的权限</span><br><span class="line">chmod =wx 文件路径 为所有者、所属组和其他用户添加写、执行的权限，取消读权限</span><br><span class="line">chmod ug=wx 文件路径 为所有者、所属组添加写、执行的权限，取消读权限</span><br></pre></td></tr></table></figure>
+
+<h2 id="文件的特殊属性-，使用-“-”-设置权限，使用-“-”-用于取消"><a href="#文件的特殊属性-，使用-“-”-设置权限，使用-“-”-用于取消" class="headerlink" title="文件的特殊属性 ，使用 “+” 设置权限，使用 “-” 用于取消"></a>文件的特殊属性 ，使用 “+” 设置权限，使用 “-” 用于取消</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">chattr +a file1 只允许以追加方式读写文件</span><br><span class="line">chattr +c file1 允许这个文件能被内核自动压缩/解压</span><br><span class="line">chattr +d file1 在进行文件系统备份时，dump程序将忽略这个文件</span><br><span class="line">chattr +i file1 设置成不可变的文件，不能被删除、修改、重命名或者链接</span><br><span class="line">chattr +s file1 允许一个文件被安全地删除</span><br><span class="line">chattr +S file1 一旦应用程序对这个文件执行了写操作，使系统立刻把修改的结果写到磁盘</span><br><span class="line">chattr +u file1 若文件被删除，系统会允许你在以后恢复这个被删除的文件</span><br><span class="line">lsattr 显示特殊的属性</span><br></pre></td></tr></table></figure>
+
+<h2 id="打包和压缩文件"><a href="#打包和压缩文件" class="headerlink" title="打包和压缩文件"></a>打包和压缩文件</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">bunzip2 file1.bz2 解压一个叫做 &#x27;file1.bz2&#x27;的文件</span><br><span class="line">bzip2 file1 压缩一个叫做 &#x27;file1&#x27; 的文件</span><br><span class="line">gunzip file1.gz 解压一个叫做 &#x27;file1.gz&#x27;的文件</span><br><span class="line">gzip file1 压缩一个叫做 &#x27;file1&#x27;的文件</span><br><span class="line">gzip -9 file1 最大程度压缩</span><br><span class="line">rar a file1.rar test_file 创建一个叫做 &#x27;file1.rar&#x27; 的包</span><br><span class="line">rar a file1.rar file1 file2 dir1 同时压缩 &#x27;file1&#x27;, &#x27;file2&#x27; 以及目录 &#x27;dir1&#x27;</span><br><span class="line">rar x file1.rar 解压rar包</span><br><span class="line">unrar x file1.rar 解压rar包</span><br><span class="line">tar -cvf archive.tar file1 创建一个非压缩的 tarball</span><br><span class="line">tar -cvf archive.tar file1 file2 dir1 创建一个包含了 &#x27;file1&#x27;, &#x27;file2&#x27; 以及 &#x27;dir1&#x27;的档案文件</span><br><span class="line">tar -tf archive.tar 显示一个包中的内容</span><br><span class="line">tar -xvf archive.tar 释放一个包</span><br><span class="line">tar -xvf archive.tar -C /tmp 将压缩包释放到 /tmp目录下</span><br><span class="line">tar -cvfj archive.tar.bz2 dir1 创建一个bzip2格式的压缩包</span><br><span class="line">tar -xvfj archive.tar.bz2 解压一个bzip2格式的压缩包</span><br><span class="line">tar -cvfz archive.tar.gz dir1 创建一个gzip格式的压缩包</span><br><span class="line">tar -xvfz archive.tar.gz 解压一个gzip格式的压缩包</span><br><span class="line">zip file1.zip file1 创建一个zip格式的压缩包</span><br><span class="line">zip -r file1.zip file1 file2 dir1 将几个文件和目录同时压缩成一个zip格式的压缩包</span><br><span class="line">unzip file1.zip 解压一个zip格式压缩包</span><br></pre></td></tr></table></figure>
+
+<h2 id="RPM-包"><a href="#RPM-包" class="headerlink" title="RPM 包"></a>RPM 包</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">rpm -ivh package.rpm 安装一个rpm包</span><br><span class="line">rpm -ivh --nodeeps package.rpm 安装一个rpm包而忽略依赖关系警告</span><br><span class="line">rpm -U package.rpm 更新一个rpm包但不改变其配置文件</span><br><span class="line">rpm -F package.rpm 更新一个确定已经安装的rpm包</span><br><span class="line">rpm -e package_name.rpm 删除一个rpm包</span><br><span class="line">rpm -qa 显示系统中所有已经安装的rpm包</span><br><span class="line">rpm -qa | grep httpd 显示所有名称中包含 &quot;httpd&quot; 字样的rpm包</span><br><span class="line">rpm -qi package_name 获取一个已安装包的特殊信息</span><br><span class="line">rpm -qg &quot;System Environment/Daemons&quot; 显示一个组件的rpm包</span><br><span class="line">rpm -ql package_name 显示一个已经安装的rpm包提供的文件列表</span><br><span class="line">rpm -qc package_name 显示一个已经安装的rpm包提供的配置文件列表</span><br><span class="line">rpm -q package_name --whatrequires 显示与一个rpm包存在依赖关系的列表</span><br><span class="line">rpm -q package_name --whatprovides 显示一个rpm包所占的体积</span><br><span class="line">rpm -q package_name --scripts 显示在安装/删除期间所执行的脚本l</span><br><span class="line">rpm -q package_name --changelog 显示一个rpm包的修改历史</span><br><span class="line">rpm -qf /etc/httpd/conf/httpd.conf 确认所给的文件由哪个rpm包所提供</span><br><span class="line">rpm -qp package.rpm -l 显示由一个尚未安装的rpm包提供的文件列表</span><br><span class="line">rpm --import /media/cdrom/RPM-GPG-KEY 导入公钥数字证书</span><br><span class="line">rpm --checksig package.rpm 确认一个rpm包的完整性</span><br><span class="line">rpm -qa gpg-pubkey 确认已安装的所有rpm包的完整性</span><br><span class="line">rpm -V package_name 检查文件尺寸、 许可、类型、所有者、群组、MD5检查以及最后修改时间</span><br><span class="line">rpm -Va 检查系统中所有已安装的rpm包- 小心使用</span><br><span class="line">rpm -Vp package.rpm 确认一个rpm包还未安装</span><br><span class="line">rpm2cpio package.rpm | cpio --extract --make-directories *bin* 从一个rpm包运行可执行文件</span><br><span class="line">rpm -ivh /usr/src/redhat/RPMS/`arch`/package.rpm 从一个rpm源码安装一个构建好的包</span><br><span class="line">rpmbuild --rebuild package_name.src.rpm 从一个rpm源码构建一个 rpm 包</span><br></pre></td></tr></table></figure>
+
+<h2 id="YUM-软件包升级器"><a href="#YUM-软件包升级器" class="headerlink" title="YUM 软件包升级器"></a>YUM 软件包升级器</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">yum install package_name 下载并安装一个rpm包</span><br><span class="line">yum localinstall package_name.rpm 将安装一个rpm包，使用你自己的软件仓库为你解决所有依赖关系</span><br><span class="line">yum update package_name.rpm 更新当前系统中所有安装的rpm包</span><br><span class="line">yum update package_name 更新一个rpm包</span><br><span class="line">yum remove package_name 删除一个rpm包</span><br><span class="line">yum list 列出当前系统中安装的所有包</span><br><span class="line">yum search package_name 在rpm仓库中搜寻软件包</span><br><span class="line">yum clean packages 清理rpm缓存删除下载的包</span><br><span class="line">yum clean headers 删除所有头文件</span><br><span class="line">yum clean all 删除所有缓存的包和头文件</span><br></pre></td></tr></table></figure>
+
+<h2 id="deb-包"><a href="#deb-包" class="headerlink" title="deb 包"></a>deb 包</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">dpkg -i package.deb 安装/更新一个 deb 包</span><br><span class="line">dpkg -r package_name 从系统删除一个 deb 包</span><br><span class="line">dpkg -l 显示系统中所有已经安装的 deb 包</span><br><span class="line">dpkg -l | grep httpd 显示所有名称中包含 &quot;httpd&quot; 字样的deb包</span><br><span class="line">dpkg -s package_name 获得已经安装在系统中一个特殊包的信息</span><br><span class="line">dpkg -L package_name 显示系统中已经安装的一个deb包所提供的文件列表</span><br><span class="line">dpkg --contents package.deb 显示尚未安装的一个包所提供的文件列表</span><br><span class="line">dpkg -S /bin/ping 确认所给的文件由哪个deb包提供</span><br><span class="line">APT 软件工具 (Debian, Ubuntu 以及类似系统)</span><br><span class="line">apt-get install package_name 安装/更新一个 deb 包</span><br><span class="line">apt-cdrom install package_name 从光盘安装/更新一个 deb 包</span><br><span class="line">apt-get update 升级列表中的软件包</span><br><span class="line">apt-get upgrade 升级所有已安装的软件</span><br><span class="line">apt-get remove package_name 从系统删除一个deb包</span><br><span class="line">apt-get check 确认依赖的软件仓库正确</span><br><span class="line">apt-get clean 从下载的软件包中清理缓存</span><br><span class="line">apt-cache search searched-package 返回包含所要搜索字符串的软件包名称</span><br></pre></td></tr></table></figure>
+
+<h2 id="查看文件内容"><a href="#查看文件内容" class="headerlink" title="查看文件内容"></a>查看文件内容</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cat file1 从第一个字节开始正向查看文件的内容</span><br><span class="line">tac file1 从最后一行开始反向查看一个文件的内容</span><br><span class="line">more file1 查看一个长文件的内容</span><br><span class="line">less file1 类似于 &#x27;more&#x27; 命令，但是它允许在文件中和正向操作一样的反向操作</span><br><span class="line">head -2 file1 查看一个文件的前两行</span><br><span class="line">tail -2 file1 查看一个文件的最后两行</span><br><span class="line">tail -f /var/log/messages 实时查看被添加到一个文件中的内容</span><br></pre></td></tr></table></figure>
+
+<h2 id="文本处理"><a href="#文本处理" class="headerlink" title="文本处理"></a>文本处理</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cat file1 file2 ... | command &lt;&gt; file1_in.txt_or_file1_out.txt general syntax for text manipulation using PIPE, STDIN and STDOUT</span><br><span class="line">cat file1 | command( sed, grep, awk, grep, etc...) &gt; result.txt 合并一个文件的详细说明文本，并将简介写入一个新文件中</span><br><span class="line">cat file1 | command( sed, grep, awk, grep, etc...) &gt;&gt; result.txt 合并一个文件的详细说明文本，并将简介写入一个已有的文件中</span><br><span class="line">grep Aug /var/log/messages 在文件 &#x27;/var/log/messages&#x27;中查找关键词&quot;Aug&quot;</span><br><span class="line">grep ^Aug /var/log/messages 在文件 &#x27;/var/log/messages&#x27;中查找以&quot;Aug&quot;开始的词汇</span><br><span class="line">grep [0-9] /var/log/messages 选择 &#x27;/var/log/messages&#x27; 文件中所有包含数字的行</span><br><span class="line">grep Aug -R /var/log/* 在目录 &#x27;/var/log&#x27; 及随后的目录中搜索字符串&quot;Aug&quot;</span><br><span class="line">sed &#x27;s/stringa1/stringa2/g&#x27; example.txt 将example.txt文件中的 &quot;string1&quot; 替换成 &quot;string2&quot;</span><br><span class="line">sed &#x27;/^$/d&#x27; example.txt 从example.txt文件中删除所有空白行</span><br><span class="line">sed &#x27;/ *#/d; /^$/d&#x27; example.txt 从example.txt文件中删除所有注释和空白行</span><br><span class="line">echo &#x27;esempio&#x27; | tr &#x27;[:lower:]&#x27; &#x27;[:upper:]&#x27; 合并上下单元格内容</span><br><span class="line">sed -e &#x27;1d&#x27; result.txt 从文件example.txt 中排除第一行</span><br><span class="line">sed -n &#x27;/stringa1/p&#x27; 查看只包含词汇 &quot;string1&quot;的行</span><br><span class="line">sed -e &#x27;s/ *$//&#x27; example.txt 删除每一行最后的空白字符</span><br><span class="line">sed -e &#x27;s/stringa1//g&#x27; example.txt 从文档中只删除词汇 &quot;string1&quot; 并保留剩余全部</span><br><span class="line">sed -n &#x27;1,5p;5q&#x27; example.txt 查看从第一行到第5行内容</span><br><span class="line">sed -n &#x27;5p;5q&#x27; example.txt 查看第5行</span><br><span class="line">sed -e &#x27;s/00*/0/g&#x27; example.txt 用单个零替换多个零</span><br><span class="line">cat -n file1 标示文件的行数</span><br><span class="line">cat example.txt | awk &#x27;NR%2==1&#x27; 删除example.txt文件中的所有偶数行</span><br><span class="line">echo a b c | awk &#x27;&#123;print $1&#125;&#x27; 查看一行第一栏</span><br><span class="line">echo a b c | awk &#x27;&#123;print $1,$3&#125;&#x27; 查看一行的第一和第三栏</span><br><span class="line">paste file1 file2 合并两个文件或两栏的内容</span><br><span class="line">paste -d &#x27;+&#x27; file1 file2 合并两个文件或两栏的内容，中间用&quot;+&quot;区分</span><br><span class="line">sort file1 file2 排序两个文件的内容</span><br><span class="line">sort file1 file2 | uniq 取出两个文件的并集(重复的行只保留一份)</span><br><span class="line">sort file1 file2 | uniq -u 删除交集，留下其他的行</span><br><span class="line">sort file1 file2 | uniq -d 取出两个文件的交集(只留下同时存在于两个文件中的文件)</span><br><span class="line">comm -1 file1 file2 比较两个文件的内容只删除 &#x27;file1&#x27; 所包含的内容</span><br><span class="line">comm -2 file1 file2 比较两个文件的内容只删除 &#x27;file2&#x27; 所包含的内容</span><br><span class="line">comm -3 file1 file2 比较两个文件的内容只删除两个文件共有的部分</span><br></pre></td></tr></table></figure>
+
+<h2 id="字符设置和文件格式转换"><a href="#字符设置和文件格式转换" class="headerlink" title="字符设置和文件格式转换"></a>字符设置和文件格式转换</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">dos2unix filedos.txt fileunix.txt 将一个文本文件的格式从MSDOS转换成UNIX</span><br><span class="line">unix2dos fileunix.txt filedos.txt 将一个文本文件的格式从UNIX转换成MSDOS</span><br><span class="line">recode ..HTML &lt; page.txt &gt; page.html 将一个文本文件转换成html</span><br><span class="line">recode -l | more 显示所有允许的转换格式</span><br></pre></td></tr></table></figure>
+
+<h2 id="文件系统分析"><a href="#文件系统分析" class="headerlink" title="文件系统分析"></a>文件系统分析</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">badblocks -v /dev/hda1 检查磁盘hda1上的坏磁块</span><br><span class="line">fsck /dev/hda1 修复/检查hda1磁盘上linux文件系统的完整性</span><br><span class="line">fsck.ext2 /dev/hda1 修复/检查hda1磁盘上ext2文件系统的完整性</span><br><span class="line">e2fsck /dev/hda1 修复/检查hda1磁盘上ext2文件系统的完整性</span><br><span class="line">e2fsck -j /dev/hda1 修复/检查hda1磁盘上ext3文件系统的完整性</span><br><span class="line">fsck.ext3 /dev/hda1 修复/检查hda1磁盘上ext3文件系统的完整性</span><br><span class="line">fsck.vfat /dev/hda1 修复/检查hda1磁盘上fat文件系统的完整性</span><br><span class="line">fsck.msdos /dev/hda1 修复/检查hda1磁盘上dos文件系统的完整性</span><br><span class="line">dosfsck /dev/hda1 修复/检查hda1磁盘上dos文件系统的完整性</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="初始化一个文件系统"><a href="#初始化一个文件系统" class="headerlink" title="初始化一个文件系统"></a>初始化一个文件系统</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mkfs /dev/hda1 在hda1分区创建一个文件系统</span><br><span class="line">mke2fs /dev/hda1 在hda1分区创建一个linux ext2的文件系统</span><br><span class="line">mke2fs -j /dev/hda1 在hda1分区创建一个linux ext3(日志型)的文件系统</span><br><span class="line">mkfs -t vfat 32 -F /dev/hda1 创建一个 FAT32 文件系统</span><br><span class="line">fdformat -n /dev/fd0 格式化一个软盘</span><br><span class="line">mkswap /dev/hda3 创建一个swap文件系统</span><br></pre></td></tr></table></figure>
+
+<h2 id="SWAP-文件系统"><a href="#SWAP-文件系统" class="headerlink" title="SWAP 文件系统"></a>SWAP 文件系统</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mkswap /dev/hda3 创建一个swap文件系统</span><br><span class="line">swapon /dev/hda3 启用一个新的swap文件系统</span><br><span class="line">swapon /dev/hda2 /dev/hdb3 启用两个swap分区</span><br></pre></td></tr></table></figure>
+
+<h2 id="备份"><a href="#备份" class="headerlink" title="备份"></a>备份</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">dump -0aj -f /tmp/home0.bak /home 制作一个 &#x27;/home&#x27; 目录的完整备份</span><br><span class="line">dump -1aj -f /tmp/home0.bak /home 制作一个 &#x27;/home&#x27; 目录的交互式备份</span><br><span class="line">restore -if /tmp/home0.bak 还原一个交互式备份</span><br><span class="line">rsync -rogpav --delete /home /tmp 同步两边的目录</span><br><span class="line">rsync -rogpav -e ssh --delete /home ip_address:/tmp 通过SSH通道rsync</span><br><span class="line">rsync -az -e ssh --delete ip_addr:/home/public /home/local 通过ssh和压缩将一个远程目录同步到本地目录</span><br><span class="line">rsync -az -e ssh --delete /home/local ip_addr:/home/public 通过ssh和压缩将本地目录同步到远程目录</span><br><span class="line">dd bs=1M if=/dev/hda | gzip | ssh user@ip_addr &#x27;dd of=hda.gz&#x27; 通过ssh在远程主机上执行一次备份本地磁盘的操作</span><br><span class="line">dd if=/dev/sda of=/tmp/file1 备份磁盘内容到一个文件</span><br><span class="line">tar -Puf backup.tar /home/user 执行一次对 &#x27;/home/user&#x27; 目录的交互式备份操作</span><br><span class="line">( cd /tmp/local/ &amp;&amp; tar c . ) | ssh -C user@ip_addr &#x27;cd /home/share/ &amp;&amp; tar x -p&#x27; 通过ssh在远程目录中复制一个目录内容</span><br><span class="line">( tar c /home ) | ssh -C user@ip_addr &#x27;cd /home/backup-home &amp;&amp; tar x -p&#x27; 通过ssh在远程目录中复制一个本地目录</span><br><span class="line">tar cf - . | (cd /tmp/backup ; tar xf - ) 本地将一个目录复制到另一个地方，保留原有权限及链接</span><br><span class="line">find /home/user1 -name &#x27;*.txt&#x27; | xargs cp -av --target-directory=/home/backup/ --parents 从一个目录查找并复制所有以 &#x27;.txt&#x27; 结尾的文件到另一个目录</span><br><span class="line">find /var/log -name &#x27;*.log&#x27; | tar cv --files-from=- | bzip2 &gt; log.tar.bz2 查找所有以 &#x27;.log&#x27; 结尾的文件并做成一个bzip包</span><br><span class="line">dd if=/dev/hda of=/dev/fd0 bs=512 count=1 做一个将 MBR (Master Boot Record)内容复制到软盘的动作</span><br><span class="line">dd if=/dev/fd0 of=/dev/hda bs=512 count=1 从已经保存到软盘的备份中恢复MBR内容</span><br></pre></td></tr></table></figure>
+
+<h2 id="网络（以太网和-WIFI-无线）"><a href="#网络（以太网和-WIFI-无线）" class="headerlink" title="网络（以太网和 WIFI 无线）"></a>网络（以太网和 WIFI 无线）</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ifconfig eth0 显示一个以太网卡的配置</span><br><span class="line">ifup eth0 启用一个 &#x27;eth0&#x27; 网络设备</span><br><span class="line">ifdown eth0 禁用一个 &#x27;eth0&#x27; 网络设备</span><br><span class="line">ifconfig eth0 192.168.1.1 netmask 255.255.255.0 控制IP地址</span><br><span class="line">ifconfig eth0 promisc 设置 &#x27;eth0&#x27; 成混杂模式以嗅探数据包 (sniffing)</span><br><span class="line">dhclient eth0 以dhcp模式启用 &#x27;eth0&#x27;</span><br><span class="line">route -n show routing table</span><br><span class="line">route add -net 0/0 gw IP_Gateway configura default gateway</span><br><span class="line">route add -net 192.168.0.0 netmask 255.255.0.0 gw 192.168.1.1 configure static route to reach network &#x27;192.168.0.0/16&#x27;</span><br><span class="line">route del 0/0 gw IP_gateway remove static route</span><br><span class="line">echo &quot;1&quot; &gt; /proc/sys/net/ipv4/ip_forward activate ip routing</span><br><span class="line">hostname show hostname of system</span><br><span class="line">host www.example.com lookup hostname to resolve name to ip address and viceversa(1)</span><br><span class="line">nslookup www.example.com lookup hostname to resolve name to ip address and viceversa(2)</span><br><span class="line">ip link show show link status of all interfaces</span><br><span class="line">mii-tool eth0 show link status of &#x27;eth0&#x27;</span><br><span class="line">ethtool eth0 show statistics of network card &#x27;eth0&#x27;</span><br><span class="line">netstat -tup show all active network connections and their PID</span><br><span class="line">netstat -tupl show all network services listening on the system and their PID</span><br><span class="line">tcpdump tcp port 80 show all HTTP traffic</span><br><span class="line">iwlist scan show wireless networks</span><br><span class="line">iwconfig eth1 show configuration of a wireless network card</span><br><span class="line">hostname show hostname</span><br><span class="line">host www.example.com lookup hostname to resolve name to ip address and viceversa</span><br><span class="line">nslookup www.example.com lookup hostname to resolve name to ip address and viceversa</span><br><span class="line">whois www.example.com lookup on Whois database</span><br></pre></td></tr></table></figure>
+
+<h2 id="列出目录内容"><a href="#列出目录内容" class="headerlink" title="列出目录内容"></a>列出目录内容</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ls -a：显示所有文件（包括隐藏文件）；</span><br><span class="line">ls -l：显示详细信息；</span><br><span class="line">ls -R：递归显示子目录结构；</span><br><span class="line">ls -ld：显示目录和链接信息；</span><br><span class="line">ctrl+r：历史记录中所搜命令（输入命令中的任意一个字符）；</span><br><span class="line">Linux中以.开头的文件是隐藏文件；</span><br><span class="line">pwd:显示当前目录</span><br></pre></td></tr></table></figure>
+
+<h2 id="查看文件的类型"><a href="#查看文件的类型" class="headerlink" title="查看文件的类型"></a>查看文件的类型</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">file:查看文件的类型</span><br></pre></td></tr></table></figure>
+
+<h2 id="显示命令"><a href="#显示命令" class="headerlink" title="显示命令"></a>显示命令</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">date:查看或设置当前系统的时间：格式化显示时间：+%Y--%m--%d；</span><br><span class="line">date -s:设置当前系统的时间</span><br><span class="line">hwclock(clock)：显示硬件时钟时间(需要管理员权限)；</span><br><span class="line">cal：查看日历</span><br><span class="line">格式 cal [参数] 月年</span><br><span class="line">cal：显示当月的日历 cal4 2004 ：显示 2004 年 4 月的日历</span><br><span class="line">cal- y 2003：显示 2003 年的日历</span><br><span class="line">uptime：查看系统运行时间</span><br></pre></td></tr></table></figure>
+
+<h2 id="查看硬件信息"><a href="#查看硬件信息" class="headerlink" title="查看硬件信息"></a>查看硬件信息</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Ispci：查看 PCI 设备 -v：查看详细信息</span><br><span class="line">Isusb：查看 USB 设备 -v：查看详细信息</span><br><span class="line">Ismod：查看加载的模块(驱动)</span><br></pre></td></tr></table></figure>
+
+<h2 id="输出查看命令"><a href="#输出查看命令" class="headerlink" title="输出查看命令"></a>输出查看命令</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">echo：显示输入的内容 追加文件 echo &quot;liuyazhuang&quot; &gt;&gt; liuyazhuang.txt</span><br><span class="line">cat：显示文件内容,也可以将数个文件合并成一个文件。</span><br><span class="line">格式：格式：cat[参数]&lt;文件名&gt;</span><br><span class="line">cat test.txt：显示 test.txt 文件内容</span><br><span class="line">cat test.txt | more ：逐页显示 test.txt 文件中的内容</span><br><span class="line">cat test.txt &gt;&gt; test1.txt ：将 test.txt 的内容附加到 test1.txt 文件之后</span><br><span class="line">cat test.txt test2.txt &gt;readme.txt 　: 将 test.txt 和 test2.txt 文件合并成 readme.txt 文件</span><br><span class="line">head:显示文件的头几行（默认 10 行） -n:指定显示的行数格式：head -n 文件名</span><br><span class="line">tail：显示文件的末尾几行（默认 10 行）-n：指定显示的行数 -f：追踪显示文件更新 （一般用于查看日志，命令不会退出，而是持续显示新加入的内容）</span><br><span class="line">格式：格式：tail[参数]&lt;文件名&gt;</span><br><span class="line">tail-10 /etc/passwd ：显示/etc/passwd/文件的倒数 10 行内容</span><br><span class="line">tail+10 /etc/passwd ：显示/etc/passwd/文件从第 10 行开始到末尾的内容</span><br><span class="line">more：用于翻页显示文件内容（只能向下翻页）</span><br><span class="line">more 命令是一般用于要显示的内容会超过一个画面长度的情况。为了避免画 面显示时瞬间就闪过去，用户可以使用 more 命令，让画面在显示满一页时暂停，此时可按空格键继续显示下一个画面，或按 Q 键停止显示。</span><br><span class="line">ls -al |more：以长格形式显示 etc 目录下的文件列表，显示满一个画面便暂停，可 按空格键继续显示下一画面，或按 Q 键跳离</span><br><span class="line">less：翻页显示文件内容（带上下翻页）按下上键分页，按 q 退出、‘</span><br><span class="line">less 命令的用法与 more 命令类似，也可以用来浏览超过一页的文件。所不同 的是 less 命令除了可以按空格键向下显示文件外，还可以利用上下键来卷动文件。当要结束浏览时，只要在 less 命令的提示符“：”下按 Q 键即可。</span><br><span class="line">ls -al | less：以长格形式列出/etc 目录中所有的内容。用户可按上下键浏览或按 Q 键跳离</span><br></pre></td></tr></table></figure>
+
+<h2 id="关机、重启"><a href="#关机、重启" class="headerlink" title="关机、重启"></a>关机、重启</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">shutdown 关闭、重启计算机</span><br><span class="line">shutdown[关机、重启]时间 -h 关闭计算机 -r：重启计算机</span><br><span class="line">如：立即关机：shutdown -h now</span><br><span class="line">10 分钟后关机：shutdown -h +10</span><br><span class="line">23:30 分关机：shutdown -h 23:30</span><br><span class="line">立即重启：shutdown -r now</span><br><span class="line">poweroff：立即关闭计算机</span><br><span class="line">reboot：立即重启计算机</span><br></pre></td></tr></table></figure>
+
+<h2 id="归档、压缩"><a href="#归档、压缩" class="headerlink" title="归档、压缩"></a>归档、压缩</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">zip:压缩文件 zip liuyazhuang.zip myfile 格式为：“zip 压缩后的 zip 文件文件名”</span><br><span class="line">unzip：解压文件 unzip liuyazhuang.zip</span><br><span class="line">gzip：压缩文件 gzip 文件名</span><br><span class="line">tar：归档文件</span><br><span class="line">tar -cvf out.tar liuyazhuang 打包一个归档（将文件&quot;liuyazhuang&quot;打包成一个归档）</span><br><span class="line">tar -xvf liuyazhuang.tar 释放一个归档（释放 liuyazhuang.tar 归档）</span><br><span class="line">tar -cvzf backup.tar.gz/etc</span><br><span class="line">-z 参数将归档后的归档文件进行 gzip 压缩以减少大小。</span><br><span class="line">-c：创建一个新 tar 文件</span><br><span class="line">-v：显示运行过程的信息</span><br><span class="line">-f：指定文件名</span><br><span class="line">-z：调用 gzip 压缩命令进行压缩</span><br><span class="line">-t：查看压缩文件的内容</span><br><span class="line">-x：解开 tar 文件</span><br><span class="line">tar -cvf test.tar *：将所有文件打包成 test.tar,扩展名.tar 需自行加上</span><br><span class="line">tar -zcvf test.tar.gz *：将所有文件打包成 test.tar,再用 gzip 命令压缩</span><br><span class="line">tar -tf test.tar ：查看 test.tar 文件中包括了哪些文件</span><br><span class="line">tar -xvf test.tar 将 test.tar 解开</span><br><span class="line">tar -zxvf foo.tar.gz 解压缩</span><br><span class="line">gzip 各 gunzip 命令</span><br><span class="line">gziptest.txt ：压缩文件时，不需要任何参数</span><br><span class="line">gizp–l test.txt.gz：显示压缩率</span><br></pre></td></tr></table></figure>]]></content>
+      <tags>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Linux/Mac文件编码处理</title>
+    <url>/2023/05/26/Linux%E6%96%87%E4%BB%B6%E7%BC%96%E7%A0%81%E5%A4%84%E7%90%86/</url>
+    <content><![CDATA[<h2 id="enca"><a href="#enca" class="headerlink" title="enca"></a>enca</h2><ul>
+<li>安装工具</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># brew install enca</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>检查文件名为xxx.txt中 中文的编码方式</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># enca -L zh_CN xxx.txt </span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>转换文件编码</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># enca -L 当前语言 -x 目标编码 文件名</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>批量转换</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">enca -x 目标编码 *</span><br></pre></td></tr></table></figure>
+
+<h2 id="iconv"><a href="#iconv" class="headerlink" title="iconv"></a>iconv</h2><p>自行安装iconv工具</p>
+<h3 id="单个处理"><a href="#单个处理" class="headerlink" title="单个处理"></a>单个处理</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">iconv -f GBK -t UTF-8 *** &gt; ****</span><br></pre></td></tr></table></figure>
+<ul>
+<li>-f 是表示从什么编码，后面跟编码</li>
+<li>-t 是表示转换到什么编码，后面跟编码</li>
+<li>&gt; 表示从哪个文件保存为哪个文件</li>
+<li>*** 第一个<em><strong>表示的是需要转换的文件，第二个</strong></em>表示转换完后的文件</li>
+</ul>
+<h3 id="批量操作"><a href="#批量操作" class="headerlink" title="批量操作"></a>批量操作</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">find *.txt -exec sh -c &quot;iconv -f GB2312 -t UTF-8 &#123;&#125; &gt; &#123;&#125;.txt&quot; </span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>操作系统</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>编码</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Mininet部分命令</title>
+    <url>/2023/12/12/Mininet%E9%83%A8%E5%88%86%E5%91%BD%E4%BB%A4/</url>
+    <content><![CDATA[<p><img src="/images/pasted-11.png" alt="upload successful"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mininet&gt;net 查看网络拓扑中的节点的状态</span><br><span class="line"></span><br><span class="line">mininet&gt;links 显示链路健壮性信息</span><br><span class="line"></span><br><span class="line">mininet&gt;nodes显示网络拓扑</span><br><span class="line"></span><br><span class="line">mininet&gt;dump显示每个节点的接口设置和表示每个节点的进程的PID</span><br><span class="line"></span><br><span class="line">mininet&gt;pingall在网络中的所有主机之间执行ping测试</span><br><span class="line"></span><br><span class="line">mininet&gt;link 禁用或启用节点间链路（启用链路：link s1 s2 up禁用链路 link s1 s2 down)</span><br><span class="line"></span><br><span class="line">mininet&gt;exit 退出</span><br></pre></td></tr></table></figure>]]></content>
+  </entry>
+  <entry>
+    <title>Nginx配置模板</title>
+    <url>/2023/05/26/Nginx%E9%85%8D%E7%BD%AE%E6%A8%A1%E6%9D%BF/</url>
+    <content><![CDATA[<h2 id="常用Nginx-Server配置模板"><a href="#常用Nginx-Server配置模板" class="headerlink" title="常用Nginx Server配置模板"></a>常用Nginx Server配置模板</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">        listen 1225;</span><br><span class="line">        server_name tencent.xing-z.com;</span><br><span class="line"></span><br><span class="line">        client_max_body_size 800m;</span><br><span class="line">        proxy_connect_timeout 600;</span><br><span class="line">        proxy_read_timeout 600;</span><br><span class="line">        proxy_send_timeout 600;</span><br><span class="line"></span><br><span class="line">        ssl on;</span><br><span class="line">        ssl_certificate /home/ubuntu/.acme.sh/tencent.xing-z.com/tencent.xing-z.com.cer;</span><br><span class="line">        ssl_certificate_key /home/ubuntu/.acme.sh/tencent.xing-z.com/tencent.xing-z.com.key;</span><br><span class="line"></span><br><span class="line">        #ssl_session_cache    shared:SSL:1m;</span><br><span class="line">        #ssl_session_timeout  5m;</span><br><span class="line">        #ssl_prefer_server_ciphers  on;</span><br><span class="line">        #ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:ECDHE:ECDH:AES:HIGH:!NULL:!aNULL:!MD5:!ADH:!RC4;</span><br><span class="line">        ssl_protocols TLSv1 TLSv1.1 TLSv1.2;</span><br><span class="line"></span><br><span class="line">        location / &#123;</span><br><span class="line">                proxy_pass http://127.0.0.1:41225;</span><br><span class="line">                proxy_http_version 1.1;</span><br><span class="line">                proxy_set_header Upgrade $http_upgrade;</span><br><span class="line">                proxy_set_header Connection &quot;upgrade&quot;;</span><br><span class="line">                proxy_set_header Host $http_host;</span><br><span class="line"></span><br><span class="line">                proxy_set_header X-Real-IP $remote_addr;</span><br><span class="line">                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</span><br><span class="line">                proxy_set_header X-Forwarded-Proto https;</span><br><span class="line">                proxy_set_header X-Nginx-Proxy true;</span><br><span class="line"></span><br><span class="line">                proxy_redirect off;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>操作系统</category>
+      </categories>
+      <tags>
+        <tag>Nginx</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Nmap端口扫描常用参数</title>
+    <url>/2023/05/26/Nmap%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F%E5%B8%B8%E7%94%A8%E5%8F%82%E6%95%B0/</url>
+    <content><![CDATA[<h2 id="最全的NMAP命令用法了"><a href="#最全的NMAP命令用法了" class="headerlink" title="最全的NMAP命令用法了"></a>最全的NMAP命令用法了</h2><ul>
+<li>TCP连接扫描，不安全，慢</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1. nmap -sT 192.168.96.4  </span><br></pre></td></tr></table></figure>
+<ul>
+<li>SYN扫描,使用最频繁，安全，快</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">2. nmap -sS 192.168.96.4  </span><br></pre></td></tr></table></figure>
+<ul>
+<li>目标机禁用ping，绕过ping扫描</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">3. nmap -Pn 192.168.96.4  </span><br></pre></td></tr></table></figure>
+<ul>
+<li>UDP扫描,慢,可得到有价值的服务器程序</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">4. nmap -sU 192.168.96.4  </span><br></pre></td></tr></table></figure>
+<ul>
+<li>使用僵尸机对目标机发送数据包</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">5. nmap -sI 僵尸ip 目标ip  </span><br></pre></td></tr></table></figure>
+<ul>
+<li>检测哪些端口被屏蔽</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">6. nmap -sA 192.168.96.4  </span><br></pre></td></tr></table></figure>
+<ul>
+<li>对指定端口扫描</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">7. nmap 192.168.96.4 -p &lt;portnumber&gt;  </span><br></pre></td></tr></table></figure>
+<ul>
+<li>对整个网段的主机进行扫描</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">8. nmap 192.168.96.1/24 </span><br></pre></td></tr></table></figure>
+<ul>
+<li>对扫描结果另存在myscan.xml</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">9. nmap 192.168.96.4 -oX myscan.xml </span><br></pre></td></tr></table></figure>
+<ul>
+<li>设置扫描速度，一般T4足够。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">10. nmap -T1~6 192.168.96.4  </span><br></pre></td></tr></table></figure>
+<ul>
+<li>对端口上的服务程序版本进行扫描</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">11. nmap -sV 192.168.96.4  </span><br></pre></td></tr></table></figure>
+<ul>
+<li>对目标主机的操作系统进行扫描</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">12. nmap -O 192.168.96.4  </span><br></pre></td></tr></table></figure>
+<ul>
+<li>使用脚本进行扫描，耗时长</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">13. nmap -sC &lt;scirptfile&gt; 192.168.96.4  </span><br></pre></td></tr></table></figure>
+<ul>
+<li>强力扫描，耗时长</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">14. nmap -A 192.168.96.4  </span><br></pre></td></tr></table></figure>
+<ul>
+<li>对ipv6地址的主机进行扫描</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">15. nmap -6 ipv6地址   </span><br></pre></td></tr></table></figure>
+<ul>
+<li>使用小数据包发送，避免被识别出</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">16. nmap -f 192.168.96.4  </span><br></pre></td></tr></table></figure>
+<ul>
+<li>发送的包大小,最大传输单元必须是8的整数</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">17. nmap –mtu &lt;size&gt; 192.168.96.4 </span><br></pre></td></tr></table></figure>
+<ul>
+<li>发送参杂着假ip的数据包检测</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">18. nmap -D &lt;假ip&gt; 192.168.96.4 </span><br></pre></td></tr></table></figure>
+<ul>
+<li>针对防火墙只允许的源端口</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">19. nmap --source-port &lt;portnumber&gt; </span><br></pre></td></tr></table></figure>
+<ul>
+<li>改变发生数据包的默认的长度，避免被识别出来是nmap发送的。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">20. nmap –data-length: &lt;length&gt; 192.168.96.4 </span><br></pre></td></tr></table></figure>
+<ul>
+<li>显示冗余信息(扫描细节)</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">21. nmap -v 192.168.96.4 </span><br></pre></td></tr></table></figure>
+<ul>
+<li>对目标进行ping检测，不进行端口扫描（会发送四种报文确定目标是否存活,）</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">22. nmap -sn 192.168.96.4 </span><br></pre></td></tr></table></figure>
+<ul>
+<li>仅仅对目标进行ping检测。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">23. nmap -sP 192.168.96.4  </span><br></pre></td></tr></table></figure>
+<ul>
+<li>-n表示不进行dns解析，-p表示要</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">24. nmap -n/-p 192.168.96.4  </span><br></pre></td></tr></table></figure>
+<ul>
+<li>扫描指定系统的dns服务器</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">25. nmap --system-dns 192.168.96.4  </span><br></pre></td></tr></table></figure>
+<ul>
+<li>追踪每个路由节点。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">26. nmap –traceroute 192.168.96.4  </span><br></pre></td></tr></table></figure>
+<ul>
+<li>使用ICMP echo, timestamp, and netmask 请求包发现主机。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">27. nmap -PE/PP/PM</span><br></pre></td></tr></table></figure>
+<ul>
+<li>主机存活性扫描，arp直连方式。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">28. nmap -sP 192.168.96.4       </span><br></pre></td></tr></table></figure>
+<ul>
+<li>对随机生成number个地址进行扫描。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">29. nmap -iR [number]      </span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>网络安全</category>
+      </categories>
+      <tags>
+        <tag>Nmap</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Python使用ecc加密算法</title>
+    <url>/2023/05/26/Python%E4%BD%BF%E7%94%A8ecc%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/</url>
+    <content><![CDATA[<h2 id="Python生成ecc秘钥，与签名验证"><a href="#Python生成ecc秘钥，与签名验证" class="headerlink" title="Python生成ecc秘钥，与签名验证"></a>Python生成ecc秘钥，与签名验证</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import ecdsa</span><br><span class="line">import hashlib</span><br><span class="line">from ecdsa.util import sigencode_der,sigdecode_der</span><br><span class="line">ecc_pri = ecdsa.SigningKey.generate(curve=ecdsa.NIST256p)</span><br><span class="line">sign_dat = ecc_pri.sign(b&#x27;123456&#x27;, entropy=None, hashfunc=hashlib.sha256, sigencode=sigencode_der)</span><br><span class="line">print(sign_dat)</span><br><span class="line">ecc_pub = ecc_pri.get_verifying_key()</span><br><span class="line">result = ecc_pub.verify(sign_dat, b&#x27;123456&#x27;, hashfunc=hashlib.sha256, sigdecode=sigdecode_der)</span><br><span class="line">print(result)</span><br><span class="line"></span><br><span class="line">with open(&#x27;ecc_pri.pem&#x27;, &#x27;wb&#x27;) as f2:</span><br><span class="line">	f2.write(ecc_pri.to_pem())</span><br><span class="line">with open(&#x27;ecc_sig.data&#x27;, &#x27;wb&#x27;) as f1:</span><br><span class="line">	f1.write(sign_dat)</span><br><span class="line">with open(&#x27;ecc_pub.pem&#x27;, &#x27;wb&#x27;) as f2:</span><br><span class="line">	f2.write(ecc_pub.to_pem())</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="Python导入外部ECC秘钥进行签名"><a href="#Python导入外部ECC秘钥进行签名" class="headerlink" title="Python导入外部ECC秘钥进行签名"></a>Python导入外部ECC秘钥进行签名</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import  ecdsa</span><br><span class="line">import hashlib</span><br><span class="line">from ecdsa.util import sigencode_der,sigdecode_der</span><br><span class="line">with open(&#x27;ecc_prikey.key&#x27;, &#x27;rb&#x27;) as f1:</span><br><span class="line">    pem_pri=f1.read()</span><br><span class="line">with open(&#x27;ecc_pub.key&#x27;, &#x27;rb&#x27;) as f2:</span><br><span class="line">    pem_pub=f2.read()</span><br><span class="line">pri_ecc = ecdsa.SigningKey.from_pem(pem_pri)</span><br><span class="line">print(pri_ecc) #私钥对象</span><br><span class="line">pub_ecc = ecdsa.VerifyingKey.from_pem(pem_pub) #公钥对象</span><br><span class="line">ecc_dat = pri_ecc.sign(b&#x27;123456&#x27;, entropy=None, hashfunc=hashlib.sha256,sigencode=sigencode_der)</span><br><span class="line">result = pub_ecc.verify(ecc_dat,b&#x27;123456&#x27;,hashfunc=hashlib.sha256,sigdecode=sigdecode_der)</span><br><span class="line">print(result)</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>编程开发</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+        <tag>加密</tag>
+        <tag>ECC</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Ubuntu升级docker-compose</title>
+    <url>/2023/06/26/Ubuntu%E5%8D%87%E7%BA%A7docker-compose/</url>
+    <content><![CDATA[<p>通过安装最新的可能的版本来更新</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ sudo curl -L &quot;https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)&quot; -o /usr/local/bin/docker-compose</span><br><span class="line">$ sudo chmod +x /usr/local/bin/docker-compose</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Docker</category>
+      </categories>
+      <tags>
+        <tag>Docker</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Vue构建后前端路由拦截失效</title>
+    <url>/2023/06/08/Vue%E6%9E%84%E5%BB%BA%E5%90%8E%E5%89%8D%E7%AB%AF%E8%B7%AF%E7%94%B1%E6%8B%A6%E6%88%AA%E5%A4%B1%E6%95%88/</url>
+    <content><![CDATA[<p>原因是：这个问题是因为 Vue 的路由模式默认是 hash 模式,只改变 URL 的 hash 部分。但是 Nginx 会把 URL 中的 hash 部分去掉。<br>解决：在nginx 的server 中添加以下代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">location / &#123;</span><br><span class="line">  try_files $uri $uri/ /index.html;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">location ~ ^/.*\.(ico|css|js|gif|jpe?g|png|svg|woff2?|ttf)$ &#123;</span><br><span class="line">  add_header Cache-Control &quot;public&quot;;</span><br><span class="line">  expires 1w;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个配置会正确保留 URL 中的 hash,所以 Vue 路由可以正常工作。</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>docker-compose参数说明</title>
+    <url>/2023/07/28/docker-compose%E5%8F%82%E6%95%B0%E8%AF%B4%E6%98%8E/</url>
+    <content><![CDATA[<p>当创建一个 Docker 服务的 Docker Compose 文件时，你可以使用以下模板作为起点：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&#x27;3&#x27;</span>  <span class="comment"># 版本号</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span>    <span class="comment"># 服务列表</span></span><br><span class="line">  <span class="attr">service_name:</span>    <span class="comment"># 服务名称，自行替换</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">image_name:tag</span>    <span class="comment"># 镜像名字和版本，自行替换</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">host_port:container_port</span>    <span class="comment"># 将容器端口映射到主机的端口</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">host_path:container_path</span>    <span class="comment"># 将主机路径挂载到容器路径</span></span><br><span class="line">    <span class="attr">environment:</span>    <span class="comment"># 环境变量</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">KEY=VALUE</span>    <span class="comment"># 自定义的环境变量</span></span><br><span class="line">    <span class="attr">depends_on:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">dependent_service</span>    <span class="comment"># 该服务依赖的其他服务列表</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">restart_policy</span>    <span class="comment"># 容器重启策略</span></span><br><span class="line">    <span class="attr">command:</span> <span class="string">command_to_run</span>    <span class="comment"># 运行容器的自定义命令</span></span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">network_name</span>    <span class="comment"># 服务所在的网络</span></span><br><span class="line"></span><br><span class="line"><span class="attr">networks:</span>    <span class="comment"># 网络列表</span></span><br><span class="line">  <span class="attr">network_name:</span>    <span class="comment"># 网络名称，自行替换</span></span><br><span class="line">    <span class="comment"># 网络配置，可以设置网络类型等</span></span><br></pre></td></tr></table></figure>
+
+<p>下面是对每个配置参数的注释说明：</p>
+<ul>
+<li><code>version</code>：指定 Docker Compose 文件格式的版本，例如 <code>&#39;3&#39;</code>。</li>
+<li><code>service_name</code>：替换为你的服务名称，可以是任意字符串。</li>
+<li><code>image</code>：指定服务所使用的镜像名称和版本，例如 <code>image_name:tag</code>。镜像可以从 Docker Hub 或者本地构建。</li>
+<li><code>ports</code>：用于将容器端口映射到主机的端口。<code>host_port</code> 是主机上的端口号，<code>container_port</code> 是容器内的端口号。</li>
+<li><code>volumes</code>：用于将主机上的路径挂载到容器内的路径。<code>host_path</code> 是主机上的路径，<code>container_path</code> 是容器内的路径。</li>
+<li><code>environment</code>：用于设置容器内的环境变量。格式为 <code>KEY=VALUE</code>，将定义一条环境变量。</li>
+<li><code>depends_on</code>：设置服务所依赖的其他服务列表。这将确保在启动当前服务之前，依赖的服务已经启动。</li>
+<li><code>restart</code>：用于指定容器重启策略。常见的策略包括 <code>&#39;no&#39;</code>（不重启）、<code>&#39;always&#39;</code>（总是重启）和 <code>&#39;on-failure&#39;</code>（仅在失败时重启）。</li>
+<li><code>command</code>：指定在容器中运行的自定义命令。例如，你可以使用这个参数来覆盖镜像的默认执行命令。</li>
+<li><code>networks</code>：用于指定服务所在的网络。网络可以是默认网络或者自定义网络，可以与其他服务共享。</li>
+</ul>
+<p>你需要根据你的具体情况替换模板中的占位符，并根据需要添加或调整其他配置参数。</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>docker常用服务</title>
+    <url>/2023/05/26/docker%E5%B8%B8%E7%94%A8%E6%9C%8D%E5%8A%A1/</url>
+    <content><![CDATA[<h2 id="redis"><a href="#redis" class="headerlink" title="redis"></a>redis</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker run --name redis-dev -p 6379:6379 -d --restart=always redis:latest redis-server --requirepass &quot;root&quot;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="rbmq"><a href="#rbmq" class="headerlink" title="rbmq"></a>rbmq</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker run -d --hostname rabbit-dev --name mq -e RABBITMQ_DEFAULT_USER=admin -e RABBITMQ_DEFAULT_PASS=root -p 15672:15672 -p 5672:5672  rabbitmq:3-management</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="jenkins"><a href="#jenkins" class="headerlink" title="jenkins"></a>jenkins</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker run -d -uroot -p 9095:8080 -p 50000:50000 --name jenkins -v /home/jenkins_home:/var/jenkins_home -v /etc/localtime:/etc/localtime jenkins/jenkins</span><br></pre></td></tr></table></figure>
+
+<h2 id="mysql"><a href="#mysql" class="headerlink" title="mysql"></a>mysql</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker run -itd --name mysql-dev  --restart=always -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root mysql</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>DevOps</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>docker换国内源</title>
+    <url>/2023/05/26/docker%E6%8D%A2%E5%9B%BD%E5%86%85%E6%BA%90/</url>
+    <content><![CDATA[<ul>
+<li>通过修改 daemon 配置文件 &#x2F;etc&#x2F;docker&#x2F;daemon.json 来使用加速器。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># vim /etc/docker/daemon.json</span><br></pre></td></tr></table></figure>
+<ul>
+<li>按下面说的修改后重启docker服务就行</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;builder&quot;: &#123;</span><br><span class="line">    &quot;gc&quot;: &#123;</span><br><span class="line">      &quot;enabled&quot;: true,</span><br><span class="line">      &quot;defaultKeepStorage&quot;: &quot;20GB&quot;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;features&quot;: &#123;</span><br><span class="line">    &quot;buildkit&quot;: true</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;experimental&quot;: false,</span><br><span class="line">  &quot;registry-mirrors&quot;: [</span><br><span class="line">    &quot;https://yrqaxlmr.mirror.aliyuncs.com&quot; // 替换成国内源就行</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>重启docker服务</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># systemctl restart docker</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>DevOps</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>docker部署单体mongodb</title>
+    <url>/2023/10/09/docker%E9%83%A8%E7%BD%B2%E5%8D%95%E4%BD%93mongodb/</url>
+    <content><![CDATA[<h2 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h2><p><img src="/images/pasted-6.png" alt="项目结构"></p>
+<h3 id="编写mongod-conf"><a href="#编写mongod-conf" class="headerlink" title="编写mongod.conf"></a>编写mongod.conf</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 数据库文件存储位置</span><br><span class="line">dbpath = /data/db</span><br><span class="line"># log文件存储位置</span><br><span class="line">logpath = /data/log/mongod.log</span><br><span class="line"># 使用追加的方式写日志</span><br><span class="line">logappend = true</span><br><span class="line"># 是否以守护进程方式运行</span><br><span class="line"># fork = true</span><br><span class="line"># 全部ip可以访问</span><br><span class="line">bind_ip = 0.0.0.0</span><br><span class="line"># 端口号</span><br><span class="line">port = 27017</span><br><span class="line"># 是否启用认证</span><br><span class="line">auth = true</span><br><span class="line"># 设置oplog的大小(MB)</span><br><span class="line">oplogSize=2048</span><br></pre></td></tr></table></figure>
+
+<h3 id="编写docker-compose-yaml"><a href="#编写docker-compose-yaml" class="headerlink" title="编写docker-compose.yaml"></a>编写docker-compose.yaml</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">version: &#x27;3&#x27;</span><br><span class="line">services:</span><br><span class="line">  mongodb:</span><br><span class="line">    image: mongo</span><br><span class="line">    restart: always</span><br><span class="line">    container_name: mongodb</span><br><span class="line">    environment:</span><br><span class="line">      MYSQL_ROOT_PASSWORD: password</span><br><span class="line">      TZ: Asia/Shanghai</span><br><span class="line">    ports:</span><br><span class="line">      - 27017:27017</span><br><span class="line">    volumes:</span><br><span class="line">      - ./config:/data/configdb</span><br><span class="line">      - ./data:/data/db</span><br><span class="line">    # command: [&#x27;mongo&#x27;, &#x27;--auth&#x27;]</span><br></pre></td></tr></table></figure>
+
+<h3 id="运行docker-comose-并进入容器创建用户"><a href="#运行docker-comose-并进入容器创建用户" class="headerlink" title="运行docker-comose,并进入容器创建用户"></a>运行docker-comose,并进入容器创建用户</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># docker-compose up -d</span><br><span class="line"># docker exec -it mongodb /bin/bash</span><br><span class="line">&gt; mongosh admin</span><br><span class="line">&gt; db.createUser(&#123; user: &#x27;admin&#x27;, pwd: &#x27;adminpwd&#x27;, roles: [ &#123; role: &quot;root&quot;, db: &quot;admin&quot; &#125; ] &#125;);</span><br><span class="line">&#123;ok:1&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>user:用户名 admin</li>
+<li>pwd:密码 adminpwd</li>
+<li>role:角色 root</li>
+<li>db:授权使用admin库</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Docker</category>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>mongodb</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2025/06/06/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>k8s 常用服务组件</title>
+    <url>/2023/07/05/k8s-%E5%B8%B8%E7%94%A8%E6%9C%8D%E5%8A%A1%E7%BB%84%E4%BB%B6/</url>
+    <content><![CDATA[<h4 id="Kubernetes（K8s）是一个高度可扩展的容器编排平台，它由多个常用的服务组件组成。以下是一些常用的Kubernetes服务组件："><a href="#Kubernetes（K8s）是一个高度可扩展的容器编排平台，它由多个常用的服务组件组成。以下是一些常用的Kubernetes服务组件：" class="headerlink" title="Kubernetes（K8s）是一个高度可扩展的容器编排平台，它由多个常用的服务组件组成。以下是一些常用的Kubernetes服务组件："></a>Kubernetes（K8s）是一个高度可扩展的容器编排平台，它由多个常用的服务组件组成。以下是一些常用的Kubernetes服务组件：</h4><ol>
+<li><p><strong>kube-apiserver</strong>：Kubernetes API的前端组件，提供了集群的核心API服务。</p>
+</li>
+<li><p><strong>kube-controller-manager</strong>：运行一组控制器，负责管理集群中的各种资源，如Pod、ReplicaSet、Deployment等。</p>
+</li>
+<li><p><strong>kube-scheduler</strong>：负责在集群中的可用节点上调度Pod，根据资源需求和其他条件为新创建的Pod选择合适的节点。</p>
+</li>
+<li><p><strong>kubelet</strong>：在每个节点上运行并与kube-apiserver进行通信，负责管理节点上的Pod和容器，以及监控它们的状态。</p>
+</li>
+<li><p><strong>kube-proxy</strong>：维护节点上的网络规则和转发，负责实现Kubernetes服务抽象。</p>
+</li>
+<li><p><strong>etcd</strong>：可靠的分布式键值存储系统，用于保存Kubernetes集群配置、服务发现和状态数据。</p>
+</li>
+<li><p><strong>CoreDNS</strong>：一个开源的域名系统（DNS）服务插件，提供基于域名的服务发现和解析。</p>
+</li>
+<li><p><strong>Container Runtime</strong>：Kubernetes支持多种容器运行时，如Docker、containerd、CRI-O等，用于管理和执行容器。</p>
+</li>
+</ol>
+<p>除了上述主要服务组件之外，Kubernetes还有其他可选的组件和插件，如Ingress Controller、Metrics Server、Dashboard等，用于增强和扩展集群的功能。这些组件共同协作，构成了一个完整的Kubernetes集群，提供了可靠的容器编排和管理环境。</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>k8s使用NFS作存储类与PVC</title>
+    <url>/2023/07/18/k8s%E4%BD%BF%E7%94%A8NFS%E4%BD%9C%E5%AD%98%E5%82%A8%E7%B1%BB%E4%B8%8EPVC/</url>
+    <content><![CDATA[<p>如果你想在 Kubernetes 中使用 NFS 存储，可以按照以下步骤创建存储类和 PVC：</p>
+<h4 id="1、创建rbac-yaml-文件"><a href="#1、创建rbac-yaml-文件" class="headerlink" title="1、创建rbac.yaml 文件"></a>1、创建rbac.yaml 文件</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">apiVersion: v1</span><br><span class="line">kind: ServiceAccount</span><br><span class="line">metadata:</span><br><span class="line">  name: nfs-client-provisioner</span><br><span class="line">  # replace with namespace where provisioner is deployed</span><br><span class="line">  namespace: default        #根据实际环境设定namespace,下面类同</span><br><span class="line">---</span><br><span class="line">kind: ClusterRole</span><br><span class="line">apiVersion: rbac.authorization.k8s.io/v1</span><br><span class="line">metadata:</span><br><span class="line">  name: nfs-client-provisioner-runner</span><br><span class="line">rules:</span><br><span class="line">  - apiGroups: [&quot;&quot;]</span><br><span class="line">    resources: [&quot;persistentvolumes&quot;]</span><br><span class="line">    verbs: [&quot;get&quot;, &quot;list&quot;, &quot;watch&quot;, &quot;create&quot;, &quot;delete&quot;]</span><br><span class="line">  - apiGroups: [&quot;&quot;]</span><br><span class="line">    resources: [&quot;persistentvolumeclaims&quot;]</span><br><span class="line">    verbs: [&quot;get&quot;, &quot;list&quot;, &quot;watch&quot;, &quot;update&quot;]</span><br><span class="line">  - apiGroups: [&quot;storage.k8s.io&quot;]</span><br><span class="line">    resources: [&quot;storageclasses&quot;]</span><br><span class="line">    verbs: [&quot;get&quot;, &quot;list&quot;, &quot;watch&quot;]</span><br><span class="line">  - apiGroups: [&quot;&quot;]</span><br><span class="line">    resources: [&quot;events&quot;]</span><br><span class="line">    verbs: [&quot;create&quot;, &quot;update&quot;, &quot;patch&quot;]</span><br><span class="line">---</span><br><span class="line">kind: ClusterRoleBinding</span><br><span class="line">apiVersion: rbac.authorization.k8s.io/v1</span><br><span class="line">metadata:</span><br><span class="line">  name: run-nfs-client-provisioner</span><br><span class="line">subjects:</span><br><span class="line">  - kind: ServiceAccount</span><br><span class="line">    name: nfs-client-provisioner</span><br><span class="line">    # replace with namespace where provisioner is deployed</span><br><span class="line">    namespace: default</span><br><span class="line">roleRef:</span><br><span class="line">  kind: ClusterRole</span><br><span class="line">  name: nfs-client-provisioner-runner</span><br><span class="line">  apiGroup: rbac.authorization.k8s.io</span><br><span class="line">---</span><br><span class="line">kind: Role</span><br><span class="line">apiVersion: rbac.authorization.k8s.io/v1</span><br><span class="line">metadata:</span><br><span class="line">  name: leader-locking-nfs-client-provisioner</span><br><span class="line">    # replace with namespace where provisioner is deployed</span><br><span class="line">  namespace: default</span><br><span class="line">rules:</span><br><span class="line">  - apiGroups: [&quot;&quot;]</span><br><span class="line">    resources: [&quot;endpoints&quot;]</span><br><span class="line">    verbs: [&quot;get&quot;, &quot;list&quot;, &quot;watch&quot;, &quot;create&quot;, &quot;update&quot;, &quot;patch&quot;]</span><br><span class="line">---</span><br><span class="line">kind: RoleBinding</span><br><span class="line">apiVersion: rbac.authorization.k8s.io/v1</span><br><span class="line">metadata:</span><br><span class="line">  name: leader-locking-nfs-client-provisioner</span><br><span class="line">subjects:</span><br><span class="line">  - kind: ServiceAccount</span><br><span class="line">    name: nfs-client-provisioner</span><br><span class="line">    # replace with namespace where provisioner is deployed</span><br><span class="line">    namespace: default</span><br><span class="line">roleRef:</span><br><span class="line">  kind: Role</span><br><span class="line">  name: leader-locking-nfs-client-provisioner</span><br><span class="line">  apiGroup: rbac.authorization.k8s.io</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>根据实际环境设定namespace。</li>
+</ul>
+<h4 id="2、创建nfs-provisioner-yaml-文件"><a href="#2、创建nfs-provisioner-yaml-文件" class="headerlink" title="2、创建nfs-provisioner.yaml 文件"></a>2、创建nfs-provisioner.yaml 文件</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">apiVersion: apps/v1</span><br><span class="line">kind: Deployment</span><br><span class="line">metadata:</span><br><span class="line">  name: nfs-client-provisioner</span><br><span class="line">  labels:</span><br><span class="line">    app: nfs-client-provisioner</span><br><span class="line">  namespace: default</span><br><span class="line">spec:</span><br><span class="line">  replicas: 1</span><br><span class="line">  strategy:</span><br><span class="line">    type: Recreate</span><br><span class="line">  selector:</span><br><span class="line">    matchLabels:</span><br><span class="line">      app: nfs-client-provisioner</span><br><span class="line">  template:</span><br><span class="line">    metadata:</span><br><span class="line">      labels:</span><br><span class="line">        app: nfs-client-provisioner</span><br><span class="line">    spec:</span><br><span class="line">      serviceAccountName: nfs-client-provisioner</span><br><span class="line">      containers:</span><br><span class="line">        - name: nfs-client-provisioner</span><br><span class="line">          image: gcr.io/k8s-staging-sig-storage/nfs-subdir-external-provisioner:v4.0.0</span><br><span class="line">          volumeMounts:</span><br><span class="line">            - name: nfs-client-root</span><br><span class="line">              mountPath: /persistentvolumes</span><br><span class="line">          env:</span><br><span class="line">            - name: PROVISIONER_NAME</span><br><span class="line">              value: default-nfs-storage</span><br><span class="line">            - name: NFS_SERVER</span><br><span class="line">              value: 192.168.10.14</span><br><span class="line">            - name: NFS_PATH  </span><br><span class="line">              value: /export</span><br><span class="line">      volumes:</span><br><span class="line">        - name: nfs-client-root</span><br><span class="line">          nfs:</span><br><span class="line">            server: 192.168.10.14</span><br><span class="line">            path: /export</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>PROVISIONER_NAME的值要和nfs-storage-class.yaml中provisioner一致</li>
+<li>NFS_SERVER：nfs服务的IP，更换成你自己的IP</li>
+<li>NFS_PATH：nfs共享的路径，更换成你自己的</li>
+</ul>
+<h4 id="3、创建nfs-pvc-yaml-文件"><a href="#3、创建nfs-pvc-yaml-文件" class="headerlink" title="3、创建nfs-pvc.yaml 文件"></a>3、创建nfs-pvc.yaml 文件</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">apiVersion: v1</span><br><span class="line">kind: PersistentVolumeClaim</span><br><span class="line">metadata:</span><br><span class="line">  name: nfs-pvc</span><br><span class="line">  annotations:</span><br><span class="line">    volume.beta.kubernetes.io/storage-class: &quot;managed-nfs-storage&quot;</span><br><span class="line">spec:</span><br><span class="line">  accessModes:</span><br><span class="line">    - ReadWriteMany</span><br><span class="line">  resources:</span><br><span class="line">    requests:</span><br><span class="line">      storage: 5Gi</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>metadata.annotations.volume.beta.kubernetes.io&#x2F;storage-class的值要和nfs-storage-class.yaml中的metadata.name一致</li>
+</ul>
+<h4 id="4、创建nfs-storage-class-yaml-文件"><a href="#4、创建nfs-storage-class-yaml-文件" class="headerlink" title="4、创建nfs-storage-class.yaml 文件"></a>4、创建nfs-storage-class.yaml 文件</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">apiVersion: storage.k8s.io/v1</span><br><span class="line">kind: StorageClass</span><br><span class="line">metadata:</span><br><span class="line">  name: managed-nfs-storage</span><br><span class="line">provisioner: default-nfs-storage</span><br><span class="line">parameters:</span><br><span class="line">  archiveOnDelete: &quot;false&quot;</span><br></pre></td></tr></table></figure>
+
+<h4 id="5、执行"><a href="#5、执行" class="headerlink" title="5、执行"></a>5、执行</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo kubectl apply -f rbac.yaml</span><br><span class="line">sudo kubectl apply -f nfs-pvc.yaml</span><br><span class="line">sudo kubectl apply -f nfs-provisioner.yaml</span><br><span class="line">sudo kubectl apply -f nfs-storage-class.yaml</span><br></pre></td></tr></table></figure>
+
+<h4 id="6、查看结果"><a href="#6、查看结果" class="headerlink" title="6、查看结果"></a>6、查看结果</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">diky@ubuntu:/opt/components$ sudo kubectl get pv,pvc,sc,pod</span><br><span class="line">NAME                                                        CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS   CLAIM             STORAGECLASS          REASON   AGE</span><br><span class="line">persistentvolume/pvc-495ff088-59ff-4bdb-8c46-1ba65800eace   5Gi        RWX            Delete           Bound    default/nfs-pvc   managed-nfs-storage            62m</span><br><span class="line"></span><br><span class="line">NAME                            STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS          AGE</span><br><span class="line">persistentvolumeclaim/nfs-pvc   Bound    pvc-495ff088-59ff-4bdb-8c46-1ba65800eace   5Gi        RWX            managed-nfs-storage   23h</span><br><span class="line"></span><br><span class="line">NAME                                               PROVISIONER             RECLAIMPOLICY   VOLUMEBINDINGMODE      ALLOWVOLUMEEXPANSION   AGE</span><br><span class="line">storageclass.storage.k8s.io/local-path (default)   rancher.io/local-path   Delete          WaitForFirstConsumer   false                  47h</span><br><span class="line">storageclass.storage.k8s.io/managed-nfs-storage    default-nfs-storage     Delete          Immediate              false                  25h</span><br><span class="line"></span><br><span class="line">NAME                                          READY   STATUS    RESTARTS      AGE</span><br><span class="line">pod/nfs-client-provisioner-7f596764c4-zc8kk   1/1     Running   1 (61m ago)   64m</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>如果pvc的STATUS为Bound就说明已经部署好了</li>
+</ul>
+]]></content>
+  </entry>
+  <entry>
+    <title>k8s开放API的例子</title>
+    <url>/2023/07/01/k8s%E5%BC%80%E6%94%BEAPI%E7%9A%84%E4%BE%8B%E5%AD%90/</url>
+    <content><![CDATA[<h2 id="k8s上的XXX-yaml"><a href="#k8s上的XXX-yaml" class="headerlink" title="k8s上的XXX.yaml"></a>k8s上的XXX.yaml</h2><p>新建一个xxx.yaml文件</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">apiVersion: networking.k8s.io/v1</span><br><span class="line">kind: Ingress</span><br><span class="line">metadata:</span><br><span class="line">  name: blog-ingress</span><br><span class="line">  namespace: blog</span><br><span class="line">spec:</span><br><span class="line">  ingressClassName: nginx-ingress</span><br><span class="line">  rules:</span><br><span class="line">    - host: xing-z.com</span><br><span class="line">      http:</span><br><span class="line">        paths:</span><br><span class="line">          - backend:</span><br><span class="line">              service:</span><br><span class="line">                name: blog-service</span><br><span class="line">                port:</span><br><span class="line">                  number: 44679</span><br><span class="line">            path: /</span><br><span class="line">            pathType: Prefix</span><br><span class="line">  </span><br><span class="line">    - host: www.xing-z.com</span><br><span class="line">      http:</span><br><span class="line">        paths:</span><br><span class="line">          - backend:</span><br><span class="line">              service: </span><br><span class="line">                name: blog-service</span><br><span class="line">                port:</span><br><span class="line">                  number: 44679</span><br><span class="line">            path: /</span><br><span class="line">            pathType: Prefix</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line">apiVersion: networking.k8s.io/v1</span><br><span class="line">kind: Ingress</span><br><span class="line">metadata:</span><br><span class="line">  name: blog-api-ingress</span><br><span class="line">  namespace: blog</span><br><span class="line">  annotations:</span><br><span class="line">    nginx.ingress.kubernetes.io/rewrite-target: /$2</span><br><span class="line">spec:</span><br><span class="line">  ingressClassName: nginx-ingress</span><br><span class="line">  rules:</span><br><span class="line">    - host: xing-z.com</span><br><span class="line">      http:</span><br><span class="line">        paths:</span><br><span class="line">          - backend:</span><br><span class="line">              service:</span><br><span class="line">                name: blog-service</span><br><span class="line">                port:</span><br><span class="line">                  number: 44678</span><br><span class="line">            path: /blog/api(/|$)(.*)</span><br><span class="line">            pathType: Prefix</span><br><span class="line">    - host: www.xing-z.com</span><br><span class="line">      http:</span><br><span class="line">        paths:</span><br><span class="line">          - backend:</span><br><span class="line">              service:</span><br><span class="line">                name: blog-service</span><br><span class="line">                port:</span><br><span class="line">                  number: 44678</span><br><span class="line">            path: /blog/api(/|$)(.*)</span><br><span class="line">            pathType: Prefix</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line">apiVersion: v1</span><br><span class="line">kind: Service</span><br><span class="line">metadata:</span><br><span class="line">  name: blog-service</span><br><span class="line">  namespace: blog</span><br><span class="line">spec:</span><br><span class="line">  selector:</span><br><span class="line">    app: blog-home-api</span><br><span class="line">  ports:</span><br><span class="line">    - name: home-api</span><br><span class="line">      protocol: TCP</span><br><span class="line">      port: 44678</span><br><span class="line">      targetPort: 33333</span><br><span class="line">    - name: home-www</span><br><span class="line">      protocol: TCP</span><br><span class="line">      port: 44679</span><br><span class="line">      targetPort: 80</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line">apiVersion: apps/v1</span><br><span class="line">kind: Deployment</span><br><span class="line">metadata:</span><br><span class="line">  name: blog-api</span><br><span class="line">  namespace: blog</span><br><span class="line">  labels:</span><br><span class="line">    app: blog-api</span><br><span class="line">spec:</span><br><span class="line">  replicas: 1</span><br><span class="line">  selector:</span><br><span class="line">    matchLabels:</span><br><span class="line">      app: blog-home-api</span><br><span class="line">  template:</span><br><span class="line">    metadata:</span><br><span class="line">      labels:</span><br><span class="line">        app: blog-home-api</span><br><span class="line">    spec:</span><br><span class="line">      containers:</span><br><span class="line">      - name: blog-home-api</span><br><span class="line">        image: registry.cn-hangzhou.aliyuncs.com/xianzx-public/blog-api:v1.3</span><br><span class="line">        ports:</span><br><span class="line">          - containerPort: 33333</span><br><span class="line">        command: [&quot;python&quot;, &quot;./app.py&quot;]</span><br><span class="line">      - name: blog-home-www</span><br><span class="line">        image: registry.cn-hangzhou.aliyuncs.com/xianzx/home:v2</span><br><span class="line">        ports:</span><br><span class="line">          - containerPort: 80</span><br><span class="line">      nodeSelector:</span><br><span class="line">        kubernetes.io/hostname: ubuntu</span><br></pre></td></tr></table></figure>
+
+<h2 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">kubectl apply -f XXX.yml </span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>k8s</category>
+      </categories>
+      <tags>
+        <tag>k8s</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>k8s配置文件常用属性说明</title>
+    <url>/2023/07/05/k8s%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%B8%B8%E7%94%A8%E5%B1%9E%E6%80%A7%E8%AF%B4%E6%98%8E/</url>
+    <content><![CDATA[<h4 id="以下是K3s-Yaml配置文件中常见属性的说明："><a href="#以下是K3s-Yaml配置文件中常见属性的说明：" class="headerlink" title="以下是K3s Yaml配置文件中常见属性的说明："></a>以下是K3s Yaml配置文件中常见属性的说明：</h4><ul>
+<li><code>apiVersion</code>：Kubernetes API 版本</li>
+<li><code>kind</code>：资源类型，通常为 <code>Deployment</code>、<code>Pod</code>、<code>Service</code>等</li>
+<li><code>metadata</code>：元数据字段，包括 <code>name</code>（资源名称）、<code>namespace</code>（命名空间）、<code>labels</code>（标签）等</li>
+<li><code>spec</code>：规范字段，用于定义资源的规范</li>
+<li><code>containers</code>：在 <code>Pod</code> 中定义容器的列表<ul>
+<li><code>name</code>：容器名称</li>
+<li><code>image</code>：容器使用的镜像</li>
+<li><code>ports</code>：容器所使用的端口配置</li>
+</ul>
+</li>
+<li><code>replicas</code>：在 <code>Deployment</code> 中定义的副本数量</li>
+<li><code>selector</code>：在 <code>Service</code> 中定义用于选择 <code>Pod</code> 的标签</li>
+<li><code>type</code>：在 <code>Service</code> 中定义服务类型，如 <code>ClusterIP</code>、<code>NodePort</code>、<code>LoadBalancer</code>等</li>
+<li><code>nodeSelector</code>：在 <code>Pod</code> 中定义用于选择节点的标签</li>
+<li><code>affinity</code>：用于定义调度规则以控制 <code>Pod</code> 的调度<ul>
+<li><code>nodeAffinity</code>：节点亲和性规则<ul>
+<li><code>requiredDuringSchedulingIgnoredDuringExecution</code>：必需的调度规则<ul>
+<li><code>nodeSelectorTerms</code>：节点选择器规则<ul>
+<li><code>matchExpressions</code>：匹配表达式<ul>
+<li><code>key</code>：节点标签的键</li>
+<li><code>operator</code>：匹配操作符，如 <code>In</code>、<code>NotIn</code>、<code>Exists</code>等</li>
+<li><code>values</code>：节点标签的值列表</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>tolerations</code>：容忍规则，用于定义在特定节点上运行 <code>Pod</code> 时容忍的 Taints</li>
+<li><code>serviceAccountName</code>：指定要在 <code>Pod</code> 中使用的 Service Account</li>
+<li><code>volumes</code>：定义 <code>Pod</code> 使用的卷<ul>
+<li><code>name</code>：卷名称</li>
+<li><code>emptyDir</code>：空目录卷</li>
+<li><code>hostPath</code>：主机路径卷</li>
+<li><code>persistentVolumeClaim</code>：持久卷声明</li>
+</ul>
+</li>
+</ul>
+<p>除了上述常见属性外，还有其他可配置的字段和属性，具体取决于不同的资源类型和您的应用需求。您可以参考 Kubernetes 官方文档获得更详细的配置信息（<a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/kubernetes-objects/%EF%BC%89">https://kubernetes.io/docs/concepts/overview/working-with-objects/kubernetes-objects/）</a></p>
+<h4 id="以下是一个pod-yaml例子："><a href="#以下是一个pod-yaml例子：" class="headerlink" title="以下是一个pod yaml例子："></a>以下是一个pod yaml例子：</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">apiVersion: apps/v1</span><br><span class="line">kind: Deployment</span><br><span class="line">metadata:</span><br><span class="line">  name: my-deployment  # 部署的名称</span><br><span class="line">spec:</span><br><span class="line">  replicas: 3  # 副本数量</span><br><span class="line">  selector:</span><br><span class="line">    matchLabels:</span><br><span class="line">      app: MyApp  # 标签选择器</span><br><span class="line">  template:</span><br><span class="line">    metadata:</span><br><span class="line">      labels:</span><br><span class="line">        app: MyApp  # Pod 标签</span><br><span class="line">    spec:</span><br><span class="line">      containers:</span><br><span class="line">        - name: my-container  # 容器的名称</span><br><span class="line">          image: my-image  # 容器使用的镜像</span><br><span class="line">          ports:  # 容器端口配置</span><br><span class="line">            - containerPort: 80  # 容器监听的端口</span><br><span class="line">      nodeSelector:</span><br><span class="line">        kubernetes.io/hostname: node1  # 选择要运行 Pod 的节点</span><br><span class="line">      affinity:  # 调度规则</span><br><span class="line">        nodeAffinity:</span><br><span class="line">          requiredDuringSchedulingIgnoredDuringExecution:</span><br><span class="line">            nodeSelectorTerms:</span><br><span class="line">              - matchExpressions:</span><br><span class="line">                  - key: disktype  # 节点标签的键</span><br><span class="line">                    operator: In  # 操作符</span><br><span class="line">                    values:</span><br><span class="line">                      - ssd  # 节点标签的值</span><br><span class="line">      tolerations:  # 容忍规则</span><br><span class="line">        - key: &quot;nodeType&quot;  # 容忍规则的键</span><br><span class="line">          operator: &quot;Exists&quot;  # 操作符</span><br><span class="line">          effect: &quot;NoSchedule&quot;  # 容忍规则的效果</span><br><span class="line">      volumes:  # 卷配置</span><br><span class="line">        - name: my-volume  # 卷的名称</span><br><span class="line">          emptyDir: &#123;&#125;  # 空目录卷</span><br></pre></td></tr></table></figure>]]></content>
+  </entry>
+  <entry>
+    <title>端口转发常用的几种方法</title>
+    <url>/2023/05/25/linux%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E5%B8%B8%E7%94%A8%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95/</url>
+    <content><![CDATA[<h2 id="SSH-端口转发"><a href="#SSH-端口转发" class="headerlink" title="SSH 端口转发"></a>SSH 端口转发</h2><p>SSH 提供了一个非常有意思的功能，就是端口转发，它能够将其他 TCP 端口的网络数据通过 SSH 链接来转发，并且自动提供了相应的加密及解密服务。</p>
+<ul>
+<li>本地端口转发</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># ssh -fgN -L 2222:localhost:22 localhost</span><br></pre></td></tr></table></figure>
+<ul>
+<li>远程端口转发</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># ssh -fgN -R 2222:host1:22 localhost</span><br></pre></td></tr></table></figure>
+<ul>
+<li>动态转发</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># ssh -fgN -D 12345 root@host1</span><br></pre></td></tr></table></figure>
+
+<h2 id="iptables-端口转发"><a href="#iptables-端口转发" class="headerlink" title="iptables 端口转发"></a>iptables 端口转发</h2><p>CentOS 7.0 以下使用的是iptables，可以通过iptables实现数据包的转发。</p>
+<ul>
+<li>开启数据转发功能</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># vi /etc/sysctl.conf</span><br><span class="line">net.ipv4.ip_forward=1 //增加一行</span><br><span class="line"># sysctl -p //使数据转发功能生效</span><br></pre></td></tr></table></figure>
+<ul>
+<li>将本地的端口转发到本机端口</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># iptables -t nat -A PREROUTING -p tcp --dport 2222 -j REDIRECT --to-port 22</span><br></pre></td></tr></table></figure>
+<ul>
+<li>将本机的端口转发到其他机器</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># iptables -t nat -A PREROUTING -d 192.168.172.130 -p tcp --dport 8000 -j DNAT --to-destination 192.168.172.131:80</span><br><span class="line"># iptables -t nat -A POSTROUTING -d 192.168.172.131 -p tcp --dport 80 -j SNAT --to 192.168.172.130</span><br><span class="line"># iptables -t nat -F PREROUTING //清空nat表的所有链</span><br></pre></td></tr></table></figure>
+
+<h2 id="firewall-端口转发"><a href="#firewall-端口转发" class="headerlink" title="firewall 端口转发"></a>firewall 端口转发</h2><p>CentOS 7.0以上使用的是firewall，通过命令行配置实现端口转发。</p>
+<ul>
+<li>开启伪装IP</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># firewall-cmd --permanent --add-masquerade</span><br></pre></td></tr></table></figure>
+<ul>
+<li>配置端口转发，将到达本机的12345端口的访问转发到另一台服务器的22端口。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># firewall-cmd --permanent --add-forward-port=port=12345:proto=tcp:toaddr=192.168.172.131:toport=22</span><br></pre></td></tr></table></figure>
+<ul>
+<li>重新载入，使其失效。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># firewall-cmd --reload</span><br></pre></td></tr></table></figure>
+
+<h2 id="rinetd-端口转发"><a href="#rinetd-端口转发" class="headerlink" title="rinetd 端口转发"></a>rinetd 端口转发</h2><p>rinetd是一个轻量级TCP转发工具，简单配置就可以实现端口映射&#x2F;转发&#x2F;重定向。</p>
+<ul>
+<li>源码下载</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># wget https://li.nux.ro/download/nux/misc/el7/x86_64/rinetd-0.62-9.el7.nux.x86_64.rpm</span><br></pre></td></tr></table></figure>
+<ul>
+<li>安装rinetd</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># rpm -ivh rinetd-0.62-9.el7.nux.x86_64.rpm</span><br></pre></td></tr></table></figure>
+<ul>
+<li>编辑配置文件</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># vi rinetd.conf</span><br><span class="line">0.0.0.0 1234 127.0.0.1 22 //添加</span><br></pre></td></tr></table></figure>
+<ul>
+<li>启动转发</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># rinetd -c /etc/rinetd.conf</span><br></pre></td></tr></table></figure>
+
+<h2 id="socat-端口转发"><a href="#socat-端口转发" class="headerlink" title="socat 端口转发"></a>socat 端口转发</h2><p>socat是一个多功能的网络工具，使用socat进行端口转发。</p>
+<ul>
+<li>socat安装</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># yum install -y socat</span><br></pre></td></tr></table></figure>
+<ul>
+<li>在本地监听12345端口，并将请求转发至192.168.172.131的22端口。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># socat TCP4-LISTEN:12345,reuseaddr,fork TCP4:192.168.172.131:22</span><br></pre></td></tr></table></figure>
+
+<h2 id="portmap-端口转发"><a href="#portmap-端口转发" class="headerlink" title="portmap 端口转发"></a>portmap 端口转发</h2><p>Linux 版的lcx，内网端口转发工具。</p>
+<ul>
+<li>下载地址：</li>
+</ul>
+<p>[<a href="http://www.vuln.cn/wp-content/uploads/2016/06/lcx_vuln.cn_.zip]">http://www.vuln.cn/wp-content/uploads/2016/06/lcx_vuln.cn_.zip]</a></p>
+<ul>
+<li>监听本地1234端口，转发给192.168.172.131的22端口</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># ./portmap -m 1 -p1 1234 -h2 192.168.172.131 -p2 22</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>操作系统</category>
+      </categories>
+      <tags>
+        <tag>网络转发</tag>
+        <tag>网络</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>mysql主从配置</title>
+    <url>/2023/10/07/mysql%E4%B8%BB%E4%BB%8E%E9%85%8D%E7%BD%AE/</url>
+    <content><![CDATA[<h2 id="一、mysql-master配置"><a href="#一、mysql-master配置" class="headerlink" title="一、mysql master配置"></a>一、mysql master配置</h2><h3 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h3><p><img src="/images/pasted-5.png" alt="项目结构"></p>
+<p>说明：本文没用到master.sh</p>
+<h3 id="修改master的my-cnf"><a href="#修改master的my-cnf" class="headerlink" title="修改master的my.cnf"></a>修改master的my.cnf</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line">## 设置server_id，同一局域网中需要唯一</span><br><span class="line">server-id=100</span><br><span class="line">## 端口</span><br><span class="line">port=3306</span><br><span class="line">## 加密方法</span><br><span class="line">default-authentication-plugin=mysql_native_password</span><br><span class="line">## 最大连接数</span><br><span class="line">max_connections=800</span><br><span class="line">## 对于同一主机，如果有超出该参数值个数的中断错误连接，则该主机将被禁止连接</span><br><span class="line">max_connect_errors=1000</span><br><span class="line">## 开启binlog              </span><br><span class="line">log_bin=ON</span><br><span class="line">## 慢查询</span><br><span class="line">slow_query_log=ON</span><br><span class="line">## 慢查询日志</span><br><span class="line">slow_query_log_file=/var/lib/mysql/slow.log</span><br><span class="line">## 错误日志路径</span><br><span class="line">log_error=/var/lib/mysql/mysql.err</span><br><span class="line"></span><br><span class="line">## slave复制的数据会写入log-bin日志文件里</span><br><span class="line">log-slave-updates=ON</span><br><span class="line">##  保证事务安全完整性的</span><br><span class="line">enforce-gtid-consistency=ON</span><br><span class="line">## slave进行同步复制的时候，无须找到binlog日志和POS点</span><br><span class="line">gtid_mode=ON</span><br><span class="line"></span><br><span class="line">## 不记录information_schema的二进制日志</span><br><span class="line">binlog-ignore-db=information_schema</span><br><span class="line">## 不记录mysql</span><br><span class="line">binlog-ignore-db=mysql</span><br><span class="line">## 不记录sys</span><br><span class="line">binlog-ignore-db=sys</span><br><span class="line">## 不记录performance_schema</span><br><span class="line">binlog-ignore-db=performance_schema</span><br><span class="line"></span><br><span class="line">## STRICT_TRANS_TABLES:如果一个值不能插入到一个事务表中,则中断当前的操作,对非事务表不做限制</span><br><span class="line">## NO_ZERO_IN_DATE:不允许日期和月份为零</span><br><span class="line">## NO_ZERO_DATE:不允许插入零日期,插入零日期会抛出错误而不是警告</span><br><span class="line">## ERROR_FOR_DIVISION_BY_ZERO:在INSERT或UPDATE过程中,如果数据被零除,则产生错误而非警告</span><br><span class="line">## NO_ENGINE_SUBSTITUTION:如果需要的存储引擎被禁用或未编译,那么抛出错误</span><br><span class="line">sql_mode = STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION</span><br></pre></td></tr></table></figure>
+
+<h3 id="编写Dockerfile"><a href="#编写Dockerfile" class="headerlink" title="编写Dockerfile"></a>编写Dockerfile</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">FROM mysql:8.0.32</span><br><span class="line">COPY ./conf.d/my.cnf /etc/mysql/conf.d</span><br><span class="line">CMD [&quot;mysqld&quot;]</span><br></pre></td></tr></table></figure>
+
+<h3 id="编写master的docker-comnpose-yaml"><a href="#编写master的docker-comnpose-yaml" class="headerlink" title="编写master的docker-comnpose.yaml"></a>编写master的docker-comnpose.yaml</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">version: &#x27;3&#x27;</span><br><span class="line">services:</span><br><span class="line">  mysql-master:</span><br><span class="line">    container_name: mysql-master</span><br><span class="line">    environment:</span><br><span class="line">      MYSQL_ROOT_PASSWORD: admin123456</span><br><span class="line">      TZ: Asia/Shanghai</span><br><span class="line">    image: mysql8_master:latest</span><br><span class="line">    build:</span><br><span class="line">      context: ./</span><br><span class="line">    ports:</span><br><span class="line">      - &quot;3301:3306&quot;</span><br><span class="line">    # volumes:</span><br><span class="line">    #   - ./data:/var/lib/mysql</span><br><span class="line">    restart: always</span><br></pre></td></tr></table></figure>
+
+<h3 id="连接上master数据库运行SQL配置同步用户"><a href="#连接上master数据库运行SQL配置同步用户" class="headerlink" title="连接上master数据库运行SQL配置同步用户"></a>连接上master数据库运行SQL配置同步用户</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">CREATE USER &#x27;sync_admin&#x27;@&#x27;%&#x27; IDENTIFIED BY &#x27;sync_admin123456&#x27;;</span><br><span class="line">GRANT REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO &#x27;sync_admin&#x27;@&#x27;%&#x27;;</span><br><span class="line">FLUSH PRIVILEGES;</span><br></pre></td></tr></table></figure>
+
+<h3 id="在Master进入mysql，执行SQL检查状态"><a href="#在Master进入mysql，执行SQL检查状态" class="headerlink" title="在Master进入mysql，执行SQL检查状态"></a>在Master进入mysql，执行SQL检查状态</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">show master status;</span><br></pre></td></tr></table></figure>
+<p>说明：当slave没有连接上时，以下为空</p>
+<p><img src="/images/pasted-2.png" alt="检查状态"></p>
+<h2 id="二、mysql-slave-配置"><a href="#二、mysql-slave-配置" class="headerlink" title="二、mysql slave 配置"></a>二、mysql slave 配置</h2><h3 id="项目结构-1"><a href="#项目结构-1" class="headerlink" title="项目结构"></a>项目结构</h3><p><img src="/images/pasted-4.png" alt="项目结构"><br>说明：本文没用到slave.sh</p>
+<h3 id="修改slave的my-cnf"><a href="#修改slave的my-cnf" class="headerlink" title="修改slave的my.cnf"></a>修改slave的my.cnf</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line">## 设置server_id，同一局域网中需要唯一</span><br><span class="line">server_id=101</span><br><span class="line">## 端口</span><br><span class="line">port=3306</span><br><span class="line">## 加密方法</span><br><span class="line">default-authentication-plugin=mysql_native_password</span><br><span class="line">## 最大连接数</span><br><span class="line">max_connections=800</span><br><span class="line">## 对于同一主机，如果有超出该参数值个数的中断错误连接，则该主机将被禁止连接</span><br><span class="line">max_connect_errors=1000</span><br><span class="line">## 开启binlog              </span><br><span class="line">log_bin=ON</span><br><span class="line">## 慢查询</span><br><span class="line">slow_query_log=ON</span><br><span class="line">## 慢查询日志</span><br><span class="line">slow_query_log_file=/var/lib/mysql/slow.log</span><br><span class="line">## 错误日志路径</span><br><span class="line">log_error=/var/lib/mysql/mysql.err</span><br><span class="line"></span><br><span class="line">## slave从m复制的数据会写入log-bin日志文件里</span><br><span class="line">log-slave-updates=ON</span><br><span class="line">## 保证事务安全完整性的</span><br><span class="line">enforce-gtid-consistency=ON</span><br><span class="line">## slave进行同步复制的时候，无须找到binlog日志和POS点</span><br><span class="line">gtid_mode=ON</span><br><span class="line"></span><br><span class="line">## 不记录information_schema的二进制日志</span><br><span class="line">binlog-ignore-db=information_schema</span><br><span class="line">## 不记录mysql</span><br><span class="line">binlog-ignore-db=mysql</span><br><span class="line">## 不记录sys</span><br><span class="line">binlog-ignore-db=sys</span><br><span class="line">## 不记录performance_schema</span><br><span class="line">binlog-ignore-db=performance_schema</span><br><span class="line"></span><br><span class="line">## STRICT_TRANS_TABLES:如果一个值不能插入到一个事务表中,则中断当前的操作,对非事务表不做限制</span><br><span class="line">## NO_ZERO_IN_DATE:不允许日期和月份为零</span><br><span class="line">## NO_ZERO_DATE:不允许插入零日期,插入零日期会抛出错误而不是警告</span><br><span class="line">## ERROR_FOR_DIVISION_BY_ZERO:在INSERT或UPDATE过程中,如果数据被零除,则产生错误而非警告</span><br><span class="line">## NO_ENGINE_SUBSTITUTION:如果需要的存储引擎被禁用或未编译,那么抛出错误</span><br><span class="line">sql_mode = STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION</span><br></pre></td></tr></table></figure>
+
+<h3 id="编写Dockerfile-1"><a href="#编写Dockerfile-1" class="headerlink" title="编写Dockerfile"></a>编写Dockerfile</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">FROM mysql:8.0.32</span><br><span class="line">COPY ./conf.d/my.cnf /etc/mysql/conf.d</span><br><span class="line">CMD [&quot;mysqld&quot;]</span><br></pre></td></tr></table></figure>
+
+<h3 id="编写slave的docker-comnpose-yaml"><a href="#编写slave的docker-comnpose-yaml" class="headerlink" title="编写slave的docker-comnpose.yaml"></a>编写slave的docker-comnpose.yaml</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">version: &#x27;3&#x27;</span><br><span class="line">services:</span><br><span class="line">  mysql-slave:</span><br><span class="line">    container_name: mysql-slave</span><br><span class="line">    environment:</span><br><span class="line">      MYSQL_ROOT_PASSWORD: admin123456</span><br><span class="line">      TZ: Asia/Shanghai</span><br><span class="line">    image: mysql8_slave:latest</span><br><span class="line">    build:</span><br><span class="line">      context: ./</span><br><span class="line">    ports:</span><br><span class="line">      - &quot;3302:3306&quot;</span><br><span class="line">    # volumes:</span><br><span class="line">    #   - ./data:/var/lib/mysql</span><br><span class="line">    restart: always</span><br></pre></td></tr></table></figure>
+
+<h3 id="连接上slave数据库运行SQL配置msater"><a href="#连接上slave数据库运行SQL配置msater" class="headerlink" title="连接上slave数据库运行SQL配置msater"></a>连接上slave数据库运行SQL配置msater</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">change master to master_host=&#x27;10.119.92.XXX&#x27;, master_port=3306, master_user=&#x27;sync_admin&#x27;,master_password=&#x27;sync_admin123456&#x27;,master_log_file=&#x27;&#x27;;</span><br><span class="line">start slave;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="在salve进入mysql，执行SQL检查状态"><a href="#在salve进入mysql，执行SQL检查状态" class="headerlink" title="在salve进入mysql，执行SQL检查状态"></a>在salve进入mysql，执行SQL检查状态</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">show slave status;</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="/images/pasted-3.png" alt="检查状态"></p>
+]]></content>
+      <categories>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>mysql</tag>
+        <tag>读写分离</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>python好用的库</title>
+    <url>/2023/05/26/python%E5%A5%BD%E7%94%A8%E7%9A%84%E5%BA%93/</url>
+    <content><![CDATA[<h2 id="sympy"><a href="#sympy" class="headerlink" title="sympy"></a>sympy</h2><ul>
+<li>是一个Python的科学计算库，用一套强大的符号计算体系完成诸如多项式求值、求极限、解方程、求积分、微分方程、级数展开、矩阵运算等等计算问题。使用 <a href="https://blog.csdn.net/qq_51478930/article/details/123636192">https://blog.csdn.net/qq_51478930/article/details/123636192</a></li>
+</ul>
+<h2 id="pillow"><a href="#pillow" class="headerlink" title="pillow"></a>pillow</h2><ul>
+<li>Pillow专门用于处理图像，您可以使用该库创建缩略图，在文件格式之间转换、旋转、应用滤镜、显示图像等等。如果您需要对许多图像执行批量操作，这是理想的选择。</li>
+</ul>
+<h2 id="Requests"><a href="#Requests" class="headerlink" title="Requests"></a>Requests</h2><ul>
+<li>Requests建立在世界上下载量最大的python库urllib3上，它令Web请求变得非常简单，功能强大且用途广泛。<br></li>
+<li>Requests可以完成您能想到的所有高级工作，比如：认证，使用cookie，执行POST、PUT、DELETE等，使用自定义证书，使用会话Session、使用代理等。</li>
+</ul>
+<h2 id="打包分发"><a href="#打包分发" class="headerlink" title="打包分发"></a>打包分发</h2><ul>
+<li>PyInstaller：将 Python 程序转换成独立的执行文件（跨平台）。</li>
+<li>cx_Freeze：将python程序转换为带有一个动态链接库的可执行文件。</li>
+<li>dh-virtualenv：构建并将 virtualenv 虚拟环境作为一个 Debian 包来发布。</li>
+<li>Nuitka：将脚本、模块、包编译成可执行文件或扩展模块。</li>
+<li>py2app：将 Python 脚本变为独立软件包（Mac OS X）。</li>
+<li>py2exe：将 Python 脚本变为独立软件包（Windows）。</li>
+<li>pynsist：一个用来创建 Windows 安装程序的工具，可以在安装程序中打包 Python 本身。</li>
+</ul>
+<h2 id="文件类"><a href="#文件类" class="headerlink" title="文件类"></a>文件类</h2><ul>
+<li>aiofiles：基于 asyncio，提供文件异步操作</li>
+<li>imghdr：（Python 标准库）检测图片类型</li>
+<li>mimetypes：（Python 标准库）将文件名映射为 MIME 类型</li>
+<li>path.py：对 os.path 进行封装的模块</li>
+<li>pathlib：（Python3.4+ 标准库）跨平台的、面向对象的路径操作库</li>
+<li>python-magic：文件类型检测的第三方库 libmagic 的 Python 接口</li>
+<li>Unipath：用面向对象的方式操作文件和目录</li>
+<li>watchdog：管理文件系统事件的 API 和 shell 工具</li>
+</ul>
+<h2 id="文本通用"><a href="#文本通用" class="headerlink" title="文本通用"></a>文本通用</h2><ul>
+<li>chardet：字符编码检测器，兼容 Python2 和 Python3。</li>
+<li>difflib：(Python 标准库)帮助我们进行差异化比较。</li>
+<li>ftfy：让 Unicode 文本更完整更连贯。</li>
+<li>fuzzywuzzy：模糊字符串匹配。</li>
+<li>Levenshtein：快速计算编辑距离以及字符串的相似度。</li>
+<li>pangu.py：在中日韩语字符和数字字母之间添加空格。</li>
+<li>pypinyin：汉字拼音转换工具 Python 版。</li>
+<li>shortuuid：一个生成器库，用以生成简洁的，明白的，URL 安全的 UUID。</li>
+<li>simplejson：Python 的 JSON 编码、解码器。</li>
+<li>unidecode：Unicode 文本的 ASCII 转换形式 。</li>
+<li>uniout：打印可读的字符，而不是转义的字符串。</li>
+<li>xpinyin：一个用于把汉字转换为拼音的库。</li>
+<li>yfiglet-figlet：pyfiglet -figlet 的 Python 实现。</li>
+<li>flashtext: 一个高效的文本查找替换库。</li>
+</ul>
+<h2 id="解释器"><a href="#解释器" class="headerlink" title="解释器"></a>解释器</h2><ul>
+<li>phonenumbers：解析，格式化，储存，验证电话号码。</li>
+<li>PLY：lex 和 yacc 解析工具的 Python 实现。</li>
+<li>Pygments：通用语法高亮工具。</li>
+<li>pyparsing：生成通用解析器的框架。</li>
+<li>python-nameparser：把一个人名分解为几个独立的部分。</li>
+<li>python-user-agents：浏览器 user agent 解析器。</li>
+<li>sqlparse：一个无验证的 SQL 解析器。</li>
+</ul>
+<h2 id="办公文本格式处理-Office"><a href="#办公文本格式处理-Office" class="headerlink" title="办公文本格式处理 Office"></a>办公文本格式处理 Office</h2><ul>
+<li>Marmir：把输入的 Python 数据结构转换为电子表单。</li>
+<li>openpyxl：一个用来读写 Excel 2010 xlsx&#x2F;xlsm&#x2F;xltx&#x2F;xltm 文件的库。</li>
+<li>pyexcel：一个提供统一 API，用来读写，操作 Excel 文件的库。</li>
+<li>python-docx：读取，查询以及修改 Microsoft Word 2007&#x2F;2008 docx 文件。</li>
+<li>relatorio：模板化 OpenDocument 文件。</li>
+<li>unoconv：在 LibreOffice&#x2F;OpenOffice 支持的任意文件格式之间进行转换。</li>
+<li>XlsxWriter：一个用于创建 Excel .xlsx 文件的 Python 模块。</li>
+<li>xlwings：一个使得在 Excel 中方便调用 Python 的库（反之亦然），基于 BSD 协议。</li>
+<li>xlwt：读写 Excel 文件的数据和格式信息。</li>
+</ul>
+<h2 id="办公文本格式处理-PDF"><a href="#办公文本格式处理-PDF" class="headerlink" title="办公文本格式处理 PDF"></a>办公文本格式处理 PDF</h2><ul>
+<li>PDFMiner：一个用于从 PDF 文档中抽取信息的工具。</li>
+<li>PyPDF2：一个可以分割，合并和转换 PDF 页面的库。</li>
+<li>ReportLab：快速创建富文本 PDF 文档。</li>
+</ul>
+<h2 id="配置管理"><a href="#配置管理" class="headerlink" title="配置管理"></a>配置管理</h2><ul>
+<li>config：logging 模块作者写的分级配置模块。</li>
+<li>ConfigObj：INI 文件解析器，带验证功能。</li>
+<li>ConfigParser：(Python 标准库) INI 文件解析器。</li>
+<li>profig：通过多种格式进行配置，具有数值转换功能。</li>
+<li>python-decouple：将设置和代码完全隔离。</li>
+</ul>
+<h2 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h2><ul>
+<li>pickleDB：一个简单，轻量级键值储存数据库。</li>
+<li>PipelineDB：流式 SQL 数据库。</li>
+<li>TinyDB：一个微型的，面向文档型数据库。</li>
+<li>ZODB：一个 Python 原生对象数据库。一个键值和对象图数据库。</li>
+</ul>
+<h2 id="网络编程的库"><a href="#网络编程的库" class="headerlink" title="网络编程的库"></a>网络编程的库</h2><ul>
+<li>asyncio：(Python 标准库) 异步 I&#x2F;O, 事件循环, 协程以及任务。</li>
+<li>Twisted：一个事件驱动的网络引擎。</li>
+<li>pulsar：事件驱动的并发框架。</li>
+<li>diesel：基于 Greenlet 的事件 I&#x2F;O 框架。</li>
+<li>pyzmq：一个 ZeroMQ 消息库的 Python 封装。</li>
+<li>Toapi：一个轻巧，简单，快速的 Flask 库，致力于为所有网站提供 API 服务。</li>
+<li>txZMQ：基于 Twisted 的 ZeroMQ 消息库的 Python 封装。</li>
+</ul>
+<h2 id="操作系统进程启动及通信库"><a href="#操作系统进程启动及通信库" class="headerlink" title="操作系统进程启动及通信库"></a>操作系统进程启动及通信库</h2><ul>
+<li>envoy：比 Python subprocess 模块更人性化。</li>
+<li>sarge：另一 种 subprocess 模块的封装。</li>
+<li>sh：一个完备的 subprocess 替代库。</li>
+</ul>
+<h2 id="并发与并行"><a href="#并发与并行" class="headerlink" title="并发与并行"></a>并发与并行</h2><ul>
+<li>multiprocessing：(Python 标准库) 基于进程的“线程”接口。</li>
+<li>threading：(Python 标准库)更高层的线程接口。</li>
+<li>eventlet：支持 WSGI 的异步框架。</li>
+<li>gevent：一个基于协程的 Python 网络库，使用 greenlet。</li>
+<li>Tomorrow：用于产生异步代码的神奇的装饰器语法实现。</li>
+<li>uvloop：在 libuv 之上超快速实现 asyncio 事件循环。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>编程开发</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+        <tag>库</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ubuntu安装nfs服务器</title>
+    <url>/2023/07/18/ubuntu%E5%AE%89%E8%A3%85nfs%E6%9C%8D%E5%8A%A1%E5%99%A8/</url>
+    <content><![CDATA[<ul>
+<li>在终端中执行以下命令</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt upgrade</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>安装NFS内核服务器软件包：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo apt install nfs-kernel-server</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>创建一个要共享的目录，例如</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo mkdir -p /export</span><br><span class="line">sudo chmod 755 /export</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>将以下内容添加到文件中，替换 <client_IP> 为客户端的IP地址</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo vim /etc/exports</span><br><span class="line"></span><br><span class="line">#写入</span><br><span class="line">/export &lt;client_IP&gt;(rw,sync,no_subtree_check)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>将更改应用到NFS服务器并重新启动服务</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo exportfs -ra</span><br><span class="line">sudo systemctl restart nfs-kernel-server</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在客户端上安装NFS客户端软件包</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo apt install nfs-common</span><br><span class="line"># 创建一个挂载点，例如 /mnt/nfs_share</span><br><span class="line">sudo mkdir -p /mnt/nfs_share</span><br><span class="line"># 挂载NFS共享到挂载点</span><br><span class="line">sudo mount &lt;server_IP&gt;:/nfs_share /mnt/nfs_share</span><br><span class="line"># 检查挂载是否成功</span><br><span class="line">df -h</span><br></pre></td></tr></table></figure>
+]]></content>
+  </entry>
+  <entry>
+    <title>ubuntu安装openvpn</title>
+    <url>/2023/11/07/ubuntu%E5%AE%89%E8%A3%85openvpn/</url>
+    <content><![CDATA[<h2 id="下载安装脚本"><a href="#下载安装脚本" class="headerlink" title="下载安装脚本"></a>下载安装脚本</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd /opt</span><br><span class="line">curl -O https://raw.githubusercontent.com/Angristan/openvpn-install/master/openvpn-install.sh</span><br><span class="line">chmod +x openvpn-install.sh</span><br></pre></td></tr></table></figure>
+
+<h2 id="安装环境"><a href="#安装环境" class="headerlink" title="安装环境"></a>安装环境</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">apt-get update</span><br><span class="line">apt-get upgrade</span><br><span class="line">apt-get install software-properties-common build-essential -y</span><br></pre></td></tr></table></figure>
+
+<h2 id="安装OPEN-VPN"><a href="#安装OPEN-VPN" class="headerlink" title="安装OPEN VPN"></a>安装OPEN VPN</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">./openvpn-install.sh</span><br><span class="line"></span><br><span class="line">1. IP address – this will be your server’s public IP address.</span><br><span class="line"></span><br><span class="line">2. Do you want to enable IPv6 support (NAT)? [y/n]: n – For now, IPv4 will do.</span><br><span class="line"></span><br><span class="line">3. What port do you want OpenVPN to listen to? [1-3]: 1 – the default port for the OpenVPN server is 1194.</span><br><span class="line"></span><br><span class="line">4. What protocol do you want OpenVPN to use? [1-2]: 1 – Both TCP and UDP are protocols for sending packets on the internet. The main difference is that TCP has error checking while UDP does not. UDP is recommended by the installer since it provides a faster connection. It is mostly used for streaming and gaming. For other purposes, we recommend using TCP to avoid data loss.</span><br><span class="line"></span><br><span class="line">5. What DNS resolvers do you want to use with the VPN?: 3 – For this, we recommend Google’s DNS but this is a personal choice.</span><br><span class="line"></span><br><span class="line">6. Do you want to use compression?: n – To avoid some vulnerabilities, it is best to disable compression.</span><br><span class="line"></span><br><span class="line">7. Do you want to customize encryption settings? y  – For the sake of this tutorial, we will go through the encryption settings to provide insights about encryption that will be used by our OpenVPN server.</span><br><span class="line"></span><br><span class="line">8. Choose which cipher you want to use for the data channel: 1 [AES]  – AES is currently the fastest cipher available for OpenVPN. The recommended value is AES-128-GCM. You may notice that AES-256-GCM is also available but that provides slower performance.</span><br><span class="line"></span><br><span class="line">9. Choose what kind of certificate you want to use: 1 [ECDSA] – RSA has gained his popularity due to its performance, maturity, and compatibility for most of the applications but in today’s security, ECDSA provides a higher key size, is scalable, and is the future of certificates.</span><br><span class="line"></span><br><span class="line">10. Choose which curve you want to use for the certificate’s key: 1 [prime256v1] – Since the release of OpenVPN 2.4, Elliptic-curve Diffie–Hellman or ECDH keys are now supported.</span><br><span class="line"></span><br><span class="line">11. Choose which cipher you want to use for the control channel: 1 [ECDHE-ECDSA-AES-128-GCM-SHA256] – Again, 128 bits key is secure enough and still provides better performance.</span><br><span class="line"></span><br><span class="line">12. Choose what kind of Diffie-Hellman key you want to use: 1 [ECDH] – ECDH is being used by modern standards.</span><br><span class="line"></span><br><span class="line">13. Choose which curve you want to use for the ECDH key: 1 [prime256v1] – A 256-bit key should be enough.</span><br><span class="line"></span><br><span class="line">14. Which digest algorithm do you want to use for HMAC?: 1 [SHA256] – Again, a 256-bit key should be enough and is the sweet spot for security and performance.</span><br><span class="line"></span><br><span class="line">15. An additional layer of security to the control channel: 1 [tls-crypt] – For increased security, we should choose tls-crypt over tls-auth as it also encrypts the TLS stack.</span><br></pre></td></tr></table></figure>
+
+<h2 id="创建新的client"><a href="#创建新的client" class="headerlink" title="创建新的client"></a>创建新的client</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">./openvpn-install.sh</span><br><span class="line"></span><br><span class="line">Client name: client1</span><br><span class="line">Do you want to protect the configuration file with a password?: 2  – You will be required to enter a passphrase.</span><br></pre></td></tr></table></figure>]]></content>
+  </entry>
+  <entry>
+    <title>acme免费SSL证书生成</title>
+    <url>/2023/12/12/%E5%85%8D%E8%B4%B9SSL%E8%AF%81%E4%B9%A6%E7%94%9F%E6%88%90/</url>
+    <content><![CDATA[<h2 id="生成证书记录"><a href="#生成证书记录" class="headerlink" title="生成证书记录"></a>生成证书记录</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">./acme.sh --issue -d *.example.com --dns --yes-I-know-dns-manual-mode-enough-go-ahead-please</span><br></pre></td></tr></table></figure>
+<p><img src="/images/pasted-8.png" alt="upload successful"></p>
+<h2 id="在域名解析中手动添加TXT记录"><a href="#在域名解析中手动添加TXT记录" class="headerlink" title="在域名解析中手动添加TXT记录"></a>在域名解析中手动添加TXT记录</h2><p>￼<br><img src="/images/pasted-9.png" alt="upload successful"></p>
+<h2 id="验证解析生效"><a href="#验证解析生效" class="headerlink" title="验证解析生效"></a>验证解析生效</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nslookup -q=TXT _acme-challenge.devopsing.site</span><br></pre></td></tr></table></figure>
+
+<h2 id="重新生成证书-按需求使用"><a href="#重新生成证书-按需求使用" class="headerlink" title="重新生成证书 (按需求使用)"></a>重新生成证书 (按需求使用)</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">./acme.sh --renew -d *.example.com --yes-I-know-dns-manual-mode-enough-go-ahead-please</span><br></pre></td></tr></table></figure>
+<p>￼<br><img src="/images/pasted-10.png" alt="upload successful"></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>常用kubectl命令</title>
+    <url>/2023/07/05/%E5%B8%B8%E7%94%A8kubectl%E5%91%BD%E4%BB%A4/</url>
+    <content><![CDATA[<h3 id="配置和集群管理命令："><a href="#配置和集群管理命令：" class="headerlink" title="配置和集群管理命令："></a>配置和集群管理命令：</h3><ul>
+<li><code>kubectl config use-context &lt;context-name&gt;</code>：切换当前使用的上下文。</li>
+<li><code>kubectl config view</code>：查看当前配置的上下文和集群信息。</li>
+<li><code>kubectl cluster-info</code>：查看集群信息。</li>
+<li><code>kubectl version</code>：查看Kubernetes集群和客户端的版本信息。</li>
+</ul>
+<h3 id="资源操作命令："><a href="#资源操作命令：" class="headerlink" title="资源操作命令："></a>资源操作命令：</h3><ul>
+<li><code>kubectl get &lt;resource&gt;</code>：获取资源的列表。</li>
+<li><code>kubectl describe &lt;resource&gt; &lt;name&gt;</code>：获取资源的详细信息。</li>
+<li><code>kubectl create -f &lt;file&gt;</code>：从YAML或JSON文件创建资源。</li>
+<li><code>kubectl apply -f &lt;file&gt;</code>：将YAML或JSON文件的更改应用到资源。</li>
+<li><code>kubectl edit &lt;resource&gt; &lt;name&gt;</code>：编辑资源。</li>
+<li><code>kubectl delete &lt;resource&gt; &lt;name&gt;</code>：删除资源。</li>
+<li><code>kubectl scale &lt;resource&gt; &lt;name&gt; --replicas=&lt;count&gt;</code>：调整资源的副本数量。</li>
+</ul>
+<h3 id="Pod-相关命令："><a href="#Pod-相关命令：" class="headerlink" title="Pod 相关命令："></a>Pod 相关命令：</h3><ul>
+<li><code>kubectl get pods</code>：获取Pod的列表。</li>
+<li><code>kubectl describe pod &lt;name&gt;</code>：获取Pod的详细信息。</li>
+<li><code>kubectl logs &lt;pod-name&gt; &lt;container-name&gt;</code>：获取Pod中容器日志。</li>
+<li><code>kubectl exec -it &lt;pod-name&gt; -- &lt;command&gt;</code>：在Pod中的容器中执行命令。</li>
+<li><code>kubectl port-forward &lt;pod-name&gt; &lt;local-port&gt;:&lt;remote-port&gt;</code>：将本地端口转发到Pod中的端口。</li>
+</ul>
+<h3 id="Service-相关命令："><a href="#Service-相关命令：" class="headerlink" title="Service 相关命令："></a>Service 相关命令：</h3><ul>
+<li><code>kubectl get services</code>：获取Service的列表。</li>
+<li><code>kubectl describe service &lt;name&gt;</code>：获取Service的详细信息。</li>
+</ul>
+<p>这只是一部分kubectl命令的示例，Kubectl提供了许多其他命令和选项，用于管理和操作Kubernetes资源。你可以使用<code>kubectl --help</code>命令或参考Kubernetes官方文档（<a href="https://kubernetes.io/docs/reference/kubectl/overview/%EF%BC%89%E4%BA%86%E8%A7%A3%E6%9B%B4%E5%A4%9A%E7%9A%84%E5%91%BD%E4%BB%A4%E5%92%8C%E9%80%89%E9%A1%B9%E3%80%82">https://kubernetes.io/docs/reference/kubectl/overview/）了解更多的命令和选项。</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>常用正则</title>
+    <url>/2023/12/12/%E5%B8%B8%E7%94%A8%E6%AD%A3%E5%88%99/</url>
+    <content><![CDATA[<p><img src="/images/pasted-23.png" alt="upload successful"></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>常用系统监控类工具</title>
+    <url>/2023/12/12/%E5%B8%B8%E7%94%A8%E7%B3%BB%E7%BB%9F%E7%9B%91%E6%8E%A7%E7%B1%BB%E5%B7%A5%E5%85%B7/</url>
+    <content><![CDATA[<p>说明：以下内容引用《网络安全学习圈》</p>
+<h2 id="MultiTail监控多个日志"><a href="#MultiTail监控多个日志" class="headerlink" title="MultiTail监控多个日志"></a>MultiTail监控多个日志</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@localhost ~]# yum -y install  multitail</span><br><span class="line"> </span><br><span class="line">[root@localhost ~]# multitail -e </span><br><span class="line">&quot;fail&quot;</span><br><span class="line"> /</span><br><span class="line">var</span><br><span class="line">/log/secure   </span><br><span class="line">#筛选关键字进行监控</span><br><span class="line"> </span><br><span class="line">[root@localhost ~]# multitail -l </span><br><span class="line">&quot;ping baidu.com&quot;</span><br><span class="line">   </span><br><span class="line">#监控后面的命令 - l 将要执行的命令</span><br><span class="line"> </span><br><span class="line">[root@localhost ~]# multitail -i /</span><br><span class="line">var</span><br><span class="line">/log/messages -i /</span><br><span class="line">var</span><br><span class="line">/log/secure </span><br><span class="line">#-i 指定一个文件名</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/pasted-12.png" alt="upload successful"></p>
+<h2 id="NMON系统资源监控"><a href="#NMON系统资源监控" class="headerlink" title="NMON系统资源监控"></a>NMON系统资源监控</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">下载：http://sourceforge.jp/projects/sfnet_nmon/releases/</span><br><span class="line"></span><br><span class="line"># nmon</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/pasted-13.png" alt="upload successful"></p>
+<h2 id="HTop进程实时监控"><a href="#HTop进程实时监控" class="headerlink" title="HTop进程实时监控"></a>HTop进程实时监控</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># yum -y install htop</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/pasted-14.png" alt="upload successful"></p>
+<h2 id="iozone硬盘读写性能"><a href="#iozone硬盘读写性能" class="headerlink" title="iozone硬盘读写性能"></a>iozone硬盘读写性能</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># iozone -a -n</span><br></pre></td></tr></table></figure>
+<p><img src="/images/pasted-15.png" alt="upload successful"></p>
+<h2 id="iptraf网络流量监控"><a href="#iptraf网络流量监控" class="headerlink" title="iptraf网络流量监控"></a>iptraf网络流量监控</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># yum -y install iptraf</span><br><span class="line"></span><br><span class="line"># iptraf</span><br></pre></td></tr></table></figure>
+<p><img src="/images/pasted-16.png" alt="upload successful"></p>
+<h2 id="iotop实时监控磁盘"><a href="#iotop实时监控磁盘" class="headerlink" title="iotop实时监控磁盘"></a>iotop实时监控磁盘</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># yum -y install iotop</span><br><span class="line"></span><br><span class="line"># iotop</span><br></pre></td></tr></table></figure>
+<p><img src="/images/pasted-17.png" alt="upload successful"></p>
+<h2 id="Nethogs带宽进程监听"><a href="#Nethogs带宽进程监听" class="headerlink" title="Nethogs带宽进程监听"></a>Nethogs带宽进程监听</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">各平台安装</span><br><span class="line"># brew install nethogs</span><br><span class="line"># apt-get install nethogs</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">使用</span><br><span class="line">nethogs 网卡</span><br></pre></td></tr></table></figure>
+<p><img src="/images/pasted-18.png" alt="upload successful"></p>
+<h2 id="iftop网络流量监控"><a href="#iftop网络流量监控" class="headerlink" title="iftop网络流量监控"></a>iftop网络流量监控</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">下载：http://www.ex-parrot.com/~pdw/iftop/</span><br><span class="line"></span><br><span class="line"># iftop -i eth0</span><br><span class="line"></span><br><span class="line"># 参数说明</span><br><span class="line">TX：发送流量</span><br><span class="line">RX：接收流量</span><br><span class="line">TOTAL：总流量</span><br><span class="line">Cumm：运行 iftop 到目前时间的总流量</span><br><span class="line">peak：流量峰值</span><br><span class="line">rates：分别表示过去 2s 10s 40s 的平均流量</span><br></pre></td></tr></table></figure>
+<p><img src="/images/pasted-19.png" alt="upload successful"></p>
+]]></content>
+  </entry>
+</search>
